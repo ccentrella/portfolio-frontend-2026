@@ -5,6 +5,7 @@ import Widget from "../../components/Widget.tsx";
 // TODO: Add header
 // TODO: Add scroll snap
 // TODO: Add transitions
+// TODO: Tweak font sizes for mobile
 
 const translations = [
 	{lang: "en", heading: "hello", placeholder: "Have a question?"},
@@ -131,16 +132,16 @@ const AIWidget = () => {
 	return (
 		<div className={'min-h-[100dvh] bg-[#3C9FBA] flex justify-center items-center'}>
 			<div className={'text-center space-y-10 grow'}>
-				<p className={'font-bumbbled text-8xl text-[#85D7E0]'}>{heading}</p>
+				<p className={'font-bumbbled text-8xl max-sm:text-6xl text-[#85D7E0]'}>{heading}</p>
 				<input placeholder={placeholder}
-							 className={'py-5 px-12 bg-[#FFFFFF7F] placeholder-gray-500 text-xl rounded-lg w-4/5'} type={'text'}/>
+							 className={'py-5 px-12 bg-[#FFFFFF7F] placeholder-gray-500 text-xl max-sm:text-lg rounded-lg w-4/5'} type={'text'}/>
 			</div>
 		</div>
 	);
 };
 
 const CreativelyIntelligent = () => (
-	<div className={'p-32 max-sm:p-10 space-y-10'}>
+	<div className={'p-32 max-sm:px-14 space-y-10'}>
 		<p className={'text-4xl'}>creatively intelligent.</p>
 		<Widget heading={''} className={'md:w-1/2 bg-[#FCFCFC1A]'}>
 			<></>
@@ -149,7 +150,7 @@ const CreativelyIntelligent = () => (
 );
 
 const DataIsBeautiful = () => (
-	<div className={'p-32 max-sm:p-10 space-y-10'}>
+	<div className={'p-32 max-sm:px-14 space-y-10'}>
 		<p className={'text-4xl'}>data is beautiful.</p>
 		<Widget heading={'databases'} className={'md:w-1/2 bg-[#FCFCFC1A]'}>
 			<></>
@@ -159,7 +160,7 @@ const DataIsBeautiful = () => (
 
 const SystemDesign = () => (
 	<div className={'py-32'}>
-		<p className={'text-5xl mb-14 text-center'}>millions of users. one system.</p>
+		<p className={'text-5xl max-sm:text-4xl mb-14 text-center'}>millions of users. one system.</p>
 		<div className={'flex flex-wrap px-14 gap-12 *:basis-[calc(50%-1.5rem)] *:max-md:basis-full'}>
 			<Widget heading={'distributed systems'} className={'bg-[#FCFCFC1A]'}>
 				<></>
@@ -172,7 +173,7 @@ const SystemDesign = () => (
 )
 
 const BuiltToScale = () => (
-	<div className={'p-32 max-sm:p-10 space-y-10'}>
+	<div className={'p-32 max-sm:px-14 space-y-10'}>
 		<p className={'text-4xl'}>built to scale.</p>
 		<div className={'flex flex-wrap gap-12 *:basis-[calc(50%-1.5rem)] *:max-md:basis-full'}>
 			<Widget heading={'architecture'} className={'md:w-1/2 bg-[#FCFCFC1A]'}>
@@ -208,7 +209,7 @@ const LeanProcesses = () => (
 )
 
 const WorkExperience = () => (
-	<div className={'p-32'}>
+	<div className={'p-32 max-sm:px-14'}>
 		<div className={'min-h-[100dvh]'}>
 			<p className={'text-4xl'}>what's in a timeline?</p>
 		</div>
@@ -390,14 +391,14 @@ const Home = () => {
 			<BuiltToScale/>
 			<img src={'/images/pattern_background.png'} alt={'processes illustration'}
 					 className={'w-full h-[100dvh] object-cover'}/>
-			<p className={'text-5xl text-center py-32'}>principles for life.</p>
+			<p className={'text-5xl max-sm:text-4xl text-center py-32'}>principles for life.</p>
 			<ImproveContinuously/>
 			<LeanProcesses/>
 			<InspirationalQuote author={'Steve Jobs'} className={'text-white bg-black'}>
 				Your time is limited, so don't waste it living someone else's life.
 			</InspirationalQuote>
 			<WorkExperience/>
-			<p className={'text-5xl text-center pb-32'}>human rights</p>
+			<p className={'text-5xl max-sm:text-4xl text-center pb-32'}>human rights</p>
 			<InspirationalQuote author={'Steve Jobs'}>
 				The people who are crazy enough to think they can change the world, are the ones who do.
 			</InspirationalQuote>
