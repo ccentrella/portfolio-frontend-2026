@@ -1,5 +1,6 @@
 import InspirationalQuote from "../../components/InspirationalQuote.tsx";
 import {useEffect, useState} from "react";
+import Widget from "../../components/Widget.tsx";
 
 const translations = [
 	{lang: "en", heading: "hello", placeholder: "Have a question?"},
@@ -77,25 +78,29 @@ const Hero = () => (
 					 src={"/images/profile.jpeg"} alt={"Chris in hoodie, relaxed"}/>
 			<div className={"basis-1/5 max-md:basis-full"}></div>
 		</div>
-		<div className={"flex justify-center flex-wrap gap-12 *:basis-[calc(50%-1.5rem)] text-[#FFFFFFA3] text-2xl " +
-			"*:max-md:basis-11/12 *:p-12 *:pb-48 *:rounded-xl"}>
-			<div className={"bg-[#62EAFF6B]"}><p>design</p></div>
-			<div className={"bg-[#9494946B]"}><p>engineering</p></div>
+		<div className={"flex justify-center flex-wrap gap-12 *:basis-[calc(50%-1.5rem)] *:max-md:basis-11/12"}>
+			<Widget heading={'design'} className={'bg-[#62EAFF6B]'}>
+				<></>
+			</Widget>
+			<Widget heading={'engineering'} className={'bg-[#9494946B]'}>
+				<></>
+			</Widget>
 		</div>
 	</div>
 );
 
 const AboutMe = () => {
 	return <div className={"min-h-[100dvh] py-[8rem]"}>
-		<div className={"flex flex-wrap *:rounded-xl px-14 gap-12"}>
-			<div className={"grow bg-[#9494941A] p-12 text-[#FFFFFFA3] text-2xl"}><p>about me</p></div>
-			<img className={`basis-[calc(100%-100%/1.61803398875-5rem)] min-w-0 max-md:grow max-sm:flex-[100%]`}
+		<div className={"flex flex-wrap px-14 gap-12"}>
+			<Widget heading={'about me'} className={'grow'}>
+				<></>
+			</Widget>
+			<img className={`basis-[calc(100%-100%/1.61803398875-5rem)] rounded-xl min-w-0 max-md:grow max-sm:flex-[100%]`}
 					 src={"/images/stroll.jpeg"} alt={"Chris walking while carrying iPad"}/>
 		</div>
-		<div className={"flex justify-center flex-wrap m-14 text-[#FFFFFFA3] text-2xl " +
-			"*:p-12 *:pb-96 *:rounded-xl"}>
-			<div className={"bg-[#62EAFF6B] grow"}><p>looking for a design-minded software engineer?</p></div>
-		</div>
+		<Widget heading={'looking for a design-minded software engineer?'} className={'m-14 bg-[#62EAFF6B] pb-96'}>
+			<></>
+		</Widget>
 	</div>;
 };
 
@@ -133,10 +138,9 @@ const AIWidget = () => {
 const CreativelyIntelligent = () => (
 	<div className={'p-24 max-sm:p-10 space-y-10'}>
 		<p className={'text-2xl'}>creatively intelligent.</p>
-		<div className={"flex flex-wrap *:rounded-xl"}>
-			<div className={"bg-[#9494941A] p-12 pb-48 basis-1/2 text-[#FFFFFFA3]"}>
-			</div>
-		</div>
+		<Widget heading={''} className={'w-1/2'}>
+			<></>
+		</Widget>
 	</div>
 );
 
@@ -149,7 +153,7 @@ const Home = () => {
 			</InspirationalQuote>
 			<AboutMe/>
 			<AIWidget/>
-			<CreativelyIntelligent />
+			<CreativelyIntelligent/>
 			<InspirationalQuote author={'Steve Jobs'}>
 				You can't connect the dots looking forward; you can only connect them looking backwards.
 			</InspirationalQuote>
