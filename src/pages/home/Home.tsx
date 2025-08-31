@@ -4,8 +4,8 @@ const Home = () => {
 	return (
 		<div className={'bg-[#002028] text-gray-50'}>
 
-			<div className={'h-[100dvh]'}>
-				<div className={'p-14 flex justify-between flex-wrap mb-24 space-y-12'}>
+			<div className={'min-h-[100dvh] p-14 space-y-14'}>
+				<div className={'flex justify-between flex-wrap space-y-12'}>
 					<div className={'font-poppins font-medium text-3xl text-gray-400 space-y-5 basis-1/5 max-md:basis-full'}>
 						<p className={'text-cyan-500 text-4xl mb-10'}>Chris <span
 							className={'ml-2 bg-cyan-200 size-2.5 rounded-[50%] inline-block'}></span></p>
@@ -18,9 +18,11 @@ const Home = () => {
 					<div className={'basis-1/5 max-md:basis-full'}></div>
 				</div>
 
-				<div className={'flex flex-wrap *:basis-1/2 *:pt-14 *:pb-24 *:px-24'}>
+				<div className={'flex justify-center flex-wrap gap-12 *:basis-[calc(50%-1.5rem)] ' +
+					'*:max-md:basis-11/12 *:pt-14 *:pb-48 *:px-24 *:rounded-xl'}>
 					<div className={'bg-[#62EAFF6B]'}><p>design</p></div>
 					<div className={'bg-[#9494946B]'}><p>engineering</p></div>
+
 				</div>
 			</div>
 			<InspirationalQuote author={'Steve Jobs'}>
