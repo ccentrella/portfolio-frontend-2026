@@ -282,13 +282,64 @@ const Palestine = () => (
 	</div>
 )
 
+const InviteChris = () => (
+	<div className={'min-h-[100dvh] bg-black text-[#FFFFFFCC] px-14 py-32 space-y-12 text-lg'}>
+		<p className={'text-4xl'}>invite Chris</p>
+		<div className={'py-6 px-12 bg-orange-400 rounded-md max-w-[45rem]'}>Coming Soon! This form is not yet active.</div>
+
+		<div className={'space-y-8'}>
+			<div className={'space-y-3 [&_input]:text-black [&_input]:py-2.5 [&_input]:px-10 [&_input]:mx-10' +
+				' [&_input]:bg-[#FFFFFFCC] [&_input]:placeholder-gray-500 [&_input]:text-xl [&_input]:rounded-md' +
+				' [&_input]:w-4/5 [&_input]:max-w-[36rem] [&_label]:basis-[6rem] [&_label]:shrink-0'}>
+				<p className={'uppercase text-base text-[#FFFFFF99] mb-6'}>Contact Information</p>
+				<div className={'flex'}>
+					<label>Reason*</label>
+					<input type={'text'} placeholder={'Event'}/>
+				</div>
+				<div className={'flex'}>
+					<label>Name*</label>
+					<input type={'text'}/>
+				</div>
+				<div className={'flex'}>
+					<label>Email*</label>
+					<input type={'text'}/>
+				</div>
+				<div className={'flex'}>
+					<label>Phone</label>
+					<input type={'text'}/>
+				</div>
+			</div>
+
+			<div className={'space-y-3 [&_input]:text-black [&_input]:py-2.5 [&_input]:px-10 [&_input]:mx-10' +
+				' [&_input]:bg-[#FFFFFFCC] [&_input]:placeholder-gray-500 [&_input]:text-xl [&_input]:rounded-md' +
+				' [&_input]:w-4/5 [&_input]:max-w-[36rem] [&_label]:basis-[6rem] [&_label]:shrink-0'}>
+				<p className={'uppercase text-base text-[#FFFFFF99] mb-6'}>Event Information</p>
+				<div className={'flex'}>
+					<label>Event*</label>
+					<input type={'text'}/>
+				</div>
+				<div className={'flex'}>
+					<label>Venue*</label>
+					<input type={'text'}/>
+				</div>
+			</div>
+		</div>
+
+		<div className={'flex flex-wrap gap-x-32 gap-y-6'}>
+			<p className={'uppercase lg'}>Add Message</p>
+			<p className={'uppercase lg'}>Send</p>
+		</div>
+	</div>
+)
+
 const Footer = () => (
 	<div className={'min-h-[100dvh] bg-[#204F5C] text-[#FFFFFF66] p-14 pt-24 pb-10 flex flex-col gap-12 justify-between'}>
 		<div className={"space-y-5 basis-1/5 max-md:basis-full"}>
 			<p className={"text-cyan-500 text-4xl mb-10"}>Chris <span
 				className={"ml-2 bg-cyan-200 size-2.5 rounded-[50%] inline-block"}></span></p>
 			<div className={'flex flex-wrap gap-x-12 gap-y-12'}>
-				<div className={'font-poppins font-medium text-4xl text-gray-400 space-y-5 basis-2/5 max-md:basis-3/5 max-sm:basis-full'}>
+				<div
+					className={'font-poppins font-medium text-4xl text-gray-400 space-y-5 basis-2/5 max-md:basis-3/5 max-sm:basis-full'}>
 					<p>resume</p>
 					<p>human rights</p>
 					<p>invite Chris</p>
@@ -353,6 +404,7 @@ const Home = () => {
 			<Environment/>
 			<Housing/>
 			<Palestine/>
+			<InviteChris/>
 			<Footer/>
 		</div>
 	);
