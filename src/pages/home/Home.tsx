@@ -78,7 +78,7 @@ const Hero = () => (
 					 src={"/images/profile.jpeg"} alt={"Chris in hoodie, relaxed"}/>
 			<div className={"basis-1/5 max-md:basis-full"}></div>
 		</div>
-		<div className={"flex justify-center flex-wrap gap-12 *:basis-[calc(50%-1.5rem)] *:max-md:basis-11/12"}>
+		<div className={"flex justify-center flex-wrap gap-12 *:basis-[calc(50%-1.5rem)] *:max-md:basis-full"}>
 			<Widget heading={'design'} className={'bg-[#62EAFF6B]'}>
 				<></>
 			</Widget>
@@ -136,11 +136,48 @@ const AIWidget = () => {
 };
 
 const CreativelyIntelligent = () => (
-	<div className={'p-24 max-sm:p-10 space-y-10'}>
-		<p className={'text-2xl'}>creatively intelligent.</p>
-		<Widget heading={''} className={'w-1/2'}>
+	<div className={'p-32 max-sm:p-10 space-y-10'}>
+		<p className={'text-4xl'}>creatively intelligent.</p>
+		<Widget heading={''} className={'md:w-1/2 bg-[#FCFCFC1A]'}>
 			<></>
 		</Widget>
+	</div>
+);
+
+const DataIsBeautiful = () => (
+	<div className={'p-32 max-sm:p-10 space-y-10'}>
+		<p className={'text-4xl'}>data is beautiful.</p>
+		<Widget heading={'databases'} className={'md:w-1/2 bg-[#FCFCFC1A]'}>
+			<></>
+		</Widget>
+	</div>
+);
+
+const SystemDesign = () => (
+	<div className={'py-32'}>
+		<p className={'text-5xl mb-14 text-center'}>millions of users. one system.</p>
+		<div className={'flex flex-wrap px-14 gap-12 *:basis-[calc(50%-1.5rem)] *:max-md:basis-full'}>
+			<Widget heading={'distributed systems'} className={'bg-[#FCFCFC1A]'}>
+				<></>
+			</Widget>
+			<Widget heading={'cloud'} className={'bg-[#FCFCFC1A]'}>
+				<></>
+			</Widget>
+		</div>
+	</div>
+)
+
+const BuiltToScale = () => (
+	<div className={'p-32 max-sm:p-10 space-y-10'}>
+		<p className={'text-4xl'}>built to scale.</p>
+		<div className={'flex flex-wrap gap-12 *:basis-[calc(50%-1.5rem)] *:max-md:basis-full'}>
+			<Widget heading={'architecture'} className={'md:w-1/2 bg-[#FCFCFC1A]'}>
+				<></>
+			</Widget>
+			<Widget heading={'quality assurance'} className={'md:w-1/2 bg-[#FCFCFC1A]'}>
+				<></>
+			</Widget>
+		</div>
 	</div>
 );
 
@@ -157,6 +194,17 @@ const Home = () => {
 			<InspirationalQuote author={'Steve Jobs'}>
 				You can't connect the dots looking forward; you can only connect them looking backwards.
 			</InspirationalQuote>
+			<DataIsBeautiful/>
+			<img src={'/images/pattern_background.png'} alt={'systems illustration'}
+					 className={'w-full h-[100dvh] object-cover'}/>
+			<SystemDesign/>
+			<InspirationalQuote author={'Steve Jobs'}>
+				Design is not just what it looks like and feels like. Design is how it works.
+			</InspirationalQuote>
+			<BuiltToScale/>
+			<img src={'/images/pattern_background.png'} alt={'processes illustration'}
+					 className={'w-full h-[100dvh] object-cover'}/>
+			<p className={'text-5xl text-center py-32'}>principles for life.</p>
 		</div>
 	);
 };
