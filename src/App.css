@@ -1,7 +1,9 @@
 @import url('/typefaces/Poppins/poppins.css');
+@import url('/typefaces/Bumbbled/bumbbled.css');
 @import 'tailwindcss';
 
 @theme {
 	--font-poppins: poppins, "ui-sans-serif", "system-ui", sans-serif;
+	--font-bumbbled: bumbbled, "Brush Script MT", "Comic Sans MS", cursive;
 	--font-sans: var(--font-poppins);
 }
