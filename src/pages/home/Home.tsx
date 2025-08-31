@@ -186,7 +186,8 @@ const BuiltToScale = () => (
 );
 
 const ImproveContinuously = () => (
-	<div className={'min-h-[100dvh] bg-white flex flex-wrap px-14 py-32 gap-12 *:basis-[calc(50%-1.5rem)] *:max-md:basis-full'}>
+	<div className={'min-h-[100dvh] bg-white flex flex-wrap px-14 py-32 gap-12 *:basis-[calc(50%-1.5rem)]' +
+		' *:max-md:basis-full'}>
 		<div className={'flex justify-center'}>
 			<p className={'text-4xl text-black self-center leading-snug'}>improve.<br/>continuously.</p>
 		</div>
@@ -241,6 +242,46 @@ const WorkExperience = () => (
 	</div>
 )
 
+const Environment = () => (
+	<div className={'min-h-[100dvh] bg-[#91A38B] px-14 py-32 gap-12 flex flex-wrap'}>
+		<Widget heading={'environment'} className={'grow bg-[#133F06]'}>
+			<></>
+		</Widget>
+		<Widget heading={'planned obsolescence'}
+						className={'basis-[calc(100%-100%/1.61803398875-5rem)] max-lg:basis-[calc(50%-1.5rem)] ' +
+							'max-md:basis-full bg-[#133F0659]'}>
+			<></>
+		</Widget>
+	</div>
+)
+
+const Housing = () => (
+	<div className={'min-h-[100dvh] bg-white px-14 py-32 gap-12 flex flex-wrap'}>
+		<div className={'flex justify-center basis-[calc(100%-100%/1.61803398875-5rem)] max-lg:basis-[calc(50%-1.5rem)] ' +
+			'max-md:basis-full'}>
+			<p className={'text-4xl text-black self-center leading-snug'}>housing is a<br/>human right</p>
+		</div>
+		<Widget heading={'affordable housing'} className={'grow bg-[#746D40]'}>
+			<></>
+		</Widget>
+	</div>
+)
+
+const Palestine = () => (
+	<div className={'min-h-[100dvh] bg-[#6A6A6A] gap-12 flex flex-wrap'}>
+		<img
+			className={'w-[calc(100%/1.61803398875-1.5rem)] max-lg:basis-[calc(50%-1.5rem)] max-md:basis-full object-cover'}
+			src={'/images/pattern_background.png'}
+			alt={'picture of people in Palestine'}/>
+		<div className={'grow flex justify-center'}>
+			<div className={'self-center space-y-5'}>
+				<p className={'text-4xl leading-snug'}>every person<br/>deserves dignity</p>
+				<p className={'text-xl'}>statement on Palestine</p>
+			</div>
+		</div>
+	</div>
+)
+
 // TODO: Separate into large components based on section
 const Home = () => {
 	return (
@@ -273,6 +314,12 @@ const Home = () => {
 			</InspirationalQuote>
 			<WorkExperience/>
 			<p className={'text-5xl text-center pb-32'}>human rights</p>
+			<InspirationalQuote author={'Steve Jobs'}>
+				The people who are crazy enough to think they can change the world, are the ones who do.
+			</InspirationalQuote>
+			<Environment/>
+			<Housing/>
+			<Palestine/>
 		</div>
 	);
 };
