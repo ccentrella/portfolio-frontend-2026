@@ -181,6 +181,28 @@ const BuiltToScale = () => (
 	</div>
 );
 
+const ImproveContinuously = () => (
+	<div className={'min-h-[100dvh] bg-white flex flex-wrap px-14 py-32 gap-12 *:basis-[calc(50%-1.5rem)] *:max-md:basis-full'}>
+		<div className={'flex justify-center'}>
+			<p className={'text-4xl text-black self-center leading-snug'}>improve.<br/>continuously.</p>
+		</div>
+		<Widget heading={'continuous improvement'} className={'bg-[#16748C]'}>
+			<></>
+		</Widget>
+	</div>
+)
+const LeanProcesses = () => (
+	<div className={'min-h-[100dvh] flex flex-wrap px-14 py-32 gap-12 *:basis-[calc(50%-1.5rem)] *:max-md:basis-full'}>
+		<div className={'flex justify-center'}>
+			<p className={'text-4xl self-center leading-snug'}>simple. lean.<br/>forever.</p>
+		</div>
+		<Widget heading={'lean processes'}>
+			<></>
+		</Widget>
+	</div>
+)
+
+// TODO: Separate into large components based on section
 const Home = () => {
 	return (
 		<div className={'bg-[#002028] text-gray-50'}>
@@ -205,6 +227,11 @@ const Home = () => {
 			<img src={'/images/pattern_background.png'} alt={'processes illustration'}
 					 className={'w-full h-[100dvh] object-cover'}/>
 			<p className={'text-5xl text-center py-32'}>principles for life.</p>
+			<ImproveContinuously />
+			<LeanProcesses />
+			<InspirationalQuote author={'Steve Jobs'} className={'text-white bg-black'}>
+				Your time is limited, so don't waste it living someone else's life.
+			</InspirationalQuote>
 		</div>
 	);
 };
