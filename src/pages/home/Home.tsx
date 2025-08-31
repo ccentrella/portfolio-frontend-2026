@@ -129,7 +129,7 @@ const AIWidget = () => {
 			<div className={'text-center space-y-10 grow'}>
 				<p className={'font-bumbbled text-8xl text-[#85D7E0]'}>{heading}</p>
 				<input placeholder={placeholder}
-							 className={'py-5 px-12 bg-[#0973907F] placeholder-gray-300 rounded-lg w-4/5'} type={'text'}/>
+							 className={'py-5 px-12 bg-[#FFFFFF7F] placeholder-gray-500 text-xl rounded-lg w-4/5'} type={'text'}/>
 			</div>
 		</div>
 	);
