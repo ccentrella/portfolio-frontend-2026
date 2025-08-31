@@ -3,7 +3,6 @@ import InspirationalQuote from "../../components/InspirationalQuote.tsx";
 const Home = () => {
 	return (
 		<div className={'bg-[#002028] text-gray-50'}>
-
 			<div className={'min-h-[100dvh] p-14 space-y-14'}>
 				<div className={'flex justify-between flex-wrap space-y-12'}>
 					<div className={'font-poppins font-medium text-3xl text-gray-400 space-y-5 basis-1/5 max-md:basis-full'}>
@@ -17,17 +16,21 @@ const Home = () => {
 							 src={'/images/profile.jpeg'} alt={'Chris in hoodie, relaxed'}/>
 					<div className={'basis-1/5 max-md:basis-full'}></div>
 				</div>
-
-				<div className={'flex justify-center flex-wrap gap-12 *:basis-[calc(50%-1.5rem)] ' +
-					'*:max-md:basis-11/12 *:pt-14 *:pb-48 *:px-24 *:rounded-xl'}>
+				<div className={'flex justify-center flex-wrap gap-12 *:basis-[calc(50%-1.5rem)] text-[#FFFFFFA3] text-2xl ' +
+					'*:max-md:basis-11/12 *:p-12 *:pb-48 *:rounded-xl'}>
 					<div className={'bg-[#62EAFF6B]'}><p>design</p></div>
 					<div className={'bg-[#9494946B]'}><p>engineering</p></div>
-
 				</div>
 			</div>
 			<InspirationalQuote author={'Steve Jobs'}>
 				The only way to do great work is to love what you do.
 			</InspirationalQuote>
+			<div className={'min-h-[100dvh] py-[8rem]'}>
+				<div className={'flex flex-wrap *:rounded-xl px-14 gap-12'}>
+					<div className={'grow bg-[#9494941A] p-12 text-[#FFFFFFA3] text-2xl'}><p>about me</p></div>
+					<img className={`basis-[calc(100%-100%/1.61803398875-5rem)] min-w-0 max-md:grow max-sm:flex-[100%]`} src={'/images/stroll.jpeg'} alt={'Chris walking while carrying iPad'}/>
+				</div>
+			</div>
 		</div>
 	);
 };
