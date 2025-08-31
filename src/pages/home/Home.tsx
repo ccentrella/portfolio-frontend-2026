@@ -206,6 +206,41 @@ const LeanProcesses = () => (
 	</div>
 )
 
+const WorkExperience = () => (
+	<div className={'p-32'}>
+		<div className={'min-h-[100dvh]'}>
+			<p className={'text-4xl'}>what's in a timeline?</p>
+		</div>
+		<p className={'text-4xl text-center mb-14'}>...and so much more</p>
+		<div className={'flex flex-wrap gap-12 *:basis-[calc(50%-1.5rem)] *:max-md:basis-full'}>
+			<Widget heading={'portfolio site'}>
+				<></>
+			</Widget>
+			<Widget heading={'AI prompt widget'}>
+				<></>
+			</Widget>
+			<Widget heading={'AI terminal interface'}>
+				<></>
+			</Widget>
+			<Widget heading={'Ajax Alternates redesign'}>
+				<></>
+			</Widget>
+			<Widget heading={'iOS coding goals app'}>
+				<></>
+			</Widget>
+			<Widget heading={'text formatter utility'}>
+				<></>
+			</Widget>
+			<Widget heading={'2024 portfolio site'}>
+				<></>
+			</Widget>
+			<Widget heading={'2022 portfolio site'}>
+				<></>
+			</Widget>
+		</div>
+	</div>
+)
+
 // TODO: Separate into large components based on section
 const Home = () => {
 	return (
@@ -231,11 +266,13 @@ const Home = () => {
 			<img src={'/images/pattern_background.png'} alt={'processes illustration'}
 					 className={'w-full h-[100dvh] object-cover'}/>
 			<p className={'text-5xl text-center py-32'}>principles for life.</p>
-			<ImproveContinuously />
-			<LeanProcesses />
+			<ImproveContinuously/>
+			<LeanProcesses/>
 			<InspirationalQuote author={'Steve Jobs'} className={'text-white bg-black'}>
 				Your time is limited, so don't waste it living someone else's life.
 			</InspirationalQuote>
+			<WorkExperience/>
+			<p className={'text-5xl text-center pb-32'}>human rights</p>
 		</div>
 	);
 };
