@@ -130,6 +130,16 @@ const AIWidget = () => {
 	);
 };
 
+const CreativelyIntelligent = () => (
+	<div className={'p-24 max-sm:p-10 space-y-10'}>
+		<p className={'text-2xl'}>creatively intelligent.</p>
+		<div className={"flex flex-wrap *:rounded-xl"}>
+			<div className={"bg-[#9494941A] p-12 pb-48 basis-1/2 text-[#FFFFFFA3]"}>
+			</div>
+		</div>
+	</div>
+);
+
 const Home = () => {
 	return (
 		<div className={'bg-[#002028] text-gray-50'}>
@@ -139,6 +149,10 @@ const Home = () => {
 			</InspirationalQuote>
 			<AboutMe/>
 			<AIWidget/>
+			<CreativelyIntelligent />
+			<InspirationalQuote author={'Steve Jobs'}>
+				You can't connect the dots looking forward; you can only connect them looking backwards.
+			</InspirationalQuote>
 		</div>
 	);
 };
