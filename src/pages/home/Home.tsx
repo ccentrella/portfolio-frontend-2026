@@ -2,6 +2,10 @@ import InspirationalQuote from "../../components/InspirationalQuote.tsx";
 import {useEffect, useState} from "react";
 import Widget from "../../components/Widget.tsx";
 
+// TODO: Add header
+// TODO: Add scroll snap
+// TODO: Add transitions
+
 const translations = [
 	{lang: "en", heading: "hello", placeholder: "Have a question?"},
 	{lang: "es", heading: "hola", placeholder: "¿Tienes una pregunta?"},
