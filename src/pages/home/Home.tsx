@@ -1,6 +1,68 @@
 import InspirationalQuote from "../../components/InspirationalQuote.tsx";
 import {useEffect, useState} from "react";
 
+const translations = [
+	{lang: "en", heading: "hello", placeholder: "Have a question?"},
+	{lang: "es", heading: "hola", placeholder: "¿Tienes una pregunta?"},
+	{lang: "fr", heading: "bonjour", placeholder: "Une question ?"},
+	{lang: "de", heading: "hallo", placeholder: "Hast du eine Frage?"},
+	{lang: "it", heading: "ciao", placeholder: "Hai una domanda?"},
+	{lang: "pt", heading: "olá", placeholder: "Tem uma pergunta?"},
+	{lang: "zh", heading: "你好", placeholder: "有问题吗？"},
+	{lang: "ja", heading: "こんにちは", placeholder: "質問はありますか？"},
+	{lang: "ko", heading: "안녕하세요", placeholder: "질문이 있나요?"},
+	{lang: "ar", heading: "مرحبًا", placeholder: "هل لديك سؤال؟"},
+	{lang: "hi", heading: "नमस्ते", placeholder: "कोई सवाल है?"},
+	{lang: "bn", heading: "হ্যালো", placeholder: "কোনো প্রশ্ন আছে?"},
+	{lang: "ur", heading: "ہیلو", placeholder: "کوئی سوال ہے؟"},
+	{lang: "fa", heading: "سلام", placeholder: "سوالی دارید؟"},
+	{lang: "ru", heading: "привет", placeholder: "Есть вопрос?"},
+	{lang: "uk", heading: "привіт", placeholder: "Є питання?"},
+	{lang: "tr", heading: "merhaba", placeholder: "Bir sorunuz mu var?"},
+	{lang: "th", heading: "สวัสดี", placeholder: "มีคำถามไหม?"},
+	{lang: "vi", heading: "xin chào", placeholder: "Bạn có câu hỏi không?"},
+	{lang: "id", heading: "halo", placeholder: "Ada pertanyaan?"},
+	{lang: "ms", heading: "hai", placeholder: "Ada soalan?"},
+	{lang: "nl", heading: "hallo", placeholder: "Heb je een vraag?"},
+	{lang: "sv", heading: "hej", placeholder: "Har du en fråga?"},
+	{lang: "no", heading: "hei", placeholder: "Har du et spørsmål?"},
+	{lang: "da", heading: "hej", placeholder: "Har du et spørgsmål?"},
+	{lang: "fi", heading: "hei", placeholder: "Onko kysyttävää?"},
+	{lang: "pl", heading: "cześć", placeholder: "Masz pytanie?"},
+	{lang: "cs", heading: "ahoj", placeholder: "Máš otázku?"},
+	{lang: "sk", heading: "ahoj", placeholder: "Máš otázku?"},
+	{lang: "sl", heading: "živjo", placeholder: "Imate vprašanje?"},
+	{lang: "ro", heading: "salut", placeholder: "Ai o întrebare?"},
+	{lang: "el", heading: "γεια", placeholder: "Έχεις ερώτηση;"},
+	{lang: "sr", heading: "здраво", placeholder: "Имате питање?"},
+	{lang: "hr", heading: "bok", placeholder: "Imate pitanje?"},
+	{lang: "bs", heading: "zdravo", placeholder: "Imate li pitanje?"},
+	{lang: "mk", heading: "здраво", placeholder: "Имате прашање?"},
+	{lang: "bg", heading: "здравей", placeholder: "Имате въпрос?"},
+	{lang: "lt", heading: "labas", placeholder: "Turite klausimą?"},
+	{lang: "lv", heading: "sveiki", placeholder: "Vai jums ir jautājums?"},
+	{lang: "et", heading: "tere", placeholder: "Kas teil on küsimus?"},
+	{lang: "ka", heading: "გამარჯობა", placeholder: "გაქვთ კითხვა?"},
+	{lang: "hy", heading: "բարեւ", placeholder: "Հարց ունե՞ք:"},
+	{lang: "sq", heading: "përshëndetje", placeholder: "Keni ndonjë pyetje?"},
+	{lang: "am", heading: "ሰላም", placeholder: "ጥያቄ አለ?"},
+	{lang: "sw", heading: "hujambo", placeholder: "Una swali?"},
+	{lang: "so", heading: "salaan", placeholder: "Su'aal ma qabtaa?"},
+	{lang: "ta", heading: "வணக்கம்", placeholder: "ஏதாவது கேள்வியா?"},
+	{lang: "te", heading: "హలో", placeholder: "ఏదైన ప్రశ్న ఉందా?"},
+	{lang: "kn", heading: "ನಮಸ್ಕಾರ", placeholder: "ಯಾವುದೇ ಪ್ರಶ್ನೆಯಿದೆಯೆ?"},
+	{lang: "ml", heading: "നമസ്കാരം", placeholder: "ചോദ്യം ഉണ്ടോ?"},
+	{lang: "mr", heading: "नमस्कार", placeholder: "काही प्रश्न आहे का?"},
+	{lang: "gu", heading: "નમસ્તે", placeholder: "કોઈ પ્રશ્ન છે?"},
+	{lang: "pa", heading: "ਸਤ ਸ੍ਰੀ ਅਕਾਲ", placeholder: "ਕੀ ਕੋਈ ਸਵਾਲ ਹੈ?"},
+	{lang: "kk", heading: "сәлем", placeholder: "Сұрағыңыз бар ма?"},
+	{lang: "mn", heading: "сайн байна уу", placeholder: "Таньд асуулт байна уу?"},
+	{lang: "my", heading: "မင်္ဂလာပါ", placeholder: "မေးစရာရှိပါသလား?"},
+	{lang: "tl", heading: "kumusta", placeholder: "May tanong ka ba?"},
+	{lang: "ca", heading: "hola", placeholder: "Tens alguna pregunta?"},
+	{lang: "is", heading: "halló", placeholder: "Ertu með spurningu?"}
+];
+
 const Hero = () => (
 	<div className={"min-h-[100dvh] p-14 space-y-14"}>
 		<div className={"flex justify-between flex-wrap space-y-12"}>
@@ -44,15 +106,12 @@ const AIWidget = () => {
 	const [placeholder, setPlaceholder] = useState('Have a question?');
 
 	useEffect(() => {
-		const headingArray = ['hello', 'hola']
-		const placeholderArray = ['Have a question?', '¿Tenga una pregunta?']
-
 		const updateText = () => {
-			const next = (current + 1) % headingArray.length;
+			const next = (current + 1) % translations.length;
 
 			setCurrent(next);
-			setHeading(headingArray[next]);
-			setPlaceholder(placeholderArray[next]);
+			setHeading(translations[next].heading);
+			setPlaceholder(translations[next].placeholder);
 		}
 
 		const timer = setInterval(updateText, 2500);
