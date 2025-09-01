@@ -3,16 +3,15 @@ import {useEffect, useState} from "react";
 import Widget from "../../components/Widget.tsx";
 import {supabase} from "../../utils/supabaseClient.ts";
 
-type SectionMap = Record<string, Attribute[]>;
-
-interface Attribute {
-	name: string,
-}
-
 // TODO: Add header
 // TODO: Add scroll snap
 // TODO: Add transitions
 // TODO: Tweak font sizes for mobile
+
+type SectionMap = Record<string, Attribute[]>;
+interface Attribute {
+	name: string,
+}
 
 const translations = [
 	{lang: "en", heading: "hello", placeholder: "Have a question?"},
@@ -128,7 +127,6 @@ const AboutMe = () => {
 		</Widget>
 	</div>;
 };
-
 const AIWidget = () => {
 
 	const [current, setCurrent] = useState(0);
@@ -166,7 +164,6 @@ const AIWidget = () => {
 		</div>
 	);
 };
-
 const CreativelyIntelligent = ({sections}: { sections: SectionMap }) => (
 	<div className={'p-32 max-sm:px-14 space-y-10'}>
 		<p className={'text-4xl'}>creatively intelligent.</p>
@@ -175,7 +172,6 @@ const CreativelyIntelligent = ({sections}: { sections: SectionMap }) => (
 		</Widget>
 	</div>
 );
-
 const DataIsBeautiful = ({sections}: { sections: SectionMap }) => (
 	<div className={'p-32 max-sm:px-14 space-y-10'}>
 		<p className={'text-4xl'}>data is beautiful.</p>
@@ -184,7 +180,6 @@ const DataIsBeautiful = ({sections}: { sections: SectionMap }) => (
 		</Widget>
 	</div>
 );
-
 const SystemDesign = ({sections}: { sections: SectionMap }) => (
 	<div className={'py-32'}>
 		<p className={'text-5xl max-sm:text-4xl mb-14 text-center'}>millions of users. one system.</p>
@@ -198,7 +193,6 @@ const SystemDesign = ({sections}: { sections: SectionMap }) => (
 		</div>
 	</div>
 )
-
 const BuiltToScale = ({sections}: { sections: SectionMap }) => (
 	<div className={'p-32 max-sm:px-14 space-y-10'}>
 		<p className={'text-4xl'}>built to scale.</p>
@@ -214,6 +208,30 @@ const BuiltToScale = ({sections}: { sections: SectionMap }) => (
 			</Widget>
 		</div>
 	</div>
+);
+const AboutSection = (props: { sections: SectionMap }) => (
+	<>
+		<InspirationalQuote author={"Steve Jobs"}>
+			The only way to do great work is to love what you do.
+		</InspirationalQuote>
+		<AboutMe/>
+		<AIWidget/>
+		<CreativelyIntelligent sections={props.sections}/>
+		<InspirationalQuote author={"Steve Jobs"}>
+			You can't connect the dots looking forward; you can only connect them looking backwards.
+		</InspirationalQuote>
+		<DataIsBeautiful sections={props.sections}/>
+		<img src={"/images/pattern_background.png"} alt={"systems illustration"}
+				 className={"w-full h-[100dvh] object-cover"}/>
+		<div className={"bg-cyan-500 text-gray-100 py-5 px-10 mx-14 my-6 md:pr-20 rounded-md inline-block"}>
+			<p>Image coming soon! Check back in the near future :)</p>
+		</div>
+		<SystemDesign sections={props.sections}/>
+		<InspirationalQuote author={"Steve Jobs"}>
+			Design is not just what it looks like and feels like. Design is how it works.
+		</InspirationalQuote>
+		<BuiltToScale sections={props.sections}/>
+	</>
 );
 
 const ImproveContinuously = ({sections}: { sections: SectionMap }) => (
@@ -243,6 +261,21 @@ const LeanProcesses = ({sections}: { sections: SectionMap }) => (
 		</Widget>
 	</div>
 )
+const GuidingPrinciplesSection = (props: { sections: SectionMap }) => (
+	<>
+		<img src={"/images/pattern_background.png"} alt={"processes illustration"}
+				 className={"w-full h-[100dvh] object-cover"}/>
+		<div className={"bg-cyan-500 text-gray-100 py-5 px-10 mx-14 my-6 md:pr-20 rounded-md inline-block"}>
+			<p>Image coming soon! Check back in the near future :)</p>
+		</div>
+		<p className={"text-5xl max-sm:text-4xl text-center py-32"}>principles for life.</p>
+		<ImproveContinuously sections={props.sections}/>
+		<LeanProcesses sections={props.sections}/>
+		<InspirationalQuote author={"Steve Jobs"} className={"text-white bg-black"}>
+			Your time is limited, so don't waste it living someone else's life.
+		</InspirationalQuote>
+	</>
+);
 
 const WorkExperienceSection = () => (
 	<div className={'pt-32 px-32 max-sm:px-14'}>
@@ -303,7 +336,6 @@ const Environment = ({sections}: { sections: SectionMap }) => (
 		</Widget>
 	</div>
 )
-
 const Housing = ({sections}: { sections: SectionMap }) => (
 	<div className={'min-h-[100dvh] bg-white px-14 py-32 gap-12 flex flex-wrap'}>
 		<div className={'flex justify-center basis-[calc(100%-100%/1.61803398875-5rem)] max-lg:basis-[calc(50%-1.5rem)] ' +
@@ -318,7 +350,6 @@ const Housing = ({sections}: { sections: SectionMap }) => (
 		</Widget>
 	</div>
 )
-
 const Palestine = () => (
 	<div className={'min-h-[100dvh] bg-[#6A6A6A] gap-12 flex flex-wrap'}>
 		<img
@@ -336,48 +367,6 @@ const Palestine = () => (
 		</div>
 	</div>
 )
-
-const AboutSection = (props: { sections: SectionMap }) => (
-	<>
-		<InspirationalQuote author={"Steve Jobs"}>
-			The only way to do great work is to love what you do.
-		</InspirationalQuote>
-		<AboutMe/>
-		<AIWidget/>
-		<CreativelyIntelligent sections={props.sections}/>
-		<InspirationalQuote author={"Steve Jobs"}>
-			You can't connect the dots looking forward; you can only connect them looking backwards.
-		</InspirationalQuote>
-		<DataIsBeautiful sections={props.sections}/>
-		<img src={"/images/pattern_background.png"} alt={"systems illustration"}
-				 className={"w-full h-[100dvh] object-cover"}/>
-		<div className={"bg-cyan-500 text-gray-100 py-5 px-10 mx-14 my-6 md:pr-20 rounded-md inline-block"}>
-			<p>Image coming soon! Check back in the near future :)</p>
-		</div>
-		<SystemDesign sections={props.sections}/>
-		<InspirationalQuote author={"Steve Jobs"}>
-			Design is not just what it looks like and feels like. Design is how it works.
-		</InspirationalQuote>
-		<BuiltToScale sections={props.sections}/>
-	</>
-);
-
-const GuidingPrinciplesSection = (props: { sections: SectionMap }) => (
-	<>
-		<img src={"/images/pattern_background.png"} alt={"processes illustration"}
-				 className={"w-full h-[100dvh] object-cover"}/>
-		<div className={"bg-cyan-500 text-gray-100 py-5 px-10 mx-14 my-6 md:pr-20 rounded-md inline-block"}>
-			<p>Image coming soon! Check back in the near future :)</p>
-		</div>
-		<p className={"text-5xl max-sm:text-4xl text-center py-32"}>principles for life.</p>
-		<ImproveContinuously sections={props.sections}/>
-		<LeanProcesses sections={props.sections}/>
-		<InspirationalQuote author={"Steve Jobs"} className={"text-white bg-black"}>
-			Your time is limited, so don't waste it living someone else's life.
-		</InspirationalQuote>
-	</>
-);
-
 const HumanRightsSection = (props: { sections: SectionMap }) => (
 	<>
 		<p id={"human-rights"} className={"text-5xl max-sm:text-4xl text-center py-32"}>human rights</p>
@@ -389,7 +378,6 @@ const HumanRightsSection = (props: { sections: SectionMap }) => (
 		<Palestine/>
 	</>
 );
-
 
 const InviteChrisSection = () => (
 	<div id={'invite-chris'} className={'min-h-[100dvh] bg-black text-[#FFFFFFCC] px-14 py-32 space-y-12 text-lg'}>
