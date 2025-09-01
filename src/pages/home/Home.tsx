@@ -124,7 +124,7 @@ const Hero = ({sections}: { sections: SectionMap }) => (
 			<Widget heading={'design'} className={'bg-[#62EAFF6B]'}>
 				<WidgetAttributes collection={sections[SECTION_KEYS.DESIGN] ?? []} />
 			</Widget>
-			<Widget heading={'engineering'} className={'bg-[#9494946B] space-y-5 *:space-y-2'}>
+			<Widget heading={'engineering'} className={'bg-[#9494946B] space-y-6 *:space-y-2'}>
 				<div>
 					<p className={'uppercase'}>Frontend</p>
 					<WidgetAttributes collection={sections[SECTION_KEYS.FRONTEND] ?? []} />
@@ -212,7 +212,7 @@ const DataIsBeautiful = ({sections}: { sections: SectionMap }) => (
 );
 const SystemDesign = ({sections}: { sections: SectionMap }) => (
 	<div className={'py-32'}>
-		<p className={'text-5xl max-sm:text-4xl mb-14 text-center'}>millions of users. one system.</p>
+		<p className={'text-4xl max-sm:text-4xl mb-14 text-center'}>millions of users. one system.</p>
 		<div className={'flex flex-wrap px-14 gap-12 *:basis-[calc(50%-1.5rem)] *:max-md:basis-full'}>
 			<Widget heading={'distributed systems'} className={'bg-[#FCFCFC1A]'}>
 				<WidgetAttributes collection={sections[SECTION_KEYS.DISTRIBUTED_SYSTEMS] ?? []} />
@@ -352,7 +352,7 @@ const Environment = ({sections}: { sections: SectionMap }) => (
 	<div className={'min-h-[100dvh] bg-[#91A38B] px-14 py-32 gap-12 flex flex-wrap'}>
 		<Widget heading={'environment'} className={'grow bg-[#133F06]'}>
 			<WidgetAttributes collection={sections[SECTION_KEYS.ENVIRONMENT] ?? []} />
-			<div className={'bg-green-400 text-gray-600 py-5 px-10 md:pr-20 rounded-md inline-block'}>
+			<div className={'bg-green-200 text-gray-600 py-5 px-10 md:pr-20 rounded-md inline-block'}>
 				<p>Coming soon! Check back in the near future :)</p>
 			</div>
 		</Widget>
@@ -360,7 +360,7 @@ const Environment = ({sections}: { sections: SectionMap }) => (
 						className={'basis-[calc(100%-100%/1.61803398875-5rem)] max-lg:basis-[calc(50%-1.5rem)] ' +
 							'max-md:basis-full bg-[#133F0659]'}>
 			<WidgetAttributes collection={sections[SECTION_KEYS.PLANNED_OBSOLESCENCE] ?? []} />
-			<div className={'bg-green-400 text-gray-600 py-5 px-10 md:pr-20 rounded-md inline-block'}>
+			<div className={'bg-green-200 text-gray-600 py-5 px-10 md:pr-20 rounded-md inline-block'}>
 				<p>Coming soon! Check back in the near future :)</p>
 			</div>
 		</Widget>
@@ -381,7 +381,7 @@ const Housing = ({sections}: { sections: SectionMap }) => (
 	</div>
 )
 const Palestine = () => (
-	<div className={'min-h-[100dvh] bg-[#6A6A6A] gap-12 flex flex-wrap'}>
+	<div className={'min-h-[100dvh] bg-[#4A4A4A] gap-12 flex flex-wrap'}>
 		<img
 			className={'w-[calc(100%/1.61803398875-1.5rem)] max-lg:basis-[calc(50%-1.5rem)] max-md:basis-full object-cover'}
 			src={'/images/pattern_background.png'}
@@ -390,7 +390,7 @@ const Palestine = () => (
 			<div className={'self-center space-y-5'}>
 				<p className={'text-4xl leading-snug'}>every person<br/>deserves dignity</p>
 				<p className={'text-xl'}>statement on Palestine</p>
-				<div className={'bg-black text-gray-100 py-5 px-10 rounded-md inline-block'}>
+				<div className={'bg-black text-gray-100 py-5 px-10 mt-5 rounded-md inline-block'}>
 					<p>Coming soon! Check back in the near future :)</p>
 				</div>
 			</div>
