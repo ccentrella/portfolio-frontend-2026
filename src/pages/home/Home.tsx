@@ -4,6 +4,7 @@ import Widget from "../../components/Widget.tsx";
 import {supabase} from "../../utils/supabaseClient.ts";
 
 type SectionMap = Record<string, Attribute[]>;
+
 interface Attribute {
 	name: string,
 }
@@ -91,20 +92,27 @@ const Hero = ({sections}: { sections: SectionMap }) => (
 		</div>
 		<div className={"flex justify-center flex-wrap gap-12 *:basis-[calc(50%-1.5rem)] *:max-md:basis-full"}>
 			<Widget heading={'design'} className={'bg-[#62EAFF6B]'}>
-				{(sections['design'] ?? []).map(attribute => attribute.name).join(', ')}
+				<p>{(sections['design'] ?? []).map(attribute => attribute.name).join(', ')}</p>
 			</Widget>
-			<Widget heading={'engineering'} className={'bg-[#9494946B]'}>
-				<></>
+			<Widget heading={'engineering'} className={'bg-[#9494946B] space-y-5 *:space-y-2'}>
+				<div>
+					<p className={'uppercase'}>Frontend</p>
+					<p>{(sections['frontend'] ?? []).map(attribute => attribute.name).join(', ')}</p>
+				</div>
+				<div>
+					<p className={'uppercase'}>Backend</p>
+					<p>{(sections['backend'] ?? []).map(attribute => attribute.name).join(', ')}</p>
+				</div>
 			</Widget>
 		</div>
 	</div>
 );
 
-const AboutMe = ({sections}: { sections: SectionMap }) => {
+const AboutMe = () => {
 	return <div className={"min-h-[100dvh] py-[8rem]"}>
 		<div className={"flex flex-wrap px-14 gap-12"}>
 			<Widget heading={'about me'} className={'grow'}>
-				{Object.keys(sections).map(key => (<p key={key}>{key}</p>))}
+				<p></p>
 			</Widget>
 			<img
 				className={`basis-[calc(100%-100%/1.61803398875-5rem)] object-cover rounded-xl min-w-0 max-md:grow max-sm:flex-[100%]`}
@@ -148,70 +156,70 @@ const AIWidget = () => {
 	);
 };
 
-const CreativelyIntelligent = () => (
+const CreativelyIntelligent = ({sections}: { sections: SectionMap }) => (
 	<div className={'p-32 max-sm:px-14 space-y-10'}>
 		<p className={'text-4xl'}>creatively intelligent.</p>
-		<Widget heading={''} className={'md:w-1/2 bg-[#FCFCFC1A]'}>
-			<></>
+		<Widget heading={'artificial intelligence'} className={'md:w-1/2 bg-[#FCFCFC1A]'}>
+			<p>{(sections['artificial intelligence'] ?? []).map(attribute => (attribute.name)).join(', ')}</p>
 		</Widget>
 	</div>
 );
 
-const DataIsBeautiful = () => (
+const DataIsBeautiful = ({sections}: { sections: SectionMap }) => (
 	<div className={'p-32 max-sm:px-14 space-y-10'}>
 		<p className={'text-4xl'}>data is beautiful.</p>
 		<Widget heading={'databases'} className={'md:w-1/2 bg-[#FCFCFC1A]'}>
-			<></>
+			<p>{(sections['databases'] ?? []).map(attribute => (attribute.name)).join(', ')}</p>
 		</Widget>
 	</div>
 );
 
-const SystemDesign = () => (
+const SystemDesign = ({sections}: { sections: SectionMap }) => (
 	<div className={'py-32'}>
 		<p className={'text-5xl max-sm:text-4xl mb-14 text-center'}>millions of users. one system.</p>
 		<div className={'flex flex-wrap px-14 gap-12 *:basis-[calc(50%-1.5rem)] *:max-md:basis-full'}>
 			<Widget heading={'distributed systems'} className={'bg-[#FCFCFC1A]'}>
-				<></>
+				<p>{(sections['distributed systems'] ?? []).map(attribute => (attribute.name)).join(', ')}</p>
 			</Widget>
 			<Widget heading={'cloud'} className={'bg-[#FCFCFC1A]'}>
-				<></>
+				<p>{(sections['cloud'] ?? []).map(attribute => (attribute.name)).join(', ')}</p>
 			</Widget>
 		</div>
 	</div>
 )
 
-const BuiltToScale = () => (
+const BuiltToScale = ({sections}: { sections: SectionMap }) => (
 	<div className={'p-32 max-sm:px-14 space-y-10'}>
 		<p className={'text-4xl'}>built to scale.</p>
 		<div className={'flex flex-wrap gap-12 *:basis-[calc(50%-1.5rem)] *:max-md:basis-full'}>
 			<Widget heading={'architecture'} className={'md:w-1/2 bg-[#FCFCFC1A]'}>
-				<></>
+				<p>{(sections['architecture'] ?? []).map(attribute => (attribute.name)).join(', ')}</p>
 			</Widget>
 			<Widget heading={'quality assurance'} className={'md:w-1/2 bg-[#FCFCFC1A]'}>
-				<></>
+				<p>{(sections['quality assurance'] ?? []).map(attribute => (attribute.name)).join(', ')}</p>
 			</Widget>
 		</div>
 	</div>
 );
 
-const ImproveContinuously = () => (
+const ImproveContinuously = ({sections}: { sections: SectionMap }) => (
 	<div className={'min-h-[100dvh] bg-white flex flex-wrap px-14 py-32 gap-12 *:basis-[calc(50%-1.5rem)]' +
 		' *:max-md:basis-full'}>
 		<div className={'flex justify-center'}>
 			<p className={'text-4xl text-black self-center leading-snug'}>improve.<br/>continuously.</p>
 		</div>
 		<Widget heading={'continuous improvement'} className={'bg-[#16748C]'}>
-			<></>
+			<p>{(sections['continuous improvement'] ?? []).map(attribute => (attribute.name)).join(', ')}</p>
 		</Widget>
 	</div>
 )
-const LeanProcesses = () => (
+const LeanProcesses = ({sections}: { sections: SectionMap }) => (
 	<div className={'min-h-[100dvh] flex flex-wrap px-14 py-32 gap-12 *:basis-[calc(50%-1.5rem)] *:max-md:basis-full'}>
 		<div className={'flex justify-center'}>
 			<p className={'text-4xl self-center leading-snug'}>simple. lean.<br/>forever.</p>
 		</div>
 		<Widget heading={'lean processes'}>
-			<></>
+			<p>{(sections['lean processes'] ?? []).map(attribute => (attribute.name)).join(', ')}</p>
 		</Widget>
 	</div>
 )
@@ -251,27 +259,27 @@ const WorkExperience = () => (
 	</div>
 )
 
-const Environment = () => (
+const Environment = ({sections}: { sections: SectionMap }) => (
 	<div className={'min-h-[100dvh] bg-[#91A38B] px-14 py-32 gap-12 flex flex-wrap'}>
 		<Widget heading={'environment'} className={'grow bg-[#133F06]'}>
-			<></>
+			<p>{(sections['environment'] ?? []).map(attribute => (attribute.name)).join(', ')}</p>
 		</Widget>
 		<Widget heading={'planned obsolescence'}
 						className={'basis-[calc(100%-100%/1.61803398875-5rem)] max-lg:basis-[calc(50%-1.5rem)] ' +
 							'max-md:basis-full bg-[#133F0659]'}>
-			<></>
+			<p>{(sections['planned obsolescene'] ?? []).map(attribute => (attribute.name)).join(', ')}</p>
 		</Widget>
 	</div>
 )
 
-const Housing = () => (
+const Housing = ({sections}: { sections: SectionMap }) => (
 	<div className={'min-h-[100dvh] bg-white px-14 py-32 gap-12 flex flex-wrap'}>
 		<div className={'flex justify-center basis-[calc(100%-100%/1.61803398875-5rem)] max-lg:basis-[calc(50%-1.5rem)] ' +
 			'max-md:basis-full'}>
 			<p className={'text-4xl text-black self-center leading-snug'}>housing is a<br/>human right</p>
 		</div>
 		<Widget heading={'affordable housing'} className={'grow bg-[#746D40]'}>
-			<></>
+			<p>{(sections['affordable housing'] ?? []).map(attribute => (attribute.name)).join(', ')}</p>
 		</Widget>
 	</div>
 )
@@ -405,25 +413,25 @@ const Home = () => {
 			<InspirationalQuote author={'Steve Jobs'}>
 				The only way to do great work is to love what you do.
 			</InspirationalQuote>
-			<AboutMe sections={sections}/>
+			<AboutMe/>
 			<AIWidget/>
-			<CreativelyIntelligent/>
+			<CreativelyIntelligent sections={sections}/>
 			<InspirationalQuote author={'Steve Jobs'}>
 				You can't connect the dots looking forward; you can only connect them looking backwards.
 			</InspirationalQuote>
-			<DataIsBeautiful/>
+			<DataIsBeautiful sections={sections}/>
 			<img src={'/images/pattern_background.png'} alt={'systems illustration'}
 					 className={'w-full h-[100dvh] object-cover'}/>
-			<SystemDesign/>
+			<SystemDesign sections={sections}/>
 			<InspirationalQuote author={'Steve Jobs'}>
 				Design is not just what it looks like and feels like. Design is how it works.
 			</InspirationalQuote>
-			<BuiltToScale/>
+			<BuiltToScale sections={sections}/>
 			<img src={'/images/pattern_background.png'} alt={'processes illustration'}
 					 className={'w-full h-[100dvh] object-cover'}/>
 			<p className={'text-5xl max-sm:text-4xl text-center py-32'}>principles for life.</p>
-			<ImproveContinuously/>
-			<LeanProcesses/>
+			<ImproveContinuously sections={sections}/>
+			<LeanProcesses sections={sections}/>
 			<InspirationalQuote author={'Steve Jobs'} className={'text-white bg-black'}>
 				Your time is limited, so don't waste it living someone else's life.
 			</InspirationalQuote>
@@ -432,8 +440,8 @@ const Home = () => {
 			<InspirationalQuote author={'Steve Jobs'}>
 				The people who are crazy enough to think they can change the world, are the ones who do.
 			</InspirationalQuote>
-			<Environment/>
-			<Housing/>
+			<Environment sections={sections}/>
+			<Housing sections={sections}/>
 			<Palestine/>
 			<InviteChris/>
 			<Footer/>
