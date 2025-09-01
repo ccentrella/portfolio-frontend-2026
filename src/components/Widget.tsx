@@ -7,7 +7,7 @@ const Widget = ({heading, children, className}: {
 	className?: string,
 }) => {
 	return (
-		<div className={twMerge(`p-12 pb-48 rounded-xl text-[#FFFFFFA3] bg-[#9494941A]`, className)}>
+		<div className={twMerge(`p-12 pb-24 rounded-xl text-[#FFFFFFA3] bg-[#9494941A]`, className)}>
 			<p className={'text-2xl mb-5'}>{heading}</p>
 			{children}
 		</div>
