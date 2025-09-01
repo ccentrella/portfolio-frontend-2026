@@ -79,12 +79,13 @@ const translations = [
 const Hero = ({sections}: { sections: SectionMap }) => (
 	<div className={"min-h-[100dvh] p-14 space-y-14"}>
 		<div className={"flex justify-between flex-wrap space-y-12"}>
-			<div className={"font-poppins font-medium text-4xl text-gray-400 space-y-5 basis-1/5 max-md:basis-full"}>
+			<div
+				className={"font-poppins font-medium text-4xl text-gray-400 [&_a]:hover:text-gray-300 [&_a]:transition-colors space-y-5 basis-1/5 max-md:basis-full"}>
 				<p className={"text-cyan-500 text-4xl mb-10"}>Chris <span
 					className={"ml-2 bg-cyan-200 size-2.5 rounded-[50%] inline-block"}></span></p>
-				<p>resume</p>
-				<p>human rights</p>
-				<p>invite Chris</p>
+				<p><a href={'/resume_christopher_centrella.pdf'} target={'_blank'}>resume</a></p>
+				<p><a href={'#human-rights'}>human rights</a></p>
+				<p><a href={'#invite-chris'}>invite Chris</a></p>
 			</div>
 			<img className={"animate-imgFloat object-cover m-auto w-72 h-80 rounded-[55%_45%_55%_45%]"}
 					 src={"/images/profile.jpeg"} alt={"Chris in hoodie, relaxed"}/>
@@ -112,14 +113,18 @@ const AboutMe = () => {
 	return <div className={"min-h-[100dvh] py-[8rem]"}>
 		<div className={"flex flex-wrap px-14 gap-12"}>
 			<Widget heading={'about me'} className={'grow'}>
-				<p></p>
+				<div className={'bg-cyan-500 text-gray-100 py-5 px-10 md:pr-20 rounded-md inline-block'}>
+					<p>Coming soon! Check back in the near future :)</p>
+				</div>
 			</Widget>
 			<img
 				className={`basis-[calc(100%-100%/1.61803398875-5rem)] object-cover rounded-xl min-w-0 max-md:grow max-sm:flex-[100%]`}
 				src={"/images/stroll.jpeg"} alt={"Chris walking while carrying iPad"}/>
 		</div>
 		<Widget heading={'looking for a design-minded software engineer?'} className={'m-14 bg-[#62EAFF6B] pb-96'}>
-			<></>
+			<div className={'bg-cyan-500 text-gray-100 py-5 px-10 md:pr-20 rounded-md inline-block'}>
+				<p>Coming soon! Check back in the near future :)</p>
+			</div>
 		</Widget>
 	</div>;
 };
@@ -151,6 +156,12 @@ const AIWidget = () => {
 				<input placeholder={placeholder}
 							 className={'py-5 px-12 bg-[#FFFFFF7F] placeholder-gray-500 text-xl max-sm:text-lg rounded-lg w-4/5'}
 							 type={'text'}/>
+				<div className={'inline-block w-4/5'}>
+					<div className={'bg-cyan-500 text-gray-100 text-left w-max py-5 px-10 md:pr-20 rounded-md'}>
+						<p>Coming soon! Check back in the near future :)</p>
+					</div>
+
+				</div>
 			</div>
 		</div>
 	);
@@ -194,6 +205,9 @@ const BuiltToScale = ({sections}: { sections: SectionMap }) => (
 		<div className={'flex flex-wrap gap-12 *:basis-[calc(50%-1.5rem)] *:max-md:basis-full'}>
 			<Widget heading={'architecture'} className={'md:w-1/2 bg-[#FCFCFC1A]'}>
 				<p>{(sections['architecture'] ?? []).map(attribute => (attribute.name)).join(', ')}</p>
+				<div className={'bg-cyan-500 text-gray-100 py-5 px-10 md:pr-20 rounded-md inline-block'}>
+					<p>Coming soon! Check back in the near future :)</p>
+				</div>
 			</Widget>
 			<Widget heading={'quality assurance'} className={'md:w-1/2 bg-[#FCFCFC1A]'}>
 				<p>{(sections['quality assurance'] ?? []).map(attribute => (attribute.name)).join(', ')}</p>
@@ -210,6 +224,9 @@ const ImproveContinuously = ({sections}: { sections: SectionMap }) => (
 		</div>
 		<Widget heading={'continuous improvement'} className={'bg-[#16748C]'}>
 			<p>{(sections['continuous improvement'] ?? []).map(attribute => (attribute.name)).join(', ')}</p>
+			<div className={'bg-cyan-500 text-gray-100 py-5 px-10 md:pr-20 rounded-md inline-block'}>
+				<p>Coming soon! Check back in the near future :)</p>
+			</div>
 		</Widget>
 	</div>
 )
@@ -220,16 +237,25 @@ const LeanProcesses = ({sections}: { sections: SectionMap }) => (
 		</div>
 		<Widget heading={'lean processes'}>
 			<p>{(sections['lean processes'] ?? []).map(attribute => (attribute.name)).join(', ')}</p>
+			<div className={'bg-cyan-500 text-gray-100 py-5 px-10 md:pr-20 rounded-md inline-block'}>
+				<p>Coming soon! Check back in the near future :)</p>
+			</div>
 		</Widget>
 	</div>
 )
 
 const WorkExperience = () => (
-	<div className={'p-32 max-sm:px-14'}>
+	<div className={'pt-32 px-32 max-sm:px-14'}>
 		<div className={'min-h-[100dvh]'}>
 			<p className={'text-4xl'}>what's in a timeline?</p>
+			<div className={'bg-cyan-500 text-gray-100 py-5 px-10 md:pr-20 mt-8 rounded-md inline-block'}>
+				<p>Coming soon! Check back in the near future :)</p>
+			</div>
 		</div>
 		<p className={'text-4xl text-center mb-14'}>...and so much more</p>
+		<div className={'bg-cyan-500 text-gray-100 py-5 px-10 md:pr-20 mb-12 rounded-md inline-block'}>
+			<p>Coming soon! Check back in the near future :)</p>
+		</div>
 		<div className={'flex flex-wrap gap-12 *:basis-[calc(50%-1.5rem)] *:max-md:basis-full'}>
 			<Widget heading={'portfolio site'}>
 				<></>
@@ -263,11 +289,17 @@ const Environment = ({sections}: { sections: SectionMap }) => (
 	<div className={'min-h-[100dvh] bg-[#91A38B] px-14 py-32 gap-12 flex flex-wrap'}>
 		<Widget heading={'environment'} className={'grow bg-[#133F06]'}>
 			<p>{(sections['environment'] ?? []).map(attribute => (attribute.name)).join(', ')}</p>
+			<div className={'bg-green-400 text-gray-600 py-5 px-10 md:pr-20 rounded-md inline-block'}>
+				<p>Coming soon! Check back in the near future :)</p>
+			</div>
 		</Widget>
 		<Widget heading={'planned obsolescence'}
 						className={'basis-[calc(100%-100%/1.61803398875-5rem)] max-lg:basis-[calc(50%-1.5rem)] ' +
 							'max-md:basis-full bg-[#133F0659]'}>
 			<p>{(sections['planned obsolescene'] ?? []).map(attribute => (attribute.name)).join(', ')}</p>
+			<div className={'bg-green-400 text-gray-600 py-5 px-10 md:pr-20 rounded-md inline-block'}>
+				<p>Coming soon! Check back in the near future :)</p>
+			</div>
 		</Widget>
 	</div>
 )
@@ -280,6 +312,9 @@ const Housing = ({sections}: { sections: SectionMap }) => (
 		</div>
 		<Widget heading={'affordable housing'} className={'grow bg-[#746D40]'}>
 			<p>{(sections['affordable housing'] ?? []).map(attribute => (attribute.name)).join(', ')}</p>
+			<div className={'bg-yellow-100 text-gray-600 py-5 px-10 md:pr-20 rounded-md inline-block'}>
+				<p>Coming soon! Check back in the near future :)</p>
+			</div>
 		</Widget>
 	</div>
 )
@@ -294,13 +329,16 @@ const Palestine = () => (
 			<div className={'self-center space-y-5'}>
 				<p className={'text-4xl leading-snug'}>every person<br/>deserves dignity</p>
 				<p className={'text-xl'}>statement on Palestine</p>
+				<div className={'bg-black text-gray-100 py-5 px-10 rounded-md inline-block'}>
+					<p>Coming soon! Check back in the near future :)</p>
+				</div>
 			</div>
 		</div>
 	</div>
 )
 
 const InviteChris = () => (
-	<div className={'min-h-[100dvh] bg-black text-[#FFFFFFCC] px-14 py-32 space-y-12 text-lg'}>
+	<div id={'invite-chris'} className={'min-h-[100dvh] bg-black text-[#FFFFFFCC] px-14 py-32 space-y-12 text-lg'}>
 		<p className={'text-4xl'}>invite Chris</p>
 		<div className={'py-6 px-12 bg-orange-400 rounded-md max-w-[45rem]'}>Coming Soon! This form is not yet active.</div>
 
@@ -356,10 +394,10 @@ const Footer = () => (
 				className={"ml-2 bg-cyan-200 size-2.5 rounded-[50%] inline-block"}></span></p>
 			<div className={'flex flex-wrap gap-x-12 gap-y-12'}>
 				<div
-					className={'font-poppins font-medium text-4xl text-gray-400 space-y-5 basis-2/5 max-md:basis-3/5 max-sm:basis-full'}>
-					<p>resume</p>
-					<p>human rights</p>
-					<p>invite Chris</p>
+					className={'font-poppins font-medium text-4xl text-gray-400 [&_a]:hover:text-gray-300 [&_a]:transition-colors space-y-5 basis-2/5 max-md:basis-3/5 max-sm:basis-full'}>
+					<p><a href={'/resume_christopher_centrella.pdf'} target={'_blank'}>resume</a></p>
+					<p><a href={'#human-rights'}>human rights</a></p>
+					<p><a href={'#invite-chris'}>invite Chris</a></p>
 				</div>
 				<div className={'uppercase text-lg space-y-5'}>
 					<p className={'font-semibold'}>Legal</p>
@@ -422,6 +460,9 @@ const Home = () => {
 			<DataIsBeautiful sections={sections}/>
 			<img src={'/images/pattern_background.png'} alt={'systems illustration'}
 					 className={'w-full h-[100dvh] object-cover'}/>
+			<div className={'bg-cyan-500 text-gray-100 py-5 px-10 mx-14 my-6 md:pr-20 rounded-md inline-block'}>
+				<p>Image coming soon! Check back in the near future :)</p>
+			</div>
 			<SystemDesign sections={sections}/>
 			<InspirationalQuote author={'Steve Jobs'}>
 				Design is not just what it looks like and feels like. Design is how it works.
@@ -429,6 +470,9 @@ const Home = () => {
 			<BuiltToScale sections={sections}/>
 			<img src={'/images/pattern_background.png'} alt={'processes illustration'}
 					 className={'w-full h-[100dvh] object-cover'}/>
+			<div className={'bg-cyan-500 text-gray-100 py-5 px-10 mx-14 my-6 md:pr-20 rounded-md inline-block'}>
+				<p>Image coming soon! Check back in the near future :)</p>
+			</div>
 			<p className={'text-5xl max-sm:text-4xl text-center py-32'}>principles for life.</p>
 			<ImproveContinuously sections={sections}/>
 			<LeanProcesses sections={sections}/>
@@ -436,7 +480,7 @@ const Home = () => {
 				Your time is limited, so don't waste it living someone else's life.
 			</InspirationalQuote>
 			<WorkExperience/>
-			<p className={'text-5xl max-sm:text-4xl text-center pb-32'}>human rights</p>
+			<p id={'human-rights'} className={'text-5xl max-sm:text-4xl text-center py-32'}>human rights</p>
 			<InspirationalQuote author={'Steve Jobs'}>
 				The people who are crazy enough to think they can change the world, are the ones who do.
 			</InspirationalQuote>
