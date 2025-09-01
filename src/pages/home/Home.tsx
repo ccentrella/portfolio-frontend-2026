@@ -86,7 +86,7 @@ const Hero = ({sections}: { sections: SectionMap }) => (
 				<p>human rights</p>
 				<p>invite Chris</p>
 			</div>
-			<img className={"object-cover m-auto w-72 h-80 rounded-[55%_45%_55%_45%]"}
+			<img className={"animate-imgFloat object-cover m-auto w-72 h-80 rounded-[55%_45%_55%_45%]"}
 					 src={"/images/profile.jpeg"} alt={"Chris in hoodie, relaxed"}/>
 			<div className={"basis-1/5 max-md:basis-full"}></div>
 		</div>

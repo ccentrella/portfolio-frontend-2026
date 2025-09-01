@@ -7,3 +7,14 @@
 	--font-bumbbled: bumbbled, "Brush Script MT", "Comic Sans MS", cursive;
 	--font-sans: var(--font-poppins);
 }
+
+@utility animate-imgFloat {
+	animation: imgFloat 5s ease-in-out infinite;
+}
+
+@keyframes imgFloat {
+	50%{
+		transform: translateY(10px);
+		border-radius: 45% 55% 45% 55%;
+	}
+}
