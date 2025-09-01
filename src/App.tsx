@@ -1,11 +1,15 @@
 import './App.css'
 import Home from "./pages/home/Home.tsx";
 import {Route, Routes} from "react-router";
+import Footer from "./components/Footer.tsx";
 
 const App = () => (
-	<Routes>
-		<Route index element={<Home/>}/>
-	</Routes>
+	<>
+		<Routes>
+			<Route index element={<Home/>}/>
+		</Routes>
+		<Footer/>
+	</>
 )
 
 export default App

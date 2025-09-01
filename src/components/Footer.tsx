@@ -1,0 +1,35 @@
+const Footer = () => (
+	<div className={'min-h-[100dvh] bg-[#204F5C] text-[#FFFFFF66] p-14 pt-24 pb-10 flex flex-col gap-12 justify-between'}>
+		<div className={"space-y-5 basis-1/5 max-md:basis-full"}>
+			<p className={"text-cyan-500 text-4xl mb-10"}>Chris <span
+				className={"ml-2 bg-cyan-200 size-2.5 rounded-[50%] inline-block"}></span></p>
+			<div className={'flex flex-wrap gap-x-12 gap-y-12'}>
+				<div
+					className={'font-poppins font-medium text-4xl text-gray-400 [&_a]:hover:text-gray-300 [&_a]:transition-colors space-y-5 basis-2/5 max-md:basis-3/5 max-sm:basis-full'}>
+					<p><a href={'/resume_christopher_centrella.pdf'} target={'_blank'}>resume</a></p>
+					<p><a href={'#human-rights'}>human rights</a></p>
+					<p><a href={'#invite-chris'}>invite Chris</a></p>
+				</div>
+				<div className={'uppercase text-lg space-y-5'}>
+					<p className={'font-semibold'}>Legal</p>
+					<p>Privacy Policy</p>
+					<p>Terms of Use</p>
+				</div>
+			</div>
+		</div>
+		<div className={'space-y-8 lg:mx-6'}>
+			<div className={'flex flex-wrap text-lg justify-between uppercase gap-x-10 gap-y-6'}>
+				<p>Accessibility Disclaimer</p>
+				<p>Modern Slavery Notice</p>
+				<p>Statement on Palestine</p>
+			</div>
+			<div className={'space-y-0 max-md:space-y-3'}>
+				<p>Designed with love by Chris Centrella, without the use of generative AI.</p>
+				<p>Copyright &copy; 2025 Chris
+					Centrella. All rights reserved.</p>
+			</div>
+		</div>
+	</div>
+);
+
+export default Footer;
