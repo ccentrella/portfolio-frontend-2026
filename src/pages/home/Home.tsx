@@ -3,6 +3,11 @@ import {useEffect, useState} from "react";
 import Widget from "../../components/Widget.tsx";
 import {supabase} from "../../utils/supabaseClient.ts";
 
+type SectionMap = Record<string, Attribute[]>;
+interface Attribute {
+	name: string,
+}
+
 // TODO: Add header
 // TODO: Add scroll snap
 // TODO: Add transitions
@@ -70,7 +75,7 @@ const translations = [
 	{lang: "is", heading: "halló", placeholder: "Ertu með spurningu?"}
 ];
 
-const Hero = () => (
+const Hero = ({sections}: { sections: SectionMap }) => (
 	<div className={"min-h-[100dvh] p-14 space-y-14"}>
 		<div className={"flex justify-between flex-wrap space-y-12"}>
 			<div className={"font-poppins font-medium text-4xl text-gray-400 space-y-5 basis-1/5 max-md:basis-full"}>
@@ -86,7 +91,7 @@ const Hero = () => (
 		</div>
 		<div className={"flex justify-center flex-wrap gap-12 *:basis-[calc(50%-1.5rem)] *:max-md:basis-full"}>
 			<Widget heading={'design'} className={'bg-[#62EAFF6B]'}>
-				<></>
+				{(sections['design'] ?? []).map(attribute => attribute.name).join(', ')}
 			</Widget>
 			<Widget heading={'engineering'} className={'bg-[#9494946B]'}>
 				<></>
@@ -95,14 +100,15 @@ const Hero = () => (
 	</div>
 );
 
-const AboutMe = ({sections}: { sections: { title: string }[] }) => {
+const AboutMe = ({sections}: { sections: SectionMap }) => {
 	return <div className={"min-h-[100dvh] py-[8rem]"}>
 		<div className={"flex flex-wrap px-14 gap-12"}>
 			<Widget heading={'about me'} className={'grow'}>
-				{sections.map((section, i) => (<p key={i}>{section.title}</p>))}
+				{Object.keys(sections).map(key => (<p key={key}>{key}</p>))}
 			</Widget>
-			<img className={`basis-[calc(100%-100%/1.61803398875-5rem)] object-cover rounded-xl min-w-0 max-md:grow max-sm:flex-[100%]`}
-					 src={"/images/stroll.jpeg"} alt={"Chris walking while carrying iPad"}/>
+			<img
+				className={`basis-[calc(100%-100%/1.61803398875-5rem)] object-cover rounded-xl min-w-0 max-md:grow max-sm:flex-[100%]`}
+				src={"/images/stroll.jpeg"} alt={"Chris walking while carrying iPad"}/>
 		</div>
 		<Widget heading={'looking for a design-minded software engineer?'} className={'m-14 bg-[#62EAFF6B] pb-96'}>
 			<></>
@@ -372,22 +378,30 @@ const Footer = () => (
 // TODO: Separate into large components based on section
 const Home = () => {
 
-	const [sections, setSections] = useState<{ title: string }[]>([]);
+	const [sections, setSections] = useState<SectionMap>({});
 
 	useEffect(() => {
-		(async () => {
+		const loadData = async () => {
 			const {data} = await supabase
 				.from('sections')
-				.select('title')
+				.select(`
+					title,
+					attributes (name)
+				`);
+			const sectionMap =
+				data?.reduce<SectionMap>((accumulator, section) => {
+					accumulator[section.title] = section.attributes
+					return accumulator;
+				}, {})
 
-			setSections(data ?? []);
-
-		})();
+			setSections(sectionMap ?? {});
+		}
+		loadData().then();
 	}, []);
 
 	return (
 		<div className={'bg-[#002028] text-gray-50'}>
-			<Hero/>
+			<Hero sections={sections}/>
 			<InspirationalQuote author={'Steve Jobs'}>
 				The only way to do great work is to love what you do.
 			</InspirationalQuote>
