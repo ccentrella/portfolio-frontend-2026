@@ -1,6 +1,7 @@
 import InspirationalQuote from "../../components/InspirationalQuote.tsx";
 import {useEffect, useState} from "react";
 import Widget from "../../components/Widget.tsx";
+import {supabase} from "../../utils/supabaseClient.ts";
 
 // TODO: Add header
 // TODO: Add scroll snap
@@ -94,13 +95,13 @@ const Hero = () => (
 	</div>
 );
 
-const AboutMe = () => {
+const AboutMe = ({sections}: { sections: { title: string }[] }) => {
 	return <div className={"min-h-[100dvh] py-[8rem]"}>
 		<div className={"flex flex-wrap px-14 gap-12"}>
 			<Widget heading={'about me'} className={'grow'}>
-				<></>
+				{sections.map((section, i) => (<p key={i}>{section.title}</p>))}
 			</Widget>
-			<img className={`basis-[calc(100%-100%/1.61803398875-5rem)] rounded-xl min-w-0 max-md:grow max-sm:flex-[100%]`}
+			<img className={`basis-[calc(100%-100%/1.61803398875-5rem)] object-cover rounded-xl min-w-0 max-md:grow max-sm:flex-[100%]`}
 					 src={"/images/stroll.jpeg"} alt={"Chris walking while carrying iPad"}/>
 		</div>
 		<Widget heading={'looking for a design-minded software engineer?'} className={'m-14 bg-[#62EAFF6B] pb-96'}>
@@ -134,7 +135,8 @@ const AIWidget = () => {
 			<div className={'text-center space-y-10 grow'}>
 				<p className={'font-bumbbled text-8xl max-sm:text-6xl text-[#85D7E0]'}>{heading}</p>
 				<input placeholder={placeholder}
-							 className={'py-5 px-12 bg-[#FFFFFF7F] placeholder-gray-500 text-xl max-sm:text-lg rounded-lg w-4/5'} type={'text'}/>
+							 className={'py-5 px-12 bg-[#FFFFFF7F] placeholder-gray-500 text-xl max-sm:text-lg rounded-lg w-4/5'}
+							 type={'text'}/>
 			</div>
 		</div>
 	);
@@ -369,13 +371,27 @@ const Footer = () => (
 
 // TODO: Separate into large components based on section
 const Home = () => {
+
+	const [sections, setSections] = useState<{ title: string }[]>([]);
+
+	useEffect(() => {
+		(async () => {
+			const {data} = await supabase
+				.from('sections')
+				.select('title')
+
+			setSections(data ?? []);
+
+		})();
+	}, []);
+
 	return (
 		<div className={'bg-[#002028] text-gray-50'}>
 			<Hero/>
 			<InspirationalQuote author={'Steve Jobs'}>
 				The only way to do great work is to love what you do.
 			</InspirationalQuote>
-			<AboutMe/>
+			<AboutMe sections={sections}/>
 			<AIWidget/>
 			<CreativelyIntelligent/>
 			<InspirationalQuote author={'Steve Jobs'}>
