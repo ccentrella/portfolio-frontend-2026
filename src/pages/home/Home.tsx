@@ -12,17 +12,20 @@ import {twMerge} from "tailwind-merge";
 type SectionMap = Record<string, Section>;
 
 interface Section {
+	id: string
 	content: string,
 	attributes: Attribute[]
 }
 
 interface Attribute {
+	id: string
 	name: string,
 }
 
 type ProjectMap = Record<string, Project>;
 
 interface Project {
+	id: string
 	title: string,
 	link: string,
 	thumbnail_path?: string,
@@ -31,11 +34,12 @@ interface Project {
 }
 
 interface Role {
+	id: string,
 	title: string,
 	company: string,
 	year_start: number,
 	year_end?: number,
-	accomplishments?: string[]
+	accomplishments: string[]
 }
 
 const LOADING_MESSAGE = 'Loading...';
@@ -130,7 +134,7 @@ const WidgetSectionAttributes = ({collection}: { collection: Attribute[] }) => {
 
 	return (
 		<div className={'flex flex-wrap gap-2'}>
-			{collection.map(attribute => (<AttributeLabel>{attribute.name}</AttributeLabel>))}
+			{collection.map(attribute => (<AttributeLabel key={attribute.id}>{attribute.name}</AttributeLabel>))}
 		</div>
 	)
 }
@@ -361,11 +365,28 @@ const GuidingPrinciplesSection = (props: { sections: SectionMap }) => (
 	</>
 );
 
+const Roles = ({roles}: { roles: Role[] }) => (
+	<div className={'space-y-10 max-sm:space-y-8'}>
+		{roles.map(role => (
+			<Widget key={role.id} heading={`${role.title} at ${role.company}`}
+							className={'max-w-[60rem] space-y-5 max-sm:space-y-4'}>
+				<p className={'max-sm:text-sm text-gray-400'}>{role.year_start} - {role.year_end}</p>
+				<p className={'max-sm:text-sm uppercase text-gray-400'}>Accomplishments:</p>
+				<div className={'space-y-2'}>
+					{role.accomplishments?.map(accomplishment => (<p key={accomplishment}>{accomplishment}</p>))}
+				</div>
+
+			</Widget>
+		))}
+	</div>
+)
+
 const Projects = ({projects}: { projects: ProjectMap }) => (
-	<div className={'flex flex-wrap m-auto justify-center gap-12 xl:gap-x-24 max-sm:gap-10 *:basis-[calc(50%-3rem)] *:max-md:basis-full max-w-[75rem]'}>
+	<div
+		className={'flex flex-wrap m-auto justify-center gap-12 xl:gap-x-24 max-sm:gap-8 *:basis-[calc(50%-3rem)] *:max-md:basis-full max-w-[75rem]'}>
 		{
 			Object.values(projects).map(project => (
-				<a href={project.link} target={'_blank'} rel={'noopener'}>
+				<a key={project.id} href={project.link} target={'_blank'} rel={'noopener'}>
 					<Widget
 						className={'bg-[#FCFCFC1A] h-full cursor-pointer opacity-100 hover:bg-[#FCFCFC1F]'}
 						heading={project.title}>
@@ -380,10 +401,10 @@ const Projects = ({projects}: { projects: ProjectMap }) => (
 const WorkExperienceSection = (props: { projects: ProjectMap, roles: Role[] }) => (
 	<div className={'pt-32 max-sm:pt-24 px-14 max-sm:px-10'}>
 		<div className={'min-h-[100dvh]'}>
-			<p className={'text-4xl max-sm:text-3xl'}>what's in a timeline?</p>
-			<ComingSoon className={'mt-8'}/>
+			<p className={'text-4xl max-sm:text-3xl mb-14'}>what's in a timeline?</p>
+			<Roles roles={props.roles}/>
 		</div>
-		<p className={'text-4xl max-sm:text-3xl text-center mb-14'}>...and so much more</p>
+		<p className={'text-4xl max-sm:text-3xl text-center mt-24 mb-14'}>...and so much more</p>
 		<Projects projects={props.projects}/>
 	</div>
 )
@@ -514,8 +535,8 @@ const Home = () => {
 
 			const [{data: sectionsData}, {data: projectsData}, {data: rolesData}] = await Promise.all([
 				supabase.from('sections').select(`
-					title, content,
-					attributes (name)
+					*,
+					attributes (id, name)
 					`),
 				supabase.from('projects').select('*'),
 				supabase.from('roles').select('*')
@@ -523,7 +544,7 @@ const Home = () => {
 
 			const sectionMap =
 				sectionsData?.reduce<SectionMap>((accumulator, section) => {
-					accumulator[section.title] = {content: section.content, attributes: section.attributes}
+					accumulator[section.title] = section;
 					return accumulator;
 				}, {})
 
@@ -534,7 +555,7 @@ const Home = () => {
 
 			setSections(sectionMap ?? {});
 			setProjects(projectMap ?? {})
-			setRoles(rolesData ?? []);
+			setRoles(rolesData?.sort((a, b) => a.year_start <= b.year_start ? 1 : -1) ?? []);
 		}
 		loadData().then();
 	}, []);
