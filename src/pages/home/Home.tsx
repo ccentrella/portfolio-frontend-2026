@@ -230,7 +230,7 @@ const AIWidget = () => {
 	);
 };
 const CreativelyIntelligent = ({sections}: { sections: SectionMap }) => (
-	<div className={'p-32 px-14 max-sm:px-10 space-y-10'}>
+	<div className={'py-32 max-sm:py-24 px-14 max-sm:px-10 space-y-10'}>
 		<p className={'text-4xl max-sm:text-3xl'}>creatively intelligent.</p>
 		<Widget heading={'artificial intelligence'} className={'md:w-1/2 bg-[#FCFCFC1A]'}>
 			<WidgetSectionContent sections={sections} sectionTitle={SECTION_KEYS.ARTIFICIAL_INTELLIGENCE}/>
@@ -239,7 +239,7 @@ const CreativelyIntelligent = ({sections}: { sections: SectionMap }) => (
 	</div>
 );
 const DataIsBeautiful = ({sections}: { sections: SectionMap }) => (
-	<div className={'p-32 px-14 max-sm:px-10 space-y-10'}>
+	<div className={'py-32 max-sm:py-24 px-14 max-sm:px-10 space-y-10'}>
 		<p className={'text-4xl max-sm:text-3xl'}>data is beautiful.</p>
 		<Widget heading={'databases'} className={'md:w-1/2 bg-[#FCFCFC1A]'}>
 			<WidgetSectionContent sections={sections} sectionTitle={SECTION_KEYS.DATABASES}/>
@@ -248,7 +248,7 @@ const DataIsBeautiful = ({sections}: { sections: SectionMap }) => (
 	</div>
 );
 const SystemDesign = ({sections}: { sections: SectionMap }) => (
-	<div className={'py-32 max-sm:py-24'}>
+	<div className={'py-32 max-sm:py-24 max-sm:pt-12'}>
 		<p className={'text-4xl max-sm:text-3xl mb-14 max-sm:mb-10 text-center'}>millions of users. one system.</p>
 		<div
 			className={'flex flex-wrap px-14 max-sm:px-10 gap-12 max-sm:gap-10 *:basis-[calc(50%-1.5rem)] *:max-md:basis-full'}>
@@ -264,7 +264,7 @@ const SystemDesign = ({sections}: { sections: SectionMap }) => (
 	</div>
 )
 const BuiltToScale = ({sections}: { sections: SectionMap }) => (
-	<div className={'p-32 px-14 max-sm:px-10 space-y-10'}>
+	<div className={'py-32 max-sm:py-24 px-14 max-sm:px-10 space-y-10'}>
 		<p className={'text-4xl max-sm:text-3xl'}>built to scale.</p>
 		<div className={'flex flex-wrap gap-12 max-sm:gap-10 *:basis-[calc(50%-1.5rem)] *:max-md:basis-full'}>
 			<Widget heading={'architecture'} className={'md:w-1/2 bg-[#FCFCFC1A]'}>
