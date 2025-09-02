@@ -133,8 +133,8 @@ const Hero = ({sections}: { sections: SectionMap }) => (
 	<div className={"min-h-[100dvh] p-14 space-y-14"}>
 		<div className={"flex justify-between flex-wrap space-y-12"}>
 			<div
-				className={"font-poppins font-medium text-4xl text-gray-400 [&_a]:hover:text-gray-300 [&_a]:transition-colors space-y-5 basis-1/5 max-md:basis-full"}>
-				<p className={"text-cyan-500 text-4xl mb-10"}>Chris <span
+				className={"font-poppins font-medium text-4xl max-sm:text-3xl text-gray-400 [&_a]:hover:text-gray-300 [&_a]:transition-colors space-y-5 basis-1/5 max-md:basis-full"}>
+				<p className={"text-cyan-500 text-4xl max-sm:text-3xl mb-10"}>Chris <span
 					className={"ml-2 bg-cyan-200 size-2.5 rounded-[50%] inline-block"}></span></p>
 				<p><a href={'/resume_christopher_centrella.pdf'} target={'_blank'}>resume</a></p>
 				<p><a href={'#human-rights'}>human rights</a></p>
@@ -146,10 +146,10 @@ const Hero = ({sections}: { sections: SectionMap }) => (
 			<div className={"basis-1/5 max-md:basis-full"}></div>
 		</div>
 		<div className={"flex justify-center flex-wrap gap-12 *:basis-[calc(50%-1.5rem)] *:max-md:basis-full"}>
-			<Widget heading={'design'} className={'bg-[#62EAFF6B] hover:bg-[#62EAFF70]'}>
+			<Widget heading={'design'} className={'bg-[#62EAFF6B]'}>
 				<p className={'text-lg'}>{sections[SECTION_KEYS.DESIGN]?.content ?? LOADING_MESSAGE}</p>
 			</Widget>
-			<Widget heading={'engineering'} className={'bg-[#9494946B] hover:bg-[#94949470]'}>
+			<Widget heading={'engineering'} className={'bg-[#9494946B]'}>
 				<p className={'text-lg'}>{sections[SECTION_KEYS.ENGINEERING]?.content ?? LOADING_MESSAGE}</p>
 			</Widget>
 		</div>
@@ -170,7 +170,7 @@ const AboutMe = ({sections}: { sections: SectionMap }) => (
 				src={"/images/stroll.jpeg"} alt={"Chris walking while carrying iPad"}/>
 		</div>
 		<Widget heading={'looking for a design-minded software engineer?'}
-						className={'m-14 bg-[#62EAFF6B] hover:bg-[#62EAFF70]'}>
+						className={'m-14 bg-[#62EAFF6B]'}>
 			<div className={'max-w-[48rem] space-y-6 *:space-y-2'}>
 				<p
 					className={'text-lg'}>{sections[SECTION_KEYS.DESIGN_MINDED_SOFTWARE_ENGINEER]?.content ?? LOADING_MESSAGE}</p>
@@ -218,7 +218,7 @@ const AIWidget = () => {
 							 className={'py-5 px-12 bg-[#FFFFFF7F] placeholder-gray-500 text-xl max-sm:text-lg rounded-lg w-4/5'}
 							 type={'text'}/>
 				<div className={'inline-block w-4/5'}>
-					<ComingSoon className={'block w-max'}/>
+					<ComingSoon className={'block md:w-max'}/>
 				</div>
 			</div>
 		</div>
@@ -227,7 +227,7 @@ const AIWidget = () => {
 const CreativelyIntelligent = ({sections}: { sections: SectionMap }) => (
 	<div className={'p-32 max-sm:px-14 space-y-10'}>
 		<p className={'text-4xl'}>creatively intelligent.</p>
-		<Widget heading={'artificial intelligence'} className={'md:w-1/2 bg-[#FCFCFC1A] hover:bg-[#FCFCFC1D]'}>
+		<Widget heading={'artificial intelligence'} className={'md:w-1/2 bg-[#FCFCFC1A]'}>
 			<p className={'text-lg'}>{sections[SECTION_KEYS.ARTIFICIAL_INTELLIGENCE]?.content ?? LOADING_MESSAGE}</p>
 			<WidgetAttributes collection={sections[SECTION_KEYS.ARTIFICIAL_INTELLIGENCE]?.attributes}/>
 		</Widget>
@@ -236,7 +236,7 @@ const CreativelyIntelligent = ({sections}: { sections: SectionMap }) => (
 const DataIsBeautiful = ({sections}: { sections: SectionMap }) => (
 	<div className={'p-32 max-sm:px-14 space-y-10'}>
 		<p className={'text-4xl'}>data is beautiful.</p>
-		<Widget heading={'databases'} className={'md:w-1/2 bg-[#FCFCFC1A] hover:bg-[#FCFCFC1D]'}>
+		<Widget heading={'databases'} className={'md:w-1/2 bg-[#FCFCFC1A]'}>
 			<p className={'text-lg'}>{sections[SECTION_KEYS.DATABASES]?.content ?? LOADING_MESSAGE}</p>
 			<WidgetAttributes collection={sections[SECTION_KEYS.DATABASES]?.attributes}/>
 		</Widget>
@@ -246,11 +246,11 @@ const SystemDesign = ({sections}: { sections: SectionMap }) => (
 	<div className={'py-32'}>
 		<p className={'text-4xl max-sm:text-4xl mb-14 text-center'}>millions of users. one system.</p>
 		<div className={'flex flex-wrap px-14 gap-12 *:basis-[calc(50%-1.5rem)] *:max-md:basis-full'}>
-			<Widget heading={'distributed systems'} className={'bg-[#FCFCFC1A] hover:bg-[#FCFCFC1D]'}>
+			<Widget heading={'distributed systems'} className={'bg-[#FCFCFC1A]'}>
 				<p className={'text-lg'}>{sections[SECTION_KEYS.DISTRIBUTED_SYSTEMS]?.content ?? LOADING_MESSAGE}</p>
 				<WidgetAttributes collection={sections[SECTION_KEYS.DISTRIBUTED_SYSTEMS]?.attributes}/>
 			</Widget>
-			<Widget heading={'cloud'} className={'bg-[#FCFCFC1A] hover:bg-[#FCFCFC1D]'}>
+			<Widget heading={'cloud'} className={'bg-[#FCFCFC1A]'}>
 				<p className={'text-lg'}>{sections[SECTION_KEYS.CLOUD]?.content ?? LOADING_MESSAGE}</p>
 				<WidgetAttributes collection={sections[SECTION_KEYS.CLOUD]?.attributes}/>
 			</Widget>
@@ -261,12 +261,12 @@ const BuiltToScale = ({sections}: { sections: SectionMap }) => (
 	<div className={'p-32 max-sm:px-14 space-y-10'}>
 		<p className={'text-4xl'}>built to scale.</p>
 		<div className={'flex flex-wrap gap-12 *:basis-[calc(50%-1.5rem)] *:max-md:basis-full'}>
-			<Widget heading={'architecture'} className={'md:w-1/2 bg-[#FCFCFC1A] hover:bg-[#FCFCFC1D]'}>
+			<Widget heading={'architecture'} className={'md:w-1/2 bg-[#FCFCFC1A]'}>
 				<p className={'text-lg'}>{sections[SECTION_KEYS.ARCHITECTURE]?.content ?? LOADING_MESSAGE}</p>
 				<WidgetAttributes collection={sections[SECTION_KEYS.ARCHITECTURE]?.attributes}/>
 				<ComingSoon/>
 			</Widget>
-			<Widget heading={'quality assurance'} className={'md:w-1/2 bg-[#FCFCFC1A] hover:bg-[#FCFCFC1D]'}>
+			<Widget heading={'quality assurance'} className={'md:w-1/2 bg-[#FCFCFC1A]'}>
 				<p className={'text-lg'}>{sections[SECTION_KEYS.QUALITY_ASSURANCE]?.content ?? LOADING_MESSAGE}</p>
 				<WidgetAttributes collection={sections[SECTION_KEYS.QUALITY_ASSURANCE]?.attributes}/>
 			</Widget>
@@ -302,7 +302,7 @@ const ImproveContinuously = ({sections}: { sections: SectionMap }) => (
 		<div className={'flex justify-center'}>
 			<p className={'text-4xl text-black self-center leading-snug'}>improve.<br/>continuously.</p>
 		</div>
-		<Widget heading={'continuous improvement'} className={'bg-[#16748C] hover:bg-[#16748CF6]'}>
+		<Widget heading={'continuous improvement'} className={'bg-[#16748C]'}>
 			<p className={'text-lg'}>{sections[SECTION_KEYS.CONTINUOUS_IMPROVEMENT]?.content ?? LOADING_MESSAGE}</p>
 			<WidgetAttributes collection={sections[SECTION_KEYS.CONTINUOUS_IMPROVEMENT]?.attributes}/>
 			<ComingSoon/>
@@ -374,14 +374,14 @@ const WorkExperienceSection = () => (
 
 const Environment = ({sections}: { sections: SectionMap }) => (
 	<div className={'min-h-[100dvh] bg-[#91A38B] px-14 py-32 gap-12 flex flex-wrap'}>
-		<Widget heading={'environment'} className={'grow bg-[#133F06] hover:bg-[#133F06F1]'}>
+		<Widget heading={'environment'} className={'grow bg-[#133F06]'}>
 			<p className={'text-lg'}>{sections[SECTION_KEYS.ENVIRONMENT]?.content ?? LOADING_MESSAGE}</p>
 			<WidgetAttributes collection={sections[SECTION_KEYS.ENVIRONMENT]?.attributes}/>
 			<ComingSoon className={'bg-green-200 text-gray-600'}/>
 		</Widget>
 		<Widget heading={'planned obsolescence'}
 						className={'basis-[calc(100%-100%/1.61803398875-5rem)] max-lg:basis-[calc(50%-1.5rem)] ' +
-							'max-md:basis-full bg-[#133F0659] hover:bg-[#133F064F]'}>
+							'max-md:basis-full bg-[#133F0659]'}>
 			<p className={'text-lg'}>{sections[SECTION_KEYS.PLANNED_OBSOLESCENCE]?.content ?? LOADING_MESSAGE}</p>
 			<WidgetAttributes collection={sections[SECTION_KEYS.PLANNED_OBSOLESCENCE]?.attributes}/>
 			<ComingSoon className={'bg-green-200 text-gray-600'}/>
@@ -394,7 +394,7 @@ const Housing = ({sections}: { sections: SectionMap }) => (
 			'max-md:basis-full'}>
 			<p className={'text-4xl text-black self-center leading-snug'}>housing is a<br/>human right</p>
 		</div>
-		<Widget heading={'affordable housing'} className={'grow bg-[#746D40] hover:bg-[#746D40F1]'}>
+		<Widget heading={'affordable housing'} className={'grow bg-[#746D40]'}>
 			<p className={'text-lg'}>{sections[SECTION_KEYS.AFFORDABLE_HOUSING]?.content ?? LOADING_MESSAGE}</p>
 			<WidgetAttributes collection={sections[SECTION_KEYS.AFFORDABLE_HOUSING]?.attributes}/>
 			<ComingSoon className={'bg-yellow-100 text-gray-600'}/>
