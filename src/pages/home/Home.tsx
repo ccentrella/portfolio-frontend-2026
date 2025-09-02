@@ -160,7 +160,7 @@ const Hero = ({sections}: { sections: SectionMap }) => (
 	<div className={"min-h-[100dvh] flex flex-col p-14 max-sm:p-10 space-y-14 max-sm:space-y-12"}>
 		<div className={"flex justify-between flex-wrap space-y-12 max-sm:space-y-8"}>
 			<div
-				className={"font-poppins font-medium text-4xl max-sm:text-3xl text-gray-400 [&_a]:hover:text-gray-300 [&_a]:transition-colors space-y-5 max-sm:space-y-4 max-lg:basis-1/5 max-md:basis-full"}>
+				className={"font-poppins font-medium text-4xl max-sm:text-3xl text-gray-400 [&_a]:hover:text-gray-300 [&_a]:transition-colors space-y-5 max-sm:space-y-4 lg:basis-[calc((100%-18rem)/2)]  xl:basis-[calc((100%-24rem)/2)] max-md:basis-full"}>
 				<p className={"text-cyan-500 text-4xl max-sm:text-3xl mb-10 max-sm:mb-8"}>Chris <span
 					className={"ml-2 bg-cyan-200 size-2.5 rounded-[50%] inline-block"}></span></p>
 				<p><a href={'/resume_christopher_centrella.pdf'} target={'_blank'}>resume</a></p>
@@ -168,9 +168,9 @@ const Hero = ({sections}: { sections: SectionMap }) => (
 				<p><a href={'#invite-chris'}>invite Chris</a></p>
 			</div>
 			<img
-				className={"animate-imgFloat object-cover opacity-95 hover:opacity-100 transition-colors m-auto w-60 sm:w-72 xl:w-96 h-64 sm:h-80 xl:h-[26rem] rounded-[55%_45%_55%_45%]"}
+				className={"animate-imgFloat object-cover opacity-95 hover:opacity-100 transition-colors my-0 max-md:mx-auto w-60 h-64  sm:w-72 sm:h-80  xl:w-96 xl:h-[26rem]  rounded-[55%_45%_55%_45%]"}
 				src={"/images/profile.jpeg"} alt={"Chris in hoodie, relaxed"}/>
-			<div className={"basis-1/5 max-md:basis-full"}></div>
+			<div className={"basis-full lg:basis-[calc((100%-18rem)/2)]  xl:basis-[calc((100%-24rem)/2)]"}></div>
 		</div>
 		<div
 			className={"grow flex justify-center flex-wrap gap-12 max-sm:gap-10 *:basis-[calc(50%-1.5rem)] *:max-md:basis-full"}>
