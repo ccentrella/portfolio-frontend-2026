@@ -157,7 +157,7 @@ const ImageComingSoon = ({className}: { className?: string }) => (
 
 
 const Hero = ({sections}: { sections: SectionMap }) => (
-	<div className={"min-h-[100dvh] p-14 max-sm:p-10 space-y-14 max-sm:space-y-12"}>
+	<div className={"min-h-[100dvh] flex flex-col p-14 max-sm:p-10 space-y-14 max-sm:space-y-12"}>
 		<div className={"flex justify-between flex-wrap space-y-12 max-sm:space-y-8"}>
 			<div
 				className={"font-poppins font-medium text-4xl max-sm:text-3xl text-gray-400 [&_a]:hover:text-gray-300 [&_a]:transition-colors space-y-5 max-sm:space-y-4 basis-1/5 max-md:basis-full"}>
@@ -173,7 +173,7 @@ const Hero = ({sections}: { sections: SectionMap }) => (
 			<div className={"basis-1/5 max-md:basis-full"}></div>
 		</div>
 		<div
-			className={"flex justify-center flex-wrap gap-12 max-sm:gap-10 *:basis-[calc(50%-1.5rem)] *:max-md:basis-full"}>
+			className={"grow flex justify-center flex-wrap gap-12 max-sm:gap-10 *:basis-[calc(50%-1.5rem)] *:max-md:basis-full"}>
 			<Widget heading={'design'} className={'bg-[#62EAFF6B]'}>
 				<WidgetSectionContent sections={sections} sectionTitle={SECTION_KEYS.DESIGN}/>
 			</Widget>
@@ -187,14 +187,14 @@ const Hero = ({sections}: { sections: SectionMap }) => (
 
 const AboutMe = ({sections}: { sections: SectionMap }) => (
 	<div className={"min-h-[100dvh] py-[8rem] max-sm:py-[6rem]"}>
-		<div className={"flex flex-wrap px-14 max-sm:px-10 gap-12 max-sm:gap-10"}>
-			<Widget heading={'about me'} className={'grow max-w-[48rem]'}>
+		<div className={"flex max-md:flex-wrap px-14 max-sm:px-10 gap-12 max-sm:gap-10 max-xl:*:basis-1/2"}>
+			<Widget heading={'about me'} className={'grow'}>
 				<WidgetSectionContent sections={sections} sectionTitle={SECTION_KEYS.ABOUT_ME}/>
 				<WidgetSectionAttributes collection={sections[SECTION_KEYS.ABOUT_ME]?.attributes}/>
 				<ComingSoon/>
 			</Widget>
 			<img
-				className={`basis-[calc(100%-100%/1.61803398875-5rem)] transition-colors opacity-95 hover:opacity-100 object-cover rounded-xl min-w-0 max-md:grow max-sm:flex-[100%]`}
+				className={`xl:basis-[calc(100%-100%/1.61803398875-1.5rem)] transition-colors opacity-95 hover:opacity-100 object-cover rounded-xl min-w-0 max-md:grow max-sm:flex-[100%]`}
 				src={"/images/stroll.jpeg"} alt={"Chris walking while carrying iPad"}/>
 		</div>
 		<Widget heading={'looking for a design-minded software engineer?'}
