@@ -160,7 +160,7 @@ const Hero = ({sections}: { sections: SectionMap }) => (
 	<div className={"min-h-[100dvh] flex flex-col p-14 max-sm:p-10 space-y-14 max-sm:space-y-12"}>
 		<div className={"flex justify-between flex-wrap space-y-12 max-sm:space-y-8"}>
 			<div
-				className={"font-poppins font-medium text-4xl max-sm:text-3xl text-gray-400 [&_a]:hover:text-gray-300 [&_a]:transition-colors space-y-5 max-sm:space-y-4 basis-1/5 max-md:basis-full"}>
+				className={"font-poppins font-medium text-4xl max-sm:text-3xl text-gray-400 [&_a]:hover:text-gray-300 [&_a]:transition-colors space-y-5 max-sm:space-y-4 max-lg:basis-1/5 max-md:basis-full"}>
 				<p className={"text-cyan-500 text-4xl max-sm:text-3xl mb-10 max-sm:mb-8"}>Chris <span
 					className={"ml-2 bg-cyan-200 size-2.5 rounded-[50%] inline-block"}></span></p>
 				<p><a href={'/resume_christopher_centrella.pdf'} target={'_blank'}>resume</a></p>
