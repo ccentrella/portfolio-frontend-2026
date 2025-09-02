@@ -1,8 +1,8 @@
 const Footer = () => (
 	<div className={'min-h-[100dvh] bg-[#204F5C] text-[#FFFFFF66] p-14 pt-24 pb-10 flex flex-col gap-12 justify-between'}>
 		<div className={"space-y-5 basis-1/5 max-md:basis-full"}>
-			<p className={"text-cyan-500 text-4xl mb-10"}>Chris <span
-				className={"ml-2 bg-cyan-200 size-2.5 rounded-[50%] inline-block"}></span></p>
+			<p className={"text-cyan-500 hover:text-cyan-400 font-medium group text-4xl mb-10"}><a href={'#'}>Chris <span
+				className={"ml-2 bg-cyan-200 group-hover:bg-cyan-100 size-2.5 rounded-[50%] inline-block"}></span></a></p>
 			<div className={'flex flex-wrap gap-x-12 gap-y-12'}>
 				<div
 					className={'font-poppins font-medium text-4xl text-gray-400 [&_a]:hover:text-gray-300 [&_a]:transition-colors space-y-5 basis-2/5 max-md:basis-3/5 max-sm:basis-full'}>

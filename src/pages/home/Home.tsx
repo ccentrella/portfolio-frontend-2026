@@ -9,12 +9,18 @@ import AttributeLabel from "../../components/AttributeLabel.tsx";
 // TODO: Add transitions
 // TODO: Tweak font sizes for mobile
 
-type SectionMap = Record<string, Attribute[]>;
+type SectionMap = Record<string, Section>;
+
+interface Section {
+	content: string,
+	attributes: Attribute[]
+}
 
 interface Attribute {
 	name: string,
 }
 
+const LOADING_MESSAGE = 'Loading...';
 const SECTION_KEYS = {
 	DESIGN: "design",
 	ENGINEERING: "engineering",
@@ -97,7 +103,11 @@ const translations = [
 	{lang: "is", heading: "halló", placeholder: "Ertu með spurningu?"}
 ];
 
-const WidgetAttributes = ({collection}: {collection: Attribute[]}) => {
+const WidgetAttributes = ({collection}: { collection: Attribute[] }) => {
+	if (collection.length == 0) {
+		return <p>{LOADING_MESSAGE}</p>
+	}
+
 	return (
 		<div className={'flex flex-wrap gap-2'}>
 			{collection.map(attribute => (<AttributeLabel>{attribute.name}</AttributeLabel>))}
@@ -122,27 +132,21 @@ const Hero = ({sections}: { sections: SectionMap }) => (
 		</div>
 		<div className={"flex justify-center flex-wrap gap-12 *:basis-[calc(50%-1.5rem)] *:max-md:basis-full"}>
 			<Widget heading={'design'} className={'bg-[#62EAFF6B]'}>
-				<WidgetAttributes collection={sections[SECTION_KEYS.DESIGN] ?? []} />
+				<p className={'text-lg'}>{sections[SECTION_KEYS.DESIGN]?.content ?? LOADING_MESSAGE}</p>
 			</Widget>
-			<Widget heading={'engineering'} className={'bg-[#9494946B] space-y-6 *:space-y-2'}>
-				<div>
-					<p className={'uppercase'}>Frontend</p>
-					<WidgetAttributes collection={sections[SECTION_KEYS.FRONTEND] ?? []} />
-				</div>
-				<div>
-					<p className={'uppercase'}>Backend</p>
-					<WidgetAttributes collection={sections[SECTION_KEYS.BACKEND] ?? []} />
-				</div>
+			<Widget heading={'engineering'} className={'bg-[#9494946B]'}>
+				<p className={'text-lg'}>{sections[SECTION_KEYS.ENGINEERING]?.content ?? LOADING_MESSAGE}</p>
 			</Widget>
 		</div>
 	</div>
 );
 
-const AboutMe = () => {
-	return <div className={"min-h-[100dvh] py-[8rem]"}>
+const AboutMe = ({sections}: { sections: SectionMap }) => (
+	<div className={"min-h-[100dvh] py-[8rem]"}>
 		<div className={"flex flex-wrap px-14 gap-12"}>
-			<Widget heading={'about me'} className={'grow'}>
-				<div className={'bg-cyan-500 text-gray-100 py-5 px-10 md:pr-20 rounded-md inline-block'}>
+			<Widget heading={'about me'} className={'grow max-w-[48rem]'}>
+				<p className={'text-lg'}>{sections[SECTION_KEYS.ABOUT_ME]?.content ?? LOADING_MESSAGE}</p>
+				<div className={'bg-cyan-500 text-gray-100 py-5 px-10 mt-6 md:pr-20 rounded-md inline-block'}>
 					<p>Coming soon! Check back in the near future :)</p>
 				</div>
 			</Widget>
@@ -150,13 +154,26 @@ const AboutMe = () => {
 				className={`basis-[calc(100%-100%/1.61803398875-5rem)] object-cover rounded-xl min-w-0 max-md:grow max-sm:flex-[100%]`}
 				src={"/images/stroll.jpeg"} alt={"Chris walking while carrying iPad"}/>
 		</div>
-		<Widget heading={'looking for a design-minded software engineer?'} className={'m-14 bg-[#62EAFF6B] pb-96'}>
-			<div className={'bg-cyan-500 text-gray-100 py-5 px-10 md:pr-20 rounded-md inline-block'}>
-				<p>Coming soon! Check back in the near future :)</p>
+		<Widget heading={'looking for a design-minded software engineer?'}
+						className={'m-14 bg-[#62EAFF6B]'}>
+			<div className={'max-w-[48rem] space-y-6 *:space-y-2'}>
+				<p className={'text-lg'}>{sections[SECTION_KEYS.DESIGN_MINDED_SOFTWARE_ENGINEER]?.content ?? LOADING_MESSAGE}</p>
+				<div>
+					<p className={'uppercase'}>Design</p>
+					<WidgetAttributes collection={sections[SECTION_KEYS.DESIGN]?.attributes ?? []}/>
+				</div>
+				<div>
+					<p className={'uppercase'}>Frontend</p>
+					<WidgetAttributes collection={sections[SECTION_KEYS.FRONTEND]?.attributes ?? []}/>
+				</div>
+				<div>
+					<p className={'uppercase'}>Backend</p>
+					<WidgetAttributes collection={sections[SECTION_KEYS.BACKEND]?.attributes ?? []}/>
+				</div>
 			</div>
 		</Widget>
-	</div>;
-};
+	</div>
+);
 const AIWidget = () => {
 
 	const [current, setCurrent] = useState(0);
@@ -198,7 +215,7 @@ const CreativelyIntelligent = ({sections}: { sections: SectionMap }) => (
 	<div className={'p-32 max-sm:px-14 space-y-10'}>
 		<p className={'text-4xl'}>creatively intelligent.</p>
 		<Widget heading={'artificial intelligence'} className={'md:w-1/2 bg-[#FCFCFC1A]'}>
-			<WidgetAttributes collection={sections[SECTION_KEYS.ARTIFICIAL_INTELLIGENCE] ?? []} />
+			<WidgetAttributes collection={sections[SECTION_KEYS.ARTIFICIAL_INTELLIGENCE]?.attributes ?? []}/>
 		</Widget>
 	</div>
 );
@@ -206,7 +223,7 @@ const DataIsBeautiful = ({sections}: { sections: SectionMap }) => (
 	<div className={'p-32 max-sm:px-14 space-y-10'}>
 		<p className={'text-4xl'}>data is beautiful.</p>
 		<Widget heading={'databases'} className={'md:w-1/2 bg-[#FCFCFC1A]'}>
-			<WidgetAttributes collection={sections[SECTION_KEYS.DATABASES] ?? []} />
+			<WidgetAttributes collection={sections[SECTION_KEYS.DATABASES]?.attributes ?? []}/>
 		</Widget>
 	</div>
 );
@@ -215,10 +232,10 @@ const SystemDesign = ({sections}: { sections: SectionMap }) => (
 		<p className={'text-4xl max-sm:text-4xl mb-14 text-center'}>millions of users. one system.</p>
 		<div className={'flex flex-wrap px-14 gap-12 *:basis-[calc(50%-1.5rem)] *:max-md:basis-full'}>
 			<Widget heading={'distributed systems'} className={'bg-[#FCFCFC1A]'}>
-				<WidgetAttributes collection={sections[SECTION_KEYS.DISTRIBUTED_SYSTEMS] ?? []} />
+				<WidgetAttributes collection={sections[SECTION_KEYS.DISTRIBUTED_SYSTEMS]?.attributes ?? []}/>
 			</Widget>
 			<Widget heading={'cloud'} className={'bg-[#FCFCFC1A]'}>
-				<WidgetAttributes collection={sections[SECTION_KEYS.CLOUD] ?? []} />
+				<WidgetAttributes collection={sections[SECTION_KEYS.CLOUD]?.attributes ?? []}/>
 			</Widget>
 		</div>
 	</div>
@@ -228,13 +245,13 @@ const BuiltToScale = ({sections}: { sections: SectionMap }) => (
 		<p className={'text-4xl'}>built to scale.</p>
 		<div className={'flex flex-wrap gap-12 *:basis-[calc(50%-1.5rem)] *:max-md:basis-full'}>
 			<Widget heading={'architecture'} className={'md:w-1/2 bg-[#FCFCFC1A]'}>
-				<WidgetAttributes collection={sections[SECTION_KEYS.ARCHITECTURE] ?? []} />
-				<div className={'bg-cyan-500 text-gray-100 py-5 px-10 md:pr-20 rounded-md inline-block'}>
+				<WidgetAttributes collection={sections[SECTION_KEYS.ARCHITECTURE]?.attributes ?? []}/>
+				<div className={'bg-cyan-500 text-gray-100 py-5 px-10 mt-6 md:pr-20 rounded-md inline-block'}>
 					<p>Coming soon! Check back in the near future :)</p>
 				</div>
 			</Widget>
 			<Widget heading={'quality assurance'} className={'md:w-1/2 bg-[#FCFCFC1A]'}>
-				<WidgetAttributes collection={sections[SECTION_KEYS.QUALITY_ASSURANCE] ?? []} />
+				<WidgetAttributes collection={sections[SECTION_KEYS.QUALITY_ASSURANCE]?.attributes ?? []}/>
 			</Widget>
 		</div>
 	</div>
@@ -244,7 +261,7 @@ const AboutSection = (props: { sections: SectionMap }) => (
 		<InspirationalQuote author={"Steve Jobs"}>
 			The only way to do great work is to love what you do.
 		</InspirationalQuote>
-		<AboutMe/>
+		<AboutMe sections={props.sections}/>
 		<AIWidget/>
 		<CreativelyIntelligent sections={props.sections}/>
 		<InspirationalQuote author={"Steve Jobs"}>
@@ -271,8 +288,8 @@ const ImproveContinuously = ({sections}: { sections: SectionMap }) => (
 			<p className={'text-4xl text-black self-center leading-snug'}>improve.<br/>continuously.</p>
 		</div>
 		<Widget heading={'continuous improvement'} className={'bg-[#16748C]'}>
-			<WidgetAttributes collection={sections[SECTION_KEYS.CONTINUOUS_IMPROVEMENT] ?? []} />
-			<div className={'bg-cyan-500 text-gray-100 py-5 px-10 md:pr-20 rounded-md inline-block'}>
+			<p className={'text-lg'}>{sections[SECTION_KEYS.CONTINUOUS_IMPROVEMENT]?.content ?? LOADING_MESSAGE}</p>
+			<div className={'bg-cyan-500 text-gray-100 py-5 px-10 mt-6 md:pr-20 rounded-md inline-block'}>
 				<p>Coming soon! Check back in the near future :)</p>
 			</div>
 		</Widget>
@@ -284,8 +301,8 @@ const LeanProcesses = ({sections}: { sections: SectionMap }) => (
 			<p className={'text-4xl self-center leading-snug'}>simple. lean.<br/>forever.</p>
 		</div>
 		<Widget heading={'lean processes'}>
-			<WidgetAttributes collection={sections[SECTION_KEYS.LEAN_PROCESSES] ?? []} />
-			<div className={'bg-cyan-500 text-gray-100 py-5 px-10 md:pr-20 rounded-md inline-block'}>
+			<p className={'text-lg'}>{sections[SECTION_KEYS.LEAN_PROCESSES]?.content ?? LOADING_MESSAGE}</p>
+			<div className={'bg-cyan-500 text-gray-100 py-5 px-10 mt-6 md:pr-20 rounded-md inline-block'}>
 				<p>Coming soon! Check back in the near future :)</p>
 			</div>
 		</Widget>
@@ -351,16 +368,16 @@ const WorkExperienceSection = () => (
 const Environment = ({sections}: { sections: SectionMap }) => (
 	<div className={'min-h-[100dvh] bg-[#91A38B] px-14 py-32 gap-12 flex flex-wrap'}>
 		<Widget heading={'environment'} className={'grow bg-[#133F06]'}>
-			<WidgetAttributes collection={sections[SECTION_KEYS.ENVIRONMENT] ?? []} />
-			<div className={'bg-green-200 text-gray-600 py-5 px-10 md:pr-20 rounded-md inline-block'}>
+			<WidgetAttributes collection={sections[SECTION_KEYS.ENVIRONMENT]?.attributes ?? []}/>
+			<div className={'bg-green-200 text-gray-600 py-5 px-10 mt-6 md:pr-20 rounded-md inline-block'}>
 				<p>Coming soon! Check back in the near future :)</p>
 			</div>
 		</Widget>
 		<Widget heading={'planned obsolescence'}
 						className={'basis-[calc(100%-100%/1.61803398875-5rem)] max-lg:basis-[calc(50%-1.5rem)] ' +
 							'max-md:basis-full bg-[#133F0659]'}>
-			<WidgetAttributes collection={sections[SECTION_KEYS.PLANNED_OBSOLESCENCE] ?? []} />
-			<div className={'bg-green-200 text-gray-600 py-5 px-10 md:pr-20 rounded-md inline-block'}>
+			<WidgetAttributes collection={sections[SECTION_KEYS.PLANNED_OBSOLESCENCE]?.attributes ?? []}/>
+			<div className={'bg-green-200 text-gray-600 py-5 px-10 mt-6 md:pr-20 rounded-md inline-block'}>
 				<p>Coming soon! Check back in the near future :)</p>
 			</div>
 		</Widget>
@@ -373,8 +390,8 @@ const Housing = ({sections}: { sections: SectionMap }) => (
 			<p className={'text-4xl text-black self-center leading-snug'}>housing is a<br/>human right</p>
 		</div>
 		<Widget heading={'affordable housing'} className={'grow bg-[#746D40]'}>
-			<WidgetAttributes collection={sections[SECTION_KEYS.AFFORDABLE_HOUSING] ?? []} />
-			<div className={'bg-yellow-100 text-gray-600 py-5 px-10 md:pr-20 rounded-md inline-block'}>
+			<WidgetAttributes collection={sections[SECTION_KEYS.AFFORDABLE_HOUSING]?.attributes ?? []}/>
+			<div className={'bg-yellow-100 text-gray-600 py-5 px-10 mt-6 md:pr-20 rounded-md inline-block'}>
 				<p>Coming soon! Check back in the near future :)</p>
 			</div>
 		</Widget>
@@ -468,12 +485,12 @@ const Home = () => {
 			const {data} = await supabase
 				.from('sections')
 				.select(`
-					title,
+					title, content,
 					attributes (name)
 				`);
 			const sectionMap =
 				data?.reduce<SectionMap>((accumulator, section) => {
-					accumulator[section.title] = section.attributes
+					accumulator[section.title] = {content: section.content, attributes: section.attributes}
 					return accumulator;
 				}, {})
 
