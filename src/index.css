@@ -1,6 +1,6 @@
 html {
 	scroll-behavior: smooth;
-	height: 100dvh;
+	height: 100lvh;
 	overflow-y: scroll;
 	scroll-snap-type: y proximity;
 }
