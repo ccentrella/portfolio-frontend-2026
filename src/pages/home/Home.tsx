@@ -219,18 +219,21 @@ const AboutMe = ({sections}: { sections: SectionMap }) => (
 );
 const AIWidget = () => {
 	const sectionRef = useRef(null);
-	const [isStarted, setIsStarted] = useState(false);
+	const [isAnimating, setIsAnimating] = useState(false);
+	const current = useRef(0);
 	const [heading, setHeading] = useState('hello');
 	const [placeholder, setPlaceholder] = useState('Have a question?');
 
 	useEffect(() => {
 		const observer = new IntersectionObserver(
 			entries => {
+				let elementInView = false;
 				entries.forEach(entry => {
 					if (entry.isIntersecting) {
-						setIsStarted(true);
+						elementInView = true;
 					}
 				})
+				setIsAnimating(elementInView);
 			}
 		)
 		observer.observe(sectionRef.current!)
@@ -239,21 +242,20 @@ const AIWidget = () => {
 	}, []);
 
 	useEffect(() => {
-		if (!isStarted) {
+		if (!isAnimating) {
 			return;
 		}
 
-		let current = 0;
 		const updateText = () => {
-			current = (current + 1) % translations.length;
-			setHeading(translations[current].heading);
-			setPlaceholder(translations[current].placeholder);
+			current.current = (current.current + 1) % translations.length;
+			setHeading(translations[current.current].heading);
+			setPlaceholder(translations[current.current].placeholder);
 		}
 
 		const timer = setInterval(updateText, 2500);
 
 		return () => clearInterval(timer);
-	}, [isStarted]);
+	}, [isAnimating]);
 
 	return (
 		<div ref={sectionRef} id={'chatbot'} className={'min-h-[100dvh] bg-[#3C9FBA] flex justify-center items-center'}>
