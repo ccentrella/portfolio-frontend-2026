@@ -122,13 +122,13 @@ const WidgetSectionContent = (props: { sections: SectionMap, sectionTitle: strin
 
 const ComingSoon = ({className}: { className?: string }) => (
 	<div
-		className={twMerge("max-sm:text-sm bg-cyan-500 text-gray-100 py-5 px-10 md:pr-20 rounded-md inline-block", className)}>
+		className={twMerge("max-sm:text-sm bg-cyan-500 text-gray-100 py-5 px-10 max-sm:py-4 max-sm:px-6 md:pr-20 rounded-md inline-block", className)}>
 		<p>Coming soon! Check back in the near future :)</p>
 	</div>
 );
 const ImageComingSoon = ({className}: { className?: string }) => (
 	<div
-		className={twMerge("max-sm:text-sm bg-cyan-500 text-gray-100 py-5 px-10 md:pr-20 m-10 rounded-md inline-block", className)}>
+		className={twMerge("max-sm:text-sm bg-cyan-500 text-gray-100 py-5 px-10  max-sm:py-4 max-sm:px-6 md:pr-20 m-10 rounded-md inline-block", className)}>
 		<p>Image coming soon! Check back in the near future :)</p>
 	</div>
 );
@@ -381,7 +381,8 @@ const WorkExperienceSection = () => (
 )
 
 const Environment = ({sections}: { sections: SectionMap }) => (
-	<div className={'min-h-[100dvh] bg-[#91A38B] px-14 max-sm:px-10 py-32 max-sm:py-24 gap-12 max-sm:gap-10 flex flex-wrap'}>
+	<div
+		className={'min-h-[100dvh] bg-[#91A38B] px-14 max-sm:px-10 py-32 max-sm:py-24 gap-12 max-sm:gap-10 flex flex-wrap'}>
 		<Widget heading={'environment'} className={'grow bg-[#133F06]'}>
 			<WidgetSectionContent sections={sections} sectionTitle={SECTION_KEYS.ENVIRONMENT}/>
 			<WidgetSectionAttributes collection={sections[SECTION_KEYS.ENVIRONMENT]?.attributes}/>
@@ -412,10 +413,10 @@ const Housing = ({sections}: { sections: SectionMap }) => (
 const Palestine = () => (
 	<div className={'min-h-[100dvh] bg-[#4A4A4A] gap-12 max-sm:gap-10 flex flex-wrap'}>
 		<img
-			className={'w-[calc(100%/1.61803398875-1.5rem)] max-lg:basis-[calc(50%-1.5rem)] max-md:basis-full object-cover'}
+			className={'w-[calc(100%/1.61803398875-3rem)] max-md:basis-full object-cover grow'}
 			src={'/images/pattern_background.png'}
 			alt={'picture of people in Palestine'}/>
-		<div className={'grow flex justify-center px-10'}>
+		<div className={'grow flex justify-center m-12'}>
 			<div className={'self-center space-y-5'}>
 				<p className={'text-4xl max-sm:text-3xl leading-snug'}>every person<br/>deserves dignity</p>
 				<p className={'text-xl'}>statement on Palestine</p>
@@ -440,7 +441,12 @@ const InviteChrisSection = () => (
 	<div id={'invite-chris'}
 			 className={'min-h-[100dvh] bg-black text-[#FFFFFFCC] px-14 max-sm:px-10 py-32 max-sm:py-24 space-y-12 text-lg'}>
 		<p className={'text-4xl max-sm:text-3xl'}>invite Chris</p>
-		<div className={'py-6 px-12 bg-orange-400 rounded-md max-w-[45rem]'}>Coming Soon! This form is not yet active.</div>
+		<div className={'py-6 px-12 max-sm:px-10 bg-orange-400 rounded-md max-w-[45rem] space-y-5'}>
+			<p>Coming Soon! This form is not yet active.</p>
+			<p>In the meantime, please reach out via LinkedIn: <a className={'font-bold'} target={'_blank'} rel={'noopener'}
+																														href={'https://linkedin.com/in/ccentrella'}>@ccentrella</a>
+			</p>
+		</div>
 
 		<div className={'space-y-8'}>
 			<div className={'space-y-3 [&_input]:text-black [&_input]:py-2.5 [&_input]:px-10 [&_input]:mx-10' +
