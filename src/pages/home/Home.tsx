@@ -20,6 +20,24 @@ interface Attribute {
 	name: string,
 }
 
+type ProjectMap = Record<string, Project>;
+
+interface Project {
+	title: string,
+	link: string,
+	thumbnail_path?: string,
+	description?: string,
+	color?: string
+}
+
+interface Role {
+	title: string,
+	company: string,
+	year_start: number,
+	year_end?: number,
+	accomplishments?: string[]
+}
+
 const LOADING_MESSAGE = 'Loading...';
 const SECTION_KEYS = {
 	DESIGN: "design",
@@ -216,7 +234,7 @@ const AIWidget = () => {
 	}, [current]);
 
 	return (
-		<div className={'min-h-[100dvh] bg-[#3C9FBA] flex justify-center items-center'}>
+		<div id={'chatbot'} className={'min-h-[100dvh] bg-[#3C9FBA] flex justify-center items-center'}>
 			<div className={'text-center space-y-10 grow'}>
 				<p className={'font-bumbbled text-8xl max-sm:text-6xl text-[#85D7E0]'}>{heading}</p>
 				<input placeholder={placeholder}
@@ -343,40 +361,30 @@ const GuidingPrinciplesSection = (props: { sections: SectionMap }) => (
 	</>
 );
 
-const WorkExperienceSection = () => (
-	<div className={'pt-32 px-32 px-14 max-sm:px-10'}>
+const Projects = ({projects}: { projects: ProjectMap }) => (
+	<div className={'flex flex-wrap m-auto justify-center gap-12 xl:gap-x-24 max-sm:gap-10 *:basis-[calc(50%-3rem)] *:max-md:basis-full max-w-[75rem]'}>
+		{
+			Object.values(projects).map(project => (
+				<a href={project.link} target={'_blank'} rel={'noopener'}>
+					<Widget
+						className={'bg-[#FCFCFC1A] h-full cursor-pointer opacity-100 hover:bg-[#FCFCFC1F]'}
+						heading={project.title}>
+						{project.description}
+					</Widget>
+				</a>
+			))
+		}
+	</div>
+);
+
+const WorkExperienceSection = (props: { projects: ProjectMap, roles: Role[] }) => (
+	<div className={'pt-32 max-sm:pt-24 px-14 max-sm:px-10'}>
 		<div className={'min-h-[100dvh]'}>
 			<p className={'text-4xl max-sm:text-3xl'}>what's in a timeline?</p>
 			<ComingSoon className={'mt-8'}/>
 		</div>
 		<p className={'text-4xl max-sm:text-3xl text-center mb-14'}>...and so much more</p>
-		<ComingSoon className={'mb-8'}/>
-		<div className={'flex flex-wrap gap-12 max-sm:gap-10 *:basis-[calc(50%-1.5rem)] *:max-md:basis-full'}>
-			<Widget heading={'portfolio site'}>
-				<></>
-			</Widget>
-			<Widget heading={'AI prompt widget'}>
-				<></>
-			</Widget>
-			<Widget heading={'AI terminal interface'}>
-				<></>
-			</Widget>
-			<Widget heading={'Ajax Alternates redesign'}>
-				<></>
-			</Widget>
-			<Widget heading={'iOS coding goals app'}>
-				<></>
-			</Widget>
-			<Widget heading={'text formatter utility'}>
-				<></>
-			</Widget>
-			<Widget heading={'2024 portfolio site'}>
-				<></>
-			</Widget>
-			<Widget heading={'2022 portfolio site'}>
-				<></>
-			</Widget>
-		</div>
+		<Projects projects={props.projects}/>
 	</div>
 )
 
@@ -398,9 +406,11 @@ const Environment = ({sections}: { sections: SectionMap }) => (
 	</div>
 )
 const Housing = ({sections}: { sections: SectionMap }) => (
-	<div className={'min-h-[100dvh] bg-white px-14 max-sm:px-10 py-32 max-sm:py-24 gap-12 max-sm:gap-10 flex flex-wrap'}>
-		<div className={'flex justify-center basis-[calc(100%-100%/1.61803398875-5rem)] max-lg:basis-[calc(50%-1.5rem)] ' +
-			'max-md:basis-full'}>
+	<div
+		className={'min-h-[100dvh] bg-white px-14 max-sm:px-10 py-32 max-sm:py-24 gap-12 max-sm:gap-10 flex flex-wrap'}>
+		<div
+			className={'flex justify-center basis-[calc(100%-100%/1.61803398875-5rem)] max-lg:basis-[calc(50%-1.5rem)] ' +
+				'max-md:basis-full'}>
 			<p className={'text-4xl max-sm:text-3xl text-black self-center leading-snug'}>housing is a<br/>human right</p>
 		</div>
 		<Widget heading={'affordable housing'} className={'grow bg-[#746D40]'}>
@@ -496,22 +506,35 @@ const InviteChrisSection = () => (
 const Home = () => {
 
 	const [sections, setSections] = useState<SectionMap>({});
+	const [projects, setProjects] = useState<ProjectMap>({});
+	const [roles, setRoles] = useState<Role[]>([]);
 
 	useEffect(() => {
 		const loadData = async () => {
-			const {data} = await supabase
-				.from('sections')
-				.select(`
+
+			const [{data: sectionsData}, {data: projectsData}, {data: rolesData}] = await Promise.all([
+				supabase.from('sections').select(`
 					title, content,
 					attributes (name)
-				`);
+					`),
+				supabase.from('projects').select('*'),
+				supabase.from('roles').select('*')
+			]);
+
 			const sectionMap =
-				data?.reduce<SectionMap>((accumulator, section) => {
+				sectionsData?.reduce<SectionMap>((accumulator, section) => {
 					accumulator[section.title] = {content: section.content, attributes: section.attributes}
 					return accumulator;
 				}, {})
 
+			const projectMap = projectsData?.reduce<ProjectMap>((accumulator, project) => {
+				accumulator[project.title] = project;
+				return accumulator;
+			}, {});
+
 			setSections(sectionMap ?? {});
+			setProjects(projectMap ?? {})
+			setRoles(rolesData ?? []);
 		}
 		loadData().then();
 	}, []);
@@ -521,7 +544,7 @@ const Home = () => {
 			<Hero sections={sections}/>
 			<AboutSection sections={sections}/>
 			<GuidingPrinciplesSection sections={sections}/>
-			<WorkExperienceSection/>
+			<WorkExperienceSection projects={projects} roles={roles}/>
 			<HumanRightsSection sections={sections}/>
 			<InviteChrisSection/>
 		</div>
