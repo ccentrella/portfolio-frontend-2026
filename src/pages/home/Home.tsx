@@ -168,7 +168,7 @@ const Hero = ({sections}: { sections: SectionMap }) => (
 				<p><a href={'#invite-chris'}>invite Chris</a></p>
 			</div>
 			<img
-				className={"animate-imgFloat object-cover opacity-95 hover:opacity-100 transition-colors m-auto w-72 max-sm:w-60 h-80 max-sm:h-64 rounded-[55%_45%_55%_45%]"}
+				className={"animate-imgFloat object-cover opacity-95 hover:opacity-100 transition-colors m-auto w-60 sm:w-72 xl:w-96 h-64 sm:h-80 xl:h-[26rem] rounded-[55%_45%_55%_45%]"}
 				src={"/images/profile.jpeg"} alt={"Chris in hoodie, relaxed"}/>
 			<div className={"basis-1/5 max-md:basis-full"}></div>
 		</div>
