@@ -1,5 +1,5 @@
 import InspirationalQuote from "../../components/InspirationalQuote.tsx";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import Widget from "../../components/Widget.tsx";
 import {supabase} from "../../utils/supabaseClient.ts";
 import AttributeLabel from "../../components/AttributeLabel.tsx";
@@ -218,27 +218,45 @@ const AboutMe = ({sections}: { sections: SectionMap }) => (
 	</div>
 );
 const AIWidget = () => {
-
-	const [current, setCurrent] = useState(0);
+	const sectionRef = useRef(null);
+	const [isStarted, setIsStarted] = useState(false);
 	const [heading, setHeading] = useState('hello');
 	const [placeholder, setPlaceholder] = useState('Have a question?');
 
 	useEffect(() => {
-		const updateText = () => {
-			const next = (current + 1) % translations.length;
+		const observer = new IntersectionObserver(
+			entries => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						setIsStarted(true);
+					}
+				})
+			}
+		)
+		observer.observe(sectionRef.current!)
 
-			setCurrent(next);
-			setHeading(translations[next].heading);
-			setPlaceholder(translations[next].placeholder);
+		return () => observer.disconnect();
+	}, []);
+
+	useEffect(() => {
+		if (!isStarted) {
+			return;
+		}
+
+		let current = 0;
+		const updateText = () => {
+			current = (current + 1) % translations.length;
+			setHeading(translations[current].heading);
+			setPlaceholder(translations[current].placeholder);
 		}
 
 		const timer = setInterval(updateText, 2500);
 
 		return () => clearInterval(timer);
-	}, [current]);
+	}, [isStarted]);
 
 	return (
-		<div id={'chatbot'} className={'min-h-[100dvh] bg-[#3C9FBA] flex justify-center items-center'}>
+		<div ref={sectionRef} id={'chatbot'} className={'min-h-[100dvh] bg-[#3C9FBA] flex justify-center items-center'}>
 			<div className={'text-center space-y-10 grow'}>
 				<p className={'font-bumbbled text-8xl max-sm:text-6xl text-[#85D7E0]'}>{heading}</p>
 				<input placeholder={placeholder}
