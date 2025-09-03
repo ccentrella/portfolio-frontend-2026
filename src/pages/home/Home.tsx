@@ -360,8 +360,8 @@ const ImproveContinuously = ({sections}: { sections: SectionMap }) => (
 )
 const LeanProcesses = ({sections}: { sections: SectionMap }) => (
 	<div
-		className={'min-h-[100lvh] flex flex-wrap px-14 max-sm:px-10 py-32 max-sm:py-24 gap-12 max-sm:gap-10 *:basis-[calc(50%-1.5rem)] *:max-md:basis-full'}>
-		<div className={'flex justify-center snap-start'}>
+		className={'snap-start min-h-[100lvh] flex flex-wrap px-14 max-sm:px-10 py-32 max-sm:py-24 gap-12 max-sm:gap-10 *:basis-[calc(50%-1.5rem)] *:max-md:basis-full'}>
+		<div className={'flex justify-center '}>
 			<p className={'text-4xl max-sm:text-3xl self-center leading-snug'}>simple. lean.<br/>forever.</p>
 		</div>
 		<Widget heading={'lean processes'}>
