@@ -1,6 +1,9 @@
+html {
+	scroll-behavior: smooth;
+}
+
 @supports not (-webkit-touch-callout: none) {
 	html {
-		scroll-behavior: smooth;
 		height: 100lvh;
 		overflow-y: scroll;
 		scroll-snap-type: y proximity;
