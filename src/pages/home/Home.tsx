@@ -63,65 +63,340 @@ const SECTION_KEYS = {
 } as const;
 
 const translations = [
-	{lang: "en", heading: "hello", placeholder: "Have a question?"},
-	{lang: "es", heading: "hola", placeholder: "¿Tienes una pregunta?"},
-	{lang: "fr", heading: "bonjour", placeholder: "Une question ?"},
-	{lang: "de", heading: "hallo", placeholder: "Hast du eine Frage?"},
-	{lang: "it", heading: "ciao", placeholder: "Hai una domanda?"},
-	{lang: "pt", heading: "olá", placeholder: "Tem uma pergunta?"},
-	{lang: "zh", heading: "你好", placeholder: "有问题吗？"},
-	{lang: "ja", heading: "こんにちは", placeholder: "質問はありますか？"},
-	{lang: "ko", heading: "안녕하세요", placeholder: "질문이 있나요?"},
-	{lang: "ar", heading: "مرحبًا", placeholder: "هل لديك سؤال؟"},
-	{lang: "hi", heading: "नमस्ते", placeholder: "कोई सवाल है?"},
-	{lang: "bn", heading: "হ্যালো", placeholder: "কোনো প্রশ্ন আছে?"},
-	{lang: "ur", heading: "ہیلو", placeholder: "کوئی سوال ہے؟"},
-	{lang: "fa", heading: "سلام", placeholder: "سوالی دارید؟"},
-	{lang: "ru", heading: "привет", placeholder: "Есть вопрос?"},
-	{lang: "uk", heading: "привіт", placeholder: "Є питання?"},
-	{lang: "tr", heading: "merhaba", placeholder: "Bir sorunuz mu var?"},
-	{lang: "th", heading: "สวัสดี", placeholder: "มีคำถามไหม?"},
-	{lang: "vi", heading: "xin chào", placeholder: "Bạn có câu hỏi không?"},
-	{lang: "id", heading: "halo", placeholder: "Ada pertanyaan?"},
-	{lang: "ms", heading: "hai", placeholder: "Ada soalan?"},
-	{lang: "nl", heading: "hallo", placeholder: "Heb je een vraag?"},
-	{lang: "sv", heading: "hej", placeholder: "Har du en fråga?"},
-	{lang: "no", heading: "hei", placeholder: "Har du et spørsmål?"},
-	{lang: "da", heading: "hej", placeholder: "Har du et spørgsmål?"},
-	{lang: "fi", heading: "hei", placeholder: "Onko kysyttävää?"},
-	{lang: "pl", heading: "cześć", placeholder: "Masz pytanie?"},
-	{lang: "cs", heading: "ahoj", placeholder: "Máš otázku?"},
-	{lang: "sk", heading: "ahoj", placeholder: "Máš otázku?"},
-	{lang: "sl", heading: "živjo", placeholder: "Imate vprašanje?"},
-	{lang: "ro", heading: "salut", placeholder: "Ai o întrebare?"},
-	{lang: "el", heading: "γεια", placeholder: "Έχεις ερώτηση;"},
-	{lang: "sr", heading: "здраво", placeholder: "Имате питање?"},
-	{lang: "hr", heading: "bok", placeholder: "Imate pitanje?"},
-	{lang: "bs", heading: "zdravo", placeholder: "Imate li pitanje?"},
-	{lang: "mk", heading: "здраво", placeholder: "Имате прашање?"},
-	{lang: "bg", heading: "здравей", placeholder: "Имате въпрос?"},
-	{lang: "lt", heading: "labas", placeholder: "Turite klausimą?"},
-	{lang: "lv", heading: "sveiki", placeholder: "Vai jums ir jautājums?"},
-	{lang: "et", heading: "tere", placeholder: "Kas teil on küsimus?"},
-	{lang: "ka", heading: "გამარჯობა", placeholder: "გაქვთ კითხვა?"},
-	{lang: "hy", heading: "բարեւ", placeholder: "Հարց ունե՞ք:"},
-	{lang: "sq", heading: "përshëndetje", placeholder: "Keni ndonjë pyetje?"},
-	{lang: "am", heading: "ሰላም", placeholder: "ጥያቄ አለ?"},
-	{lang: "sw", heading: "hujambo", placeholder: "Una swali?"},
-	{lang: "so", heading: "salaan", placeholder: "Su'aal ma qabtaa?"},
-	{lang: "ta", heading: "வணக்கம்", placeholder: "ஏதாவது கேள்வியா?"},
-	{lang: "te", heading: "హలో", placeholder: "ఏదైన ప్రశ్న ఉందా?"},
-	{lang: "kn", heading: "ನಮಸ್ಕಾರ", placeholder: "ಯಾವುದೇ ಪ್ರಶ್ನೆಯಿದೆಯೆ?"},
-	{lang: "ml", heading: "നമസ്കാരം", placeholder: "ചോദ്യം ഉണ്ടോ?"},
-	{lang: "mr", heading: "नमस्कार", placeholder: "काही प्रश्न आहे का?"},
-	{lang: "gu", heading: "નમસ્તે", placeholder: "કોઈ પ્રશ્ન છે?"},
-	{lang: "pa", heading: "ਸਤ ਸ੍ਰੀ ਅਕਾਲ", placeholder: "ਕੀ ਕੋਈ ਸਵਾਲ ਹੈ?"},
-	{lang: "kk", heading: "сәлем", placeholder: "Сұрағыңыз бар ма?"},
-	{lang: "mn", heading: "сайн байна уу", placeholder: "Таньд асуулт байна уу?"},
-	{lang: "my", heading: "မင်္ဂလာပါ", placeholder: "မေးစရာရှိပါသလား?"},
-	{lang: "tl", heading: "kumusta", placeholder: "May tanong ka ba?"},
-	{lang: "ca", heading: "hola", placeholder: "Tens alguna pregunta?"},
-	{lang: "is", heading: "halló", placeholder: "Ertu með spurningu?"}
+	{
+		lang: "en",
+		heading: "hello",
+		placeholder: "Have a question?",
+		comingSoon: "Coming soon! Check back in the near future :)"
+	},
+	{
+		lang: "es",
+		heading: "hola",
+		placeholder: "¿Tienes una pregunta?",
+		comingSoon: "¡Próximamente! Vuelve a consultar en un futuro cercano :)"
+	},
+	{
+		lang: "fr",
+		heading: "bonjour",
+		placeholder: "Une question ?",
+		comingSoon: "Bientôt disponible ! Revenez dans un futur proche :)"
+	},
+	{
+		lang: "de",
+		heading: "hallo",
+		placeholder: "Hast du eine Frage?",
+		comingSoon: "Kommt bald! Schau in naher Zukunft wieder vorbei :)"
+	},
+	{
+		lang: "it",
+		heading: "ciao",
+		placeholder: "Hai una domanda?",
+		comingSoon: "In arrivo! Ricontrolla nel prossimo futuro :)"
+	},
+	{lang: "pt", heading: "olá", placeholder: "Tem uma pergunta?", comingSoon: "Em breve! Volte a verificar em breve :)"},
+	{lang: "zh", heading: "你好", placeholder: "有问题吗？", comingSoon: "即将推出！请在不久的将来再查看 :)"},
+	{
+		lang: "ja",
+		heading: "こんにちは",
+		placeholder: "質問はありますか？",
+		comingSoon: "近日公開！近いうちにまたチェックしてください :)"
+	},
+	{lang: "ko", heading: "안녕하세요", placeholder: "질문이 있나요?", comingSoon: "곧 제공됩니다! 가까운 미래에 다시 확인해 주세요 :)"},
+	{
+		lang: "ar",
+		heading: "مرحبًا",
+		placeholder: "هل لديك سؤال؟",
+		comingSoon: "قريباً! تحقق مرة أخرى في المستقبل القريب :)"
+	},
+	{
+		lang: "hi",
+		heading: "नमस्ते",
+		placeholder: "कोई सवाल है?",
+		comingSoon: "जल्द आ रहा है! निकट भविष्य में दोबारा देखें :)"
+	},
+	{
+		lang: "bn",
+		heading: "হ্যালো",
+		placeholder: "কোনো প্রশ্ন আছে?",
+		comingSoon: "শীঘ্রই আসছে! নিকট ভবিষ্যতে আবার চেক করুন :)"
+	},
+	{
+		lang: "ur",
+		heading: "ہیلو",
+		placeholder: "کوئی سوال ہے؟",
+		comingSoon: "جلد آ رہا ہے! قریب مستقبل میں دوبارہ چیک کریں :)"
+	},
+	{
+		lang: "fa",
+		heading: "سلام",
+		placeholder: "سوالی دارید؟",
+		comingSoon: "به زودی! در آینده نزدیک دوباره بررسی کنید :)"
+	},
+	{
+		lang: "ru",
+		heading: "привет",
+		placeholder: "Есть вопрос?",
+		comingSoon: "Скоро выйдет! Загляните в ближайшем будущем :)"
+	},
+	{
+		lang: "uk",
+		heading: "привіт",
+		placeholder: "Є питання?",
+		comingSoon: "Незабаром! Перевірте ще раз найближчим часом :)"
+	},
+	{
+		lang: "tr",
+		heading: "merhaba",
+		placeholder: "Bir sorunuz mu var?",
+		comingSoon: "Çok yakında! Yakın gelecekte tekrar kontrol edin :)"
+	},
+	{
+		lang: "th",
+		heading: "สวัสดี",
+		placeholder: "มีคำถามไหม?",
+		comingSoon: "เร็วๆ นี้! โปรดกลับมาตรวจสอบอีกครั้งในอนาคตอันใกล้ :)"
+	},
+	{
+		lang: "vi",
+		heading: "xin chào",
+		placeholder: "Bạn có câu hỏi không?",
+		comingSoon: "Sắp ra mắt! Vui lòng kiểm tra lại trong tương lai gần :)"
+	},
+	{
+		lang: "id",
+		heading: "halo",
+		placeholder: "Ada pertanyaan?",
+		comingSoon: "Segera hadir! Periksa kembali di masa mendatang :)"
+	},
+	{
+		lang: "ms",
+		heading: "hai",
+		placeholder: "Ada soalan?",
+		comingSoon: "Akan datang! Semak semula dalam masa terdekat :)"
+	},
+	{
+		lang: "nl",
+		heading: "hallo",
+		placeholder: "Heb je een vraag?",
+		comingSoon: "Binnenkort beschikbaar! Kom binnenkort terug :)"
+	},
+	{
+		lang: "sv",
+		heading: "hej",
+		placeholder: "Har du en fråga?",
+		comingSoon: "Kommer snart! Kolla igen inom en snar framtid :)"
+	},
+	{
+		lang: "no",
+		heading: "hei",
+		placeholder: "Har du et spørsmål?",
+		comingSoon: "Kommer snart! Sjekk igjen i nær fremtid :)"
+	},
+	{
+		lang: "da",
+		heading: "hej",
+		placeholder: "Har du et spørgsmål?",
+		comingSoon: "Kommer snart! Tjek igen i den nærmeste fremtid :)"
+	},
+	{
+		lang: "fi",
+		heading: "hei",
+		placeholder: "Onko kysyttävää?",
+		comingSoon: "Tulossa pian! Tarkista uudelleen lähitulevaisuudessa :)"
+	},
+	{
+		lang: "pl",
+		heading: "cześć",
+		placeholder: "Masz pytanie?",
+		comingSoon: "Wkrótce dostępne! Sprawdź ponownie w niedalekiej przyszłości :)"
+	},
+	{
+		lang: "cs",
+		heading: "ahoj",
+		placeholder: "Máš otázku?",
+		comingSoon: "Již brzy! Podívej se znovu v blízké budoucnosti :)"
+	},
+	{
+		lang: "sk",
+		heading: "ahoj",
+		placeholder: "Máš otázku?",
+		comingSoon: "Už čoskoro! Skontrolujte znova v blízkej budúcnosti :)"
+	},
+	{
+		lang: "sl",
+		heading: "živjo",
+		placeholder: "Imate vprašanje?",
+		comingSoon: "Kmalu na voljo! Preverite znova v bližnji prihodnosti :)"
+	},
+	{
+		lang: "ro",
+		heading: "salut",
+		placeholder: "Ai o întrebare?",
+		comingSoon: "În curând! Verifică din nou în viitorul apropiat :)"
+	},
+	{
+		lang: "el",
+		heading: "γεια",
+		placeholder: "Έχεις ερώτηση;",
+		comingSoon: "Σύντομα διαθέσιμο! Έλεγξε ξανά στο άμεσο μέλλον :)"
+	},
+	{
+		lang: "sr",
+		heading: "здраво",
+		placeholder: "Имате питање?",
+		comingSoon: "Ускоро! Проверите поново у блиској будућности :)"
+	},
+	{
+		lang: "hr",
+		heading: "bok",
+		placeholder: "Imate pitanje?",
+		comingSoon: "Uskoro! Provjerite ponovo u skoroj budućnosti :)"
+	},
+	{
+		lang: "bs",
+		heading: "zdravo",
+		placeholder: "Imate li pitanje?",
+		comingSoon: "Uskoro! Provjerite ponovo u bliskoj budućnosti :)"
+	},
+	{
+		lang: "mk",
+		heading: "здраво",
+		placeholder: "Имате прашање?",
+		comingSoon: "Наскоро! Проверете повторно во блиска иднина :)"
+	},
+	{
+		lang: "bg",
+		heading: "здравей",
+		placeholder: "Имате въпрос?",
+		comingSoon: "Скоро! Проверете отново в близко бъдеще :)"
+	},
+	{
+		lang: "lt",
+		heading: "labas",
+		placeholder: "Turite klausimą?",
+		comingSoon: "Netrukus! Patikrinkite dar kartą artimiausiu metu :)"
+	},
+	{
+		lang: "lv",
+		heading: "sveiki",
+		placeholder: "Vai jums ir jautājums?",
+		comingSoon: "Drīzumā! Pārbaudiet vēlreiz tuvākajā nākotnē :)"
+	},
+	{
+		lang: "et",
+		heading: "tere",
+		placeholder: "Kas teil on küsimus?",
+		comingSoon: "Varsti saadaval! Kontrollige uuesti lähitulevikus :)"
+	},
+	{
+		lang: "ka",
+		heading: "გამარჯობა",
+		placeholder: "გაქვთ კითხვა?",
+		comingSoon: "მალე გამოვა! შეამოწმეთ ახლო მომავალში :)"
+	},
+	{
+		lang: "hy",
+		heading: "բարեւ",
+		placeholder: "Հարց ունե՞ք:",
+		comingSoon: "Շուտով հասանելի կլինի! Ստուգեք կրկին մոտ ապագայում :)"
+	},
+	{
+		lang: "sq",
+		heading: "përshëndetje",
+		placeholder: "Keni ndonjë pyetje?",
+		comingSoon: "Së shpejti! Kontrolloni përsëri në të ardhmen e afërt :)"
+	},
+	{lang: "am", heading: "ሰላም", placeholder: "ጥያቄ አለ?", comingSoon: "በቅርቡ! በቅርቡ ደግሞ ይመልከቱ :)"},
+	{
+		lang: "sw",
+		heading: "hujambo",
+		placeholder: "Una swali?",
+		comingSoon: "Inakuja hivi karibuni! Angalia tena katika siku zijazo :)"
+	},
+	{
+		lang: "so",
+		heading: "salaan",
+		placeholder: "Su'aal ma qabtaa?",
+		comingSoon: "Waxaa soo socda dhowaan! Dib u hubi mustaqbalka dhow :)"
+	},
+	{
+		lang: "ta",
+		heading: "வணக்கம்",
+		placeholder: "ஏதாவது கேள்வியா?",
+		comingSoon: "விரைவில் வருகிறது! அருகிலுள்ள காலத்தில் மீண்டும் சரிபார்க்கவும் :)"
+	},
+	{
+		lang: "te",
+		heading: "హలో",
+		placeholder: "ఏదైన ప్రశ్న ఉందా?",
+		comingSoon: "త్వరలో రాబోతోంది! సమీప భవిష్యత్తులో మళ్లీ చూడండి :)"
+	},
+	{
+		lang: "kn",
+		heading: "ನಮಸ್ಕಾರ",
+		placeholder: "ಯಾವುದೇ ಪ್ರಶ್ನೆಯಿದೆಯೆ?",
+		comingSoon: "ಶೀಘ್ರದಲ್ಲೇ ಬರುತ್ತದೆ! ಸಮೀಪದ ಭವಿಷ್ಯದಲ್ಲಿ ಮತ್ತೆ ಪರಿಶೀಲಿಸಿ :)"
+	},
+	{
+		lang: "ml",
+		heading: "നമസ്കാരം",
+		placeholder: "ചോദ്യം ഉണ്ടോ?",
+		comingSoon: "വേഗത്തിൽ വരുന്നു! അടുത്ത കാലത്ത് വീണ്ടും പരിശോധിക്കുക :)"
+	},
+	{
+		lang: "mr",
+		heading: "नमस्कार",
+		placeholder: "काही प्रश्न आहे का?",
+		comingSoon: "लवकरच येत आहे! निकट भविष्यात पुन्हा तपासा :)"
+	},
+	{
+		lang: "gu",
+		heading: "નમસ્તે",
+		placeholder: "કોઈ પ્રશ્ન છે?",
+		comingSoon: "જલદી જ આવી રહ્યું છે! નજીકના ભવિષ્યમાં ફરી તપાસો :)"
+	},
+	{
+		lang: "pa",
+		heading: "ਸਤ ਸ੍ਰੀ ਅਕਾਲ",
+		placeholder: "ਕੀ ਕੋਈ ਸਵਾਲ ਹੈ?",
+		comingSoon: "ਜਲਦੀ ਹੀ ਆ ਰਿਹਾ ਹੈ! ਨੇੜਲੇ ਭਵਿੱਖ ਵਿੱਚ ਦੁਬਾਰਾ ਜਾਂਚ ਕਰੋ :)"
+	},
+	{
+		lang: "kk",
+		heading: "сәлем",
+		placeholder: "Сұрағыңыз бар ма?",
+		comingSoon: "Жақында! Жақын арада қайта тексеріңіз :)"
+	},
+	{
+		lang: "mn",
+		heading: "сайн байна уу",
+		placeholder: "Таньд асуулт байна уу?",
+		comingSoon: "Тун удахгүй! Ойрын үед дахин шалгаарай :)"
+	},
+	{
+		lang: "my",
+		heading: "မင်္ဂလာပါ",
+		placeholder: "မေးစရာရှိပါသလား?",
+		comingSoon: "မကြာမီ လာမယ်! မကြာမီနောက်တဖန် စစ်ဆေးပါ :)"
+	},
+	{
+		lang: "tl",
+		heading: "kumusta",
+		placeholder: "May tanong ka ba?",
+		comingSoon: "Malapit na! Suriin muli sa malapit na hinaharap :)"
+	},
+	{
+		lang: "ca",
+		heading: "hola",
+		placeholder: "Tens alguna pregunta?",
+		comingSoon: "Pròximament! Torna a consultar en un futur proper :)"
+	},
+	{
+		lang: "is",
+		heading: "halló",
+		placeholder: "Ertu með spurningu?",
+		comingSoon: "Kemur fljótlega! Athugaðu aftur í náinni framtíð :)"
+	}
 ];
 
 const WidgetSectionAttributes = ({collection}: { collection: Attribute[] }) => {
@@ -222,6 +497,7 @@ const AIWidget = () => {
 	const current = useRef(0);
 	const [heading, setHeading] = useState('hello');
 	const [placeholder, setPlaceholder] = useState('Have a question?');
+	const [comingSoon, setComingSoon] = useState('Coming soon! Check back in the near future :)');
 
 	useEffect(() => {
 		const observer = new IntersectionObserver(
@@ -249,6 +525,7 @@ const AIWidget = () => {
 			current.current = (current.current + 1) % translations.length;
 			setHeading(translations[current.current].heading);
 			setPlaceholder(translations[current.current].placeholder);
+			setComingSoon(translations[current.current].comingSoon)
 		}
 
 		const timer = setInterval(updateText, 2500);
@@ -265,7 +542,10 @@ const AIWidget = () => {
 							 className={'py-5 px-12 bg-[#FFFFFF7F] placeholder-gray-500 text-xl max-sm:text-lg rounded-lg w-4/5'}
 							 type={'text'}/>
 				<div className={'inline-block w-4/5'}>
-					<ComingSoon className={'block md:w-max text-left'}/>
+					<div className={twMerge("max-sm:text-sm bg-cyan-500 text-gray-100 py-5 px-10 max-sm:py-4" +
+						" max-sm:px-6 md:pr-20 rounded-md inline-block", "block md:w-max text-left")}>
+						<p>{comingSoon}</p>
+					</div>
 				</div>
 			</div>
 		</div>
