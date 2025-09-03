@@ -839,8 +839,8 @@ const Home = () => {
 					*,
 					attributes (id, name)
 					`),
-				supabase.from('projects').select('*'),
-				supabase.from('roles').select('*').order('order')
+				supabase.from('projects').select('*').order('order'),
+				supabase.from('roles').select('*')
 			]);
 
 			const sectionMap =
