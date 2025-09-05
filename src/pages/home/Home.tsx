@@ -12,7 +12,8 @@ interface InviteForm {
 	email: string,
 	phone?: string
 	message: string
-	signup: boolean
+	signup: boolean,
+	token?: string,
 }
 
 // TODO: Add header
@@ -787,14 +788,15 @@ const HumanRightsSection = (props: { sections: SectionMap }) => (
 );
 
 const InviteChrisSection = () => {
-// either useRef or save variable in handler and use useCallback
 
+	const [isSuccess, setIsSuccess] = useState<boolean | undefined>();
 	const [form, setForm] = useState<InviteForm>({
 		email: "",
 		message: "",
 		name: "",
 		phone: "",
-		signup: false
+		signup: false,
+		token: ""
 	});
 
 	const updateFormState = useMemo(() => {
@@ -806,9 +808,14 @@ const InviteChrisSection = () => {
 		}
 	}, [])
 
-	const sendMessage = () => {
-		console.log(form);
+	const sendMessage = async () => {
+		const {error} = await supabase.functions.invoke('Invite-Form', {
+			body: form
+		})
+		setIsSuccess(!error);
 	}
+
+	const onTurnstileSuccess = (token: string) => setForm(prev => ({...prev, token}));
 
 	return (
 		<div id={'invite-chris'}
@@ -823,12 +830,17 @@ const InviteChrisSection = () => {
 						<SiCalendly className={'inline mr-4 mt-[-.15rem]'}/> Calendly</a>
 				</p>
 			</div>
-			<div className={'py-6 px-12 max-sm:px-10 bg-orange-400 rounded-md max-w-[45rem] space-y-5'}>
-				<p>Coming Soon! This form is not yet active.</p>
-			</div>
+			{isSuccess && <div
+				className={'max-sm:text-sm bg-green-500 text-gray-100 py-5 px-10  max-sm:py-4 max-sm:px-6 md:pr-20 rounded-md inline-block'}>
+				<p>Message sent successfully.</p>
+			</div>}
+			{isSuccess == false && <div
+				className={'max-sm:text-sm bg-red-400 text-gray-100 py-5 px-10  max-sm:py-4 max-sm:px-6 md:pr-20 rounded-md inline-block'}>
+				<p>Message unsuccessful. Feel free to schedule a meeting on my Calendly.</p>
+			</div>}
 			<form onSubmit={e => {
 				e.preventDefault();
-				sendMessage();
+				sendMessage().then();
 			}} className={[
 				'space-y-8',
 				'[&_input,textarea]:text-black',
@@ -905,6 +917,10 @@ const InviteChrisSection = () => {
 					<button type={'submit'} className={'px-10 py-5 bg-cyan-500 hover:bg-cyan-600 rounded block max-sm:w-full'}>
 						<Send className={'inline mr-4 mt-[-.15rem]'}/> Send Message
 					</button>
+					<div className="cf-turnstile"
+							 data-sitekey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
+							 data-callback={onTurnstileSuccess}
+							 data-theme={'dark'}></div>
 				</p>
 			</form>
 		</div>
