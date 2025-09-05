@@ -5,7 +5,7 @@ import {supabase} from "../../utils/supabaseClient.ts";
 import AttributeLabel from "../../components/AttributeLabel.tsx";
 import {twMerge} from "tailwind-merge";
 import { Download } from 'lucide-react';
-
+import {SiCalendly} from "@icons-pack/react-simple-icons";
 
 // TODO: Add header
 // TODO: Add transitions
@@ -708,11 +708,12 @@ const WorkExperienceSection = (props: { projects: ProjectMap, roles: Role[] }) =
 				<p className={'text-4xl max-sm:text-3xl'}>
 					what's in a timeline?</p>
 				<p className={'max-sm:w-full'}><a className={'px-10 py-5 bg-cyan-500 hover:bg-cyan-600 rounded block'}
-							href={'/resume_christopher_centrella.pdf'} target={'_blank'}><Download className={'inline mr-4 mt-[-.15rem]'} /> Download Resume</a></p>
+																					href={'/resume_christopher_centrella.pdf'} target={'_blank'}><Download
+					className={'inline mr-4 mt-[-.15rem]'}/> Download Resume</a></p>
 			</div>
-		<Roles roles={props.roles}/>
-	</div>
-<p className={'text-4xl max-sm:text-3xl text-center mt-24 mb-14 snap-start'}>...and so much more</p>
+			<Roles roles={props.roles}/>
+		</div>
+		<p className={'text-4xl max-sm:text-3xl text-center mt-24 mb-14 snap-start'}>...and so much more</p>
 		<Projects projects={props.projects}/>
 	</div>
 )
@@ -781,13 +782,18 @@ const InviteChrisSection = () => (
 	<div id={'invite-chris'}
 			 className={'min-h-[100lvh] bg-black text-[#FFFFFFCC] px-14 max-sm:px-10 py-32 max-sm:py-24 space-y-12 text-lg snap-start'}>
 		<p className={'text-4xl max-sm:text-3xl'}>invite Chris</p>
-		<div className={'py-6 px-12 max-sm:px-10 bg-orange-400 rounded-md max-w-[45rem] space-y-5'}>
-			<p>Coming Soon! This form is not yet active.</p>
-			<p>In the meantime, please reach out via LinkedIn: <a className={'font-bold'} target={'_blank'} rel={'noopener'}
-																														href={'https://linkedin.com/in/ccentrella'}>@ccentrella</a>
+		<p className={'uppercase text-base text-[#FFFFFF99] mb-6'}>Schedule Call</p>
+		<div className={'flex flex-wrap gap-6'}>
+			<p className={'max-sm:w-full'}>
+				<a className={'px-10 py-5 bg-cyan-500 hover:bg-cyan-600 rounded block'}
+					 href={'https://calendly.com/ccentrella/chat'}
+					 target={'_blank'}>
+					<SiCalendly className={'inline mr-4 mt-[-.15rem]'}/> Calendly</a>
 			</p>
 		</div>
-
+		<div className={'py-6 px-12 max-sm:px-10 bg-orange-400 rounded-md max-w-[45rem] space-y-5'}>
+			<p>Coming Soon! This form is not yet active.</p>
+		</div>
 		<div className={'space-y-8'}>
 			<div className={'space-y-3 [&_input]:text-black [&_input]:py-2.5 [&_input]:px-10 [&_input]:mx-10' +
 				' [&_input]:bg-[#FFFFFFCC] [&_input]:placeholder-gray-500 [&_input]:text-xl [&_input]:rounded-md' +
