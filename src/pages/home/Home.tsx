@@ -704,10 +704,10 @@ const Projects = ({projects}: { projects: ProjectMap }) => (
 const WorkExperienceSection = (props: { projects: ProjectMap, roles: Role[] }) => (
 	<div id={'resume'} className={'pt-32 max-sm:pt-24 px-14 max-sm:px-10 snap-start'}>
 		<div className={'min-h-[100lvh]'}>
-			<div className={'flex items-center mb-14 justify-between max-w-[60rem]'}>
-				<p className={'text-4xl max-sm:text-3xl '}>
+			<div className={'flex flex-wrap max-sm:justify-center gap-6 items-center mb-10 justify-between max-w-[60rem]'}>
+				<p className={'text-4xl max-sm:text-3xl'}>
 					what's in a timeline?</p>
-				<p><a className={'px-10 py-5 bg-cyan-500 hover:bg-cyan-600 rounded'}
+				<p className={'max-sm:w-full'}><a className={'px-10 py-5 bg-cyan-500 hover:bg-cyan-600 rounded block'}
 							href={'/resume_christopher_centrella.pdf'} target={'_blank'}><Download className={'inline mr-4 mt-[-.15rem]'} /> Download Resume</a></p>
 			</div>
 		<Roles roles={props.roles}/>
