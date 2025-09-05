@@ -12,6 +12,7 @@ interface InviteForm {
 	email: string,
 	phone?: string
 	message: string
+	signup: boolean
 }
 
 // TODO: Add header
@@ -793,12 +794,13 @@ const InviteChrisSection = () => {
 		message: "",
 		name: "",
 		phone: "",
+		signup: false
 	});
 
 	const updateFormState = useMemo(() => {
 		let timer: ReturnType<typeof setTimeout>;
 
-		return (property: string, value: string) => {
+		return (property: string, value: string | boolean) => {
 			clearTimeout(timer);
 			timer = setTimeout(() => setForm(prev => ({...prev, [property]: value})), 500)
 		}
@@ -824,21 +826,25 @@ const InviteChrisSection = () => {
 			<div className={'py-6 px-12 max-sm:px-10 bg-orange-400 rounded-md max-w-[45rem] space-y-5'}>
 				<p>Coming Soon! This form is not yet active.</p>
 			</div>
-			<form className={[
+			<form onSubmit={e => {
+				e.preventDefault();
+				sendMessage();
+			}} className={[
 				'space-y-8',
 				'[&_input,textarea]:text-black',
 				'[&_input,textarea]:py-2.5',
-				'[&_input,textarea]:px-10',
-				'[&_input,textarea]:sm:mx-10',
+				'[&_input,textarea]:px-5',
+				'[&_input:not([type=checkbox]),textarea]:sm:mx-10',
 				'[&_input,textarea]:max-sm:mt-2',
 				'[&_input,textarea]:max-sm:mb-4',
 				'[&_input,textarea]:bg-[#FFFFFFCC]',
 				'[&_input,textarea]:invalid:bg-red-100',
 				'[&_input,textarea]:placeholder-gray-500',
-				'[&_input,textarea]:text-xl',
 				'[&_input,textarea]:rounded-md',
-				'[&_input,textarea]:w-full',
+				'[&_input:not([type=checkbox]),textarea]:w-full',
 				'[&_input,textarea]:max-w-[36rem]',
+				'[&_input,textarea]:text-lg',
+				'[&_label]:text-base',
 				'[&_label]:basis-[6rem]',
 				'[&_label]:shrink-0',
 			].join(' ')}>
@@ -851,12 +857,12 @@ const InviteChrisSection = () => {
 					</div>
 					<div className={'flex max-sm:flex-wrap'}>
 						<label>Email*</label>
-						<input required name={'email'} type={'text'}
+						<input required name={'email'} type={'email'}
 									 onChange={(e) => updateFormState(e.target.name, e.target.value)}/>
 					</div>
 					<div className={'flex max-sm:flex-wrap'}>
 						<label>Phone</label>
-						<input name={'phone'} type={'text'}
+						<input name={'phone'} type={'tel'}
 									 onChange={(e) => updateFormState(e.target.name, e.target.value)}/>
 					</div>
 					<div className={'flex max-sm:flex-wrap'}>
@@ -865,11 +871,39 @@ const InviteChrisSection = () => {
 											onChange={(e) => updateFormState(e.target.name, e.target.value)}>
 						</textarea>
 					</div>
+					<div className={'mt-6'}>
+						<label className="inline-flex items-center gap-6 cursor-pointer">
+							<input type="checkbox" className="sr-only peer"/>
+							<span className={[
+								"flex",
+								"items-center",
+								"justify-center",
+								"w-8",
+								"h-8",
+								"rounded-[0.1rem]",
+								"border",
+								"border-gray-400",
+								"peer-checked:bg-cyan-500",
+								"peer-checked:border-cyan-500",
+
+								"after:content-['']",
+								"after:absolute",
+								"after:w-[0.5rem]",
+								"after:h-[1rem]",
+								"after:border-white",
+								"after:border-b-3",
+								"after:border-r-3",
+								"after:rotate-45",
+								"after:opacity-0",
+								"peer-checked:after:opacity-100",
+							].join(" ")}></span>
+							Send me helpful tips and updates
+						</label>
+					</div>
 				</div>
 				<p>
-					<button className={'px-10 py-5 bg-cyan-500 hover:bg-cyan-600 rounded block max-sm:w-full'} onSubmit={() => sendMessage()}>
-						<Send
-							className={'inline mr-4 mt-[-.15rem]'}/> Send Message
+					<button type={'submit'} className={'px-10 py-5 bg-cyan-500 hover:bg-cyan-600 rounded block max-sm:w-full'}>
+						<Send className={'inline mr-4 mt-[-.15rem]'}/> Send Message
 					</button>
 				</p>
 			</form>
