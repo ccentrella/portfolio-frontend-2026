@@ -4,6 +4,8 @@ import Widget from "../../components/Widget.tsx";
 import {supabase} from "../../utils/supabaseClient.ts";
 import AttributeLabel from "../../components/AttributeLabel.tsx";
 import {twMerge} from "tailwind-merge";
+import { Download } from 'lucide-react';
+
 
 // TODO: Add header
 // TODO: Add transitions
@@ -437,7 +439,8 @@ const Hero = ({sections}: { sections: SectionMap }) => (
 				className={"font-poppins font-medium text-4xl max-sm:text-3xl text-gray-400 [&_a]:hover:text-gray-300 [&_a]:transition-colors space-y-5 max-sm:space-y-4 lg:basis-[calc((100%-18rem)/2)]  xl:basis-[calc((100%-24rem)/2)] max-md:basis-full"}>
 				<p className={"text-cyan-500 text-4xl max-sm:text-3xl mb-10 max-sm:mb-8"}>Chris <span
 					className={"ml-2 bg-cyan-200 size-2.5 rounded-[50%] inline-block"}></span></p>
-				<p><a href={'/resume_christopher_centrella.pdf'} target={'_blank'}>resume</a></p>
+				<p><a href={'https://blog.chriscentrella.com'} target={'_blank'}>blog</a></p>
+				<p><a href={'#resume'}>resume</a></p>
 				<p><a href={'#human-rights'}>human rights</a></p>
 				<p><a href={'#invite-chris'}>invite Chris</a></p>
 			</div>
@@ -699,12 +702,17 @@ const Projects = ({projects}: { projects: ProjectMap }) => (
 );
 
 const WorkExperienceSection = (props: { projects: ProjectMap, roles: Role[] }) => (
-	<div className={'pt-32 max-sm:pt-24 px-14 max-sm:px-10 snap-start'}>
+	<div id={'resume'} className={'pt-32 max-sm:pt-24 px-14 max-sm:px-10 snap-start'}>
 		<div className={'min-h-[100lvh]'}>
-			<p className={'text-4xl max-sm:text-3xl mb-14'}>what's in a timeline?</p>
-			<Roles roles={props.roles}/>
-		</div>
-		<p className={'text-4xl max-sm:text-3xl text-center mt-24 mb-14 snap-start'}>...and so much more</p>
+			<div className={'flex items-center mb-14 justify-between max-w-[60rem]'}>
+				<p className={'text-4xl max-sm:text-3xl '}>
+					what's in a timeline?</p>
+				<p><a className={'px-10 py-5 bg-cyan-500 hover:bg-cyan-600 rounded'}
+							href={'/resume_christopher_centrella.pdf'} target={'_blank'}><Download className={'inline mr-4 mt-[-.15rem]'} /> Download Resume</a></p>
+			</div>
+		<Roles roles={props.roles}/>
+	</div>
+<p className={'text-4xl max-sm:text-3xl text-center mt-24 mb-14 snap-start'}>...and so much more</p>
 		<Projects projects={props.projects}/>
 	</div>
 )
