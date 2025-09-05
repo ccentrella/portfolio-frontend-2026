@@ -1,11 +1,18 @@
 import InspirationalQuote from "../../components/InspirationalQuote.tsx";
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useMemo, useRef, useState} from "react";
 import Widget from "../../components/Widget.tsx";
 import {supabase} from "../../utils/supabaseClient.ts";
 import AttributeLabel from "../../components/AttributeLabel.tsx";
 import {twMerge} from "tailwind-merge";
-import { Download } from 'lucide-react';
+import {Download, Send} from 'lucide-react';
 import {SiCalendly} from "@icons-pack/react-simple-icons";
+
+interface InviteForm {
+	name: string,
+	email: string,
+	phone?: string
+	message: string
+}
 
 // TODO: Add header
 // TODO: Add transitions
@@ -778,66 +785,97 @@ const HumanRightsSection = (props: { sections: SectionMap }) => (
 	</>
 );
 
-const InviteChrisSection = () => (
-	<div id={'invite-chris'}
-			 className={'min-h-[100lvh] bg-black text-[#FFFFFFCC] px-14 max-sm:px-10 py-32 max-sm:py-24 space-y-12 text-lg snap-start'}>
-		<p className={'text-4xl max-sm:text-3xl'}>invite Chris</p>
-		<p className={'uppercase text-base text-[#FFFFFF99] mb-6'}>Schedule Call</p>
-		<div className={'flex flex-wrap gap-6'}>
-			<p className={'max-sm:w-full'}>
-				<a className={'px-10 py-5 bg-cyan-500 hover:bg-cyan-600 rounded block'}
-					 href={'https://calendly.com/ccentrella/chat'}
-					 target={'_blank'}>
-					<SiCalendly className={'inline mr-4 mt-[-.15rem]'}/> Calendly</a>
-			</p>
-		</div>
-		<div className={'py-6 px-12 max-sm:px-10 bg-orange-400 rounded-md max-w-[45rem] space-y-5'}>
-			<p>Coming Soon! This form is not yet active.</p>
-		</div>
-		<div className={'space-y-8'}>
-			<div className={'space-y-3 [&_input]:text-black [&_input]:py-2.5 [&_input]:px-10 [&_input]:mx-10' +
-				' [&_input]:bg-[#FFFFFFCC] [&_input]:placeholder-gray-500 [&_input]:text-xl [&_input]:rounded-md' +
-				' [&_input]:w-4/5 [&_input]:max-w-[36rem] [&_label]:basis-[6rem] [&_label]:shrink-0'}>
-				<p className={'uppercase text-base text-[#FFFFFF99] mb-6'}>Contact Information</p>
-				<div className={'flex'}>
-					<label>Reason*</label>
-					<input type={'text'} placeholder={'Event'}/>
-				</div>
-				<div className={'flex'}>
-					<label>Name*</label>
-					<input type={'text'}/>
-				</div>
-				<div className={'flex'}>
-					<label>Email*</label>
-					<input type={'text'}/>
-				</div>
-				<div className={'flex'}>
-					<label>Phone</label>
-					<input type={'text'}/>
-				</div>
-			</div>
+const InviteChrisSection = () => {
+// either useRef or save variable in handler and use useCallback
 
-			<div className={'space-y-3 [&_input]:text-black [&_input]:py-2.5 [&_input]:px-10 [&_input]:mx-10' +
-				' [&_input]:bg-[#FFFFFFCC] [&_input]:placeholder-gray-500 [&_input]:text-xl [&_input]:rounded-md' +
-				' [&_input]:w-4/5 [&_input]:max-w-[36rem] [&_label]:basis-[6rem] [&_label]:shrink-0'}>
-				<p className={'uppercase text-base text-[#FFFFFF99] mb-6'}>Event Information</p>
-				<div className={'flex'}>
-					<label>Event*</label>
-					<input type={'text'}/>
-				</div>
-				<div className={'flex'}>
-					<label>Venue*</label>
-					<input type={'text'}/>
-				</div>
-			</div>
-		</div>
+	const [form, setForm] = useState<InviteForm>({
+		email: "",
+		message: "",
+		name: "",
+		phone: "",
+	});
 
-		<div className={'flex flex-wrap gap-x-32 gap-y-6'}>
-			<p className={'uppercase lg'}>Add Message</p>
-			<p className={'uppercase lg'}>Send</p>
+	const updateFormState = useMemo(() => {
+		let timer: ReturnType<typeof setTimeout>;
+
+		return (property: string, value: string) => {
+			clearTimeout(timer);
+			timer = setTimeout(() => setForm(prev => ({...prev, [property]: value})), 500)
+		}
+	}, [])
+
+	const sendMessage = () => {
+		console.log(form);
+	}
+
+	return (
+		<div id={'invite-chris'}
+				 className={'min-h-[100lvh] bg-black text-[#FFFFFFCC] px-14 max-sm:px-10 py-32 max-sm:py-24 space-y-12 text-lg snap-start'}>
+			<p className={'text-4xl max-sm:text-3xl'}>invite Chris</p>
+			<p className={'uppercase text-base text-[#FFFFFF99] mb-6'}>Schedule Call</p>
+			<div className={'flex flex-wrap gap-6'}>
+				<p className={'max-sm:w-full'}>
+					<a className={'px-10 py-5 bg-cyan-500 hover:bg-cyan-600 rounded block'}
+						 href={'https://calendly.com/ccentrella/chat'}
+						 target={'_blank'}>
+						<SiCalendly className={'inline mr-4 mt-[-.15rem]'}/> Calendly</a>
+				</p>
+			</div>
+			<div className={'py-6 px-12 max-sm:px-10 bg-orange-400 rounded-md max-w-[45rem] space-y-5'}>
+				<p>Coming Soon! This form is not yet active.</p>
+			</div>
+			<form className={[
+				'space-y-8',
+				'[&_input,textarea]:text-black',
+				'[&_input,textarea]:py-2.5',
+				'[&_input,textarea]:px-10',
+				'[&_input,textarea]:sm:mx-10',
+				'[&_input,textarea]:max-sm:mt-2',
+				'[&_input,textarea]:max-sm:mb-4',
+				'[&_input,textarea]:bg-[#FFFFFFCC]',
+				'[&_input,textarea]:invalid:bg-red-100',
+				'[&_input,textarea]:placeholder-gray-500',
+				'[&_input,textarea]:text-xl',
+				'[&_input,textarea]:rounded-md',
+				'[&_input,textarea]:w-full',
+				'[&_input,textarea]:max-w-[36rem]',
+				'[&_label]:basis-[6rem]',
+				'[&_label]:shrink-0',
+			].join(' ')}>
+				<div className={'space-y-3'}>
+					<p className={'uppercase text-base text-[#FFFFFF99] mb-6'}>Contact Chris</p>
+					<div className={'flex max-sm:flex-wrap'}>
+						<label>Name*</label>
+						<input required name={'name'} type={'text'}
+									 onChange={(e) => updateFormState(e.target.name, e.target.value)}/>
+					</div>
+					<div className={'flex max-sm:flex-wrap'}>
+						<label>Email*</label>
+						<input required name={'email'} type={'text'}
+									 onChange={(e) => updateFormState(e.target.name, e.target.value)}/>
+					</div>
+					<div className={'flex max-sm:flex-wrap'}>
+						<label>Phone</label>
+						<input name={'phone'} type={'text'}
+									 onChange={(e) => updateFormState(e.target.name, e.target.value)}/>
+					</div>
+					<div className={'flex max-sm:flex-wrap'}>
+						<label>Message*</label>
+						<textarea required name={'message'} className={'h-32'}
+											onChange={(e) => updateFormState(e.target.name, e.target.value)}>
+						</textarea>
+					</div>
+				</div>
+				<p>
+					<button className={'px-10 py-5 bg-cyan-500 hover:bg-cyan-600 rounded block max-sm:w-full'} onSubmit={() => sendMessage()}>
+						<Send
+							className={'inline mr-4 mt-[-.15rem]'}/> Send Message
+					</button>
+				</p>
+			</form>
 		</div>
-	</div>
-)
+	);
+}
 
 const Home = () => {
 
