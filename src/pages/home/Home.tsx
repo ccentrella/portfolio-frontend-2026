@@ -892,7 +892,8 @@ const InviteChrisSection = () => {
 					</div>
 					<div className={'mt-6'}>
 						<label className="inline-flex items-center gap-6 cursor-pointer">
-							<input type="checkbox" className="sr-only peer"/>
+							<input name={'signup'} type="checkbox" className="sr-only peer"
+										 onChange={(e) => updateFormState(e.target.name, e.target.checked)}/>
 							<span className={[
 								"flex",
 								"items-center",
