@@ -1,5 +1,5 @@
 import InspirationalQuote from "../../components/InspirationalQuote.tsx";
-import {useEffect, useMemo, useRef, useState} from "react";
+import {type ChangeEvent, useEffect, useMemo, useRef, useState} from "react";
 import Widget from "../../components/Widget.tsx";
 import {supabase} from "../../utils/supabaseClient.ts";
 import AttributeLabel from "../../components/AttributeLabel.tsx";
@@ -789,6 +789,7 @@ const HumanRightsSection = (props: { sections: SectionMap }) => (
 
 const InviteChrisSection = () => {
 
+	const [isValid, setIsValid] = useState<boolean>(false);
 	const [isSuccess, setIsSuccess] = useState<boolean | undefined>();
 	const [form, setForm] = useState<InviteForm>({
 		email: "",
@@ -811,9 +812,12 @@ const InviteChrisSection = () => {
 	const updateFormState = useMemo(() => {
 		let timer: ReturnType<typeof setTimeout>;
 
-		return (property: string, value: string | boolean) => {
+		return (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, value: string | boolean) => {
 			clearTimeout(timer);
-			timer = setTimeout(() => setForm(prev => ({...prev, [property]: value})), 500)
+			timer = setTimeout(() => {
+				setIsValid(e.target.form?.checkValidity() ?? false);
+				setForm(prev => ({...prev, [e.target.name]: value}));
+			}, 500)
 		}
 	}, [])
 
@@ -857,7 +861,7 @@ const InviteChrisSection = () => {
 				'[&_input,textarea]:max-sm:mt-2',
 				'[&_input,textarea]:max-sm:mb-4',
 				'[&_input,textarea]:bg-[#FFFFFFCC]',
-				'[&_input,textarea]:invalid:bg-red-100',
+				'[&_input,textarea]:invalid:bg-red-200',
 				'[&_input,textarea]:placeholder-gray-500',
 				'[&_input,textarea]:rounded-md',
 				'[&_input:not([type=checkbox]),textarea]:w-full',
@@ -872,28 +876,28 @@ const InviteChrisSection = () => {
 					<div className={'flex max-sm:flex-wrap'}>
 						<label>Name*</label>
 						<input required name={'name'} type={'text'}
-									 onChange={(e) => updateFormState(e.target.name, e.target.value)}/>
+									 onChange={(e) => updateFormState(e, e.target.value)}/>
 					</div>
 					<div className={'flex max-sm:flex-wrap'}>
 						<label>Email*</label>
 						<input required name={'email'} type={'email'}
-									 onChange={(e) => updateFormState(e.target.name, e.target.value)}/>
+									 onChange={(e) => updateFormState(e, e.target.value)}/>
 					</div>
 					<div className={'flex max-sm:flex-wrap'}>
 						<label>Phone</label>
 						<input name={'phone'} type={'tel'}
-									 onChange={(e) => updateFormState(e.target.name, e.target.value)}/>
+									 onChange={(e) => updateFormState(e, e.target.value)}/>
 					</div>
 					<div className={'flex max-sm:flex-wrap'}>
 						<label>Message*</label>
 						<textarea required name={'message'} className={'h-32'}
-											onChange={(e) => updateFormState(e.target.name, e.target.value)}>
+											onChange={(e) => updateFormState(e, e.target.value)}>
 						</textarea>
 					</div>
 					<div className={'mt-6'}>
 						<label className="inline-flex items-center gap-6 cursor-pointer">
 							<input name={'signup'} type="checkbox" className="sr-only peer"
-										 onChange={(e) => updateFormState(e.target.name, e.target.checked)}/>
+										 onChange={(e) => updateFormState(e, e.target.checked)}/>
 							<span className={[
 								"flex",
 								"items-center",
@@ -922,7 +926,9 @@ const InviteChrisSection = () => {
 					</div>
 				</div>
 				<p>
-					<button type={'submit'} className={'px-10 py-5 bg-cyan-500 hover:bg-cyan-600 rounded block max-sm:w-full'}>
+					<button disabled={!isValid || isSuccess} type={'submit'}
+									className={'px-10 py-5 bg-cyan-500 hover:bg-cyan-600 rounded block max-sm:w-full ' +
+										'disabled:bg-gray-400 disabled:hover:bg-gray-400 disabled:cursor-not-allowed'}>
 						<Send className={'inline mr-4 mt-[-.15rem]'}/> Send Message
 					</button>
 					<div id="turnstile-container" className={'mt-5'}></div>
