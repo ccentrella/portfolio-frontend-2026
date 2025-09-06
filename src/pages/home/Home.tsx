@@ -924,7 +924,7 @@ const InviteChrisSection = () => {
 					<button type={'submit'} className={'px-10 py-5 bg-cyan-500 hover:bg-cyan-600 rounded block max-sm:w-full'}>
 						<Send className={'inline mr-4 mt-[-.15rem]'}/> Send Message
 					</button>
-					<div id="turnstile-container"></div>
+					<div id="turnstile-container" className={'mt-5'}></div>
 				</p>
 			</form>
 		</div>
