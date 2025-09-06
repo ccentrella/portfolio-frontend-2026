@@ -7,7 +7,7 @@ import Footer from "./components/Footer.tsx";
 
 // When page first loads, scroll to hash and disable instant scroll
 const useHashOnPageLoad = () => {
-	const { hash} = useLocation();
+	const {hash} = useLocation();
 	const [isInitial, setIsInitial] = useState(true);
 
 	useEffect(() => {
@@ -17,7 +17,8 @@ const useHashOnPageLoad = () => {
 			return;
 		}
 
-		const element = document.getElementById(hash.slice(1));
+		const element = document.getElementById(hash.slice(1)) ??
+			document.getElementById(hash.slice(1).toLowerCase());
 		element?.scrollIntoView({behavior: "instant"});
 
 	}, [isInitial, hash]);
