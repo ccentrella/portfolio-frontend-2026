@@ -799,6 +799,15 @@ const InviteChrisSection = () => {
 		token: ""
 	});
 
+	useEffect(() => {
+		const widgetId = window.turnstile.render("#turnstile-container", {
+			sitekey: import.meta.env.VITE_TURNSTILE_SITE_KEY,
+			callback: (token: string) => setForm(prev => ({...prev, token})),
+		});
+
+		return () => window.turnstile.remove(widgetId);
+	}, []);
+
 	const updateFormState = useMemo(() => {
 		let timer: ReturnType<typeof setTimeout>;
 
@@ -814,8 +823,6 @@ const InviteChrisSection = () => {
 		})
 		setIsSuccess(!error);
 	}
-
-	const onTurnstileSuccess = (token: string) => setForm(prev => ({...prev, token}));
 
 	return (
 		<div id={'invite-chris'}
@@ -917,10 +924,7 @@ const InviteChrisSection = () => {
 					<button type={'submit'} className={'px-10 py-5 bg-cyan-500 hover:bg-cyan-600 rounded block max-sm:w-full'}>
 						<Send className={'inline mr-4 mt-[-.15rem]'}/> Send Message
 					</button>
-					<div className="cf-turnstile"
-							 data-sitekey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
-							 data-callback={onTurnstileSuccess}
-							 data-theme={'dark'}></div>
+					<div id="turnstile-container"></div>
 				</p>
 			</form>
 		</div>
