@@ -842,7 +842,7 @@ const InviteChrisSection = () => {
 				</p>
 			</div>
 			{isSuccess && <div
-				className={'max-sm:text-sm bg-green-500 text-gray-100 py-5 px-10  max-sm:py-4 max-sm:px-6 md:pr-20 rounded-md inline-block'}>
+				className={'max-sm:text-sm bg-green-600 text-gray-100 py-5 px-10  max-sm:py-4 max-sm:px-6 md:pr-20 rounded-md inline-block'}>
 				<p>Message sent successfully.</p>
 			</div>}
 			{isSuccess == false && <div
@@ -861,7 +861,7 @@ const InviteChrisSection = () => {
 				'[&_input,textarea]:max-sm:mt-2',
 				'[&_input,textarea]:max-sm:mb-4',
 				'[&_input,textarea]:bg-[#FFFFFFCC]',
-				'[&_input,textarea]:invalid:bg-red-200',
+				'[&_input,textarea]:user-invalid:bg-red-200',
 				'[&_input,textarea]:placeholder-gray-500',
 				'[&_input,textarea]:rounded-md',
 				'[&_input:not([type=checkbox]),textarea]:w-full',
