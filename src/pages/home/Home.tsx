@@ -801,12 +801,19 @@ const InviteChrisSection = () => {
 	});
 
 	useEffect(() => {
-		const widgetId = window.turnstile.render("#turnstile-container", {
-			sitekey: import.meta.env.VITE_TURNSTILE_SITE_KEY,
-			callback: (token: string) => setForm(prev => ({...prev, token})),
-		});
+		let widgetId = '';
+		if (window.turnstile) {
+			widgetId = window.turnstile.render("#turnstile-container", {
+				sitekey: import.meta.env.VITE_TURNSTILE_SITE_KEY,
+				callback: (token: string) => setForm(prev => ({...prev, token})),
+			});
+		}
 
-		return () => window.turnstile.remove(widgetId);
+		return () => {
+			if (window.turnstile) {
+				window.turnstile.remove(widgetId);
+			}
+		}
 	}, []);
 
 	const updateFormState = useMemo(() => {
