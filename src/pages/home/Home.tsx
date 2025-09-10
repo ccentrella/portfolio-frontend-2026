@@ -801,15 +801,24 @@ const InviteChrisSection = () => {
 	});
 
 	useEffect(() => {
+		let ignore = false;
 		let widgetId = '';
-		if (window.turnstile) {
-			widgetId = window.turnstile.render("#turnstile-container", {
-				sitekey: import.meta.env.VITE_TURNSTILE_SITE_KEY,
-				callback: (token: string) => setForm(prev => ({...prev, token})),
-			});
-		}
+
+		const script = document.createElement("script");
+		script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+		script.onload = () => {
+			if (!ignore) {
+				widgetId = window.turnstile.render("#turnstile-container", {
+					sitekey: import.meta.env.VITE_TURNSTILE_SITE_KEY,
+					callback: (token: string) => setForm(prev => ({...prev, token})),
+				});
+			}
+		};
+
+		document.body.appendChild(script);
 
 		return () => {
+			ignore = true;
 			if (window.turnstile) {
 				window.turnstile.remove(widgetId);
 			}
