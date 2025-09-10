@@ -932,14 +932,14 @@ const InviteChrisSection = () => {
 						</label>
 					</div>
 				</div>
-				<p>
+				<div>
 					<button disabled={!isValid || isSuccess} type={'submit'}
 									className={'px-10 py-5 bg-cyan-500 hover:bg-cyan-600 rounded block max-sm:w-full ' +
 										'disabled:bg-gray-400 disabled:hover:bg-gray-400 disabled:cursor-not-allowed'}>
 						<Send className={'inline mr-4 mt-[-.15rem]'}/> Send Message
 					</button>
 					<div id="turnstile-container" className={'mt-5'}></div>
-				</p>
+				</div>
 			</form>
 		</div>
 	);
