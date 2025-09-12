@@ -7,6 +7,8 @@ import {twMerge} from "tailwind-merge";
 import {Download, Send} from 'lucide-react';
 import {SiCalendly} from "@icons-pack/react-simple-icons";
 
+import {motion, useAnimate} from "motion/react"
+
 interface InviteForm {
 	name: string,
 	email: string,
@@ -441,34 +443,79 @@ const ImageComingSoon = ({className}: { className?: string }) => (
 );
 
 
-const Hero = ({sections}: { sections: SectionMap }) => (
-	<div className={"min-h-[100svh] flex flex-col p-14 max-sm:p-10 space-y-14 max-sm:space-y-12 snap-start"}>
-		<div className={"flex justify-between flex-wrap space-y-12 max-sm:space-y-8"}>
-			<div
-				className={"font-poppins font-medium text-4xl max-sm:text-3xl text-gray-400 [&_a]:hover:text-gray-300 [&_a]:transition-colors space-y-5 max-sm:space-y-4 lg:basis-[calc((100%-18rem)/2)]  xl:basis-[calc((100%-24rem)/2)] max-md:basis-full"}>
-				<p className={"text-cyan-500 text-4xl max-sm:text-3xl mb-10 max-sm:mb-8"}>Chris <span
-					className={"ml-2 bg-cyan-200 size-2.5 rounded-[50%] inline-block"}></span></p>
-				<p><a href={'https://blog.chriscentrella.com'} target={'_blank'}>blog</a></p>
-				<p><a href={'#resume'}>resume</a></p>
-				<p><a href={'#human-rights'}>human rights</a></p>
-				<p><a href={'#invite-chris'}>invite Chris</a></p>
+const Hero = ({sections}: { sections: SectionMap }) => {
+	const [scope, animate] = useAnimate();
+
+	useEffect(() => {
+
+		const beat = 0.30;
+		const dropBeats = 2;
+		const holdBeats = 4;
+		const controlsAt = (dropBeats + holdBeats) * beat;
+		const dockAt = controlsAt + beat;
+
+		const runAnimation = async () =>
+			await animate([
+				// Image drops in
+				[
+					"#profile-image",
+					{y: ["-40px", "50%"], opacity: [0, 1]},
+					{duration: dropBeats * beat, ease: "easeOut", at: 0}
+				],
+				// Show controls
+				[
+					"#controls",
+					{y: ["-40px", 0], opacity: [0, 1]},
+					{duration: beat, ease: "easeOut", at: controlsAt}
+				],
+				// Move cards in
+				[
+					"#cards",
+					{y: ["-40px", 0], opacity: [0, 1]},
+					{duration: 2 * beat, ease: "easeOut", at: dockAt}
+				],
+				[
+					"#profile-image",
+					{y: [0], opacity: [1]},
+					{duration: 2 * beat, ease: "easeOut", at: dockAt}
+				]
+			]);
+
+		runAnimation().then();
+	}, [animate]);
+
+	return (
+		<div ref={scope}
+				 className={"min-h-[100svh] flex flex-col p-14 max-sm:p-10 space-y-14 max-sm:space-y-12 snap-start"}>
+			<div className={"flex justify-between flex-wrap space-y-12 max-sm:space-y-8"}>
+				<motion.div id={'controls'}
+										className={"font-poppins font-medium text-4xl max-sm:text-3xl text-gray-400 [&_a]:hover:text-gray-300 [&_a]:transition-colors space-y-5 max-sm:space-y-4 lg:basis-[calc((100%-18rem)/2)]  xl:basis-[calc((100%-24rem)/2)] max-md:basis-full"}>
+					<p className={"text-cyan-500 text-4xl max-sm:text-3xl mb-10 max-sm:mb-8"}>Chris <span
+						className={"ml-2 bg-cyan-200 size-2.5 rounded-[50%] inline-block"}></span></p>
+					<p><a href={'https://blog.chriscentrella.com'} target={'_blank'}>blog</a></p>
+					<p><a href={'#resume'}>resume</a></p>
+					<p><a href={'#human-rights'}>human rights</a></p>
+					<p><a href={'#invite-chris'}>invite Chris</a></p>
+				</motion.div>
+				<motion.div id={'profile-image'} className={' my-0 max-md:mx-auto'}>
+					<img
+						className={"animate-imgFloat object-cover opacity-95 hover:opacity-100 transition-colors w-60 h-64  sm:w-72 sm:h-80  xl:w-96 xl:h-[26rem]  rounded-[55%_45%_55%_45%]"}
+						src={"/images/profile.jpeg"} alt={"Chris in hoodie, relaxed"}/>
+				</motion.div>
+				<div className={"basis-full lg:basis-[calc((100%-18rem)/2)]  xl:basis-[calc((100%-24rem)/2)]"}></div>
 			</div>
-			<img
-				className={"animate-imgFloat object-cover opacity-95 hover:opacity-100 transition-colors my-0 max-md:mx-auto w-60 h-64  sm:w-72 sm:h-80  xl:w-96 xl:h-[26rem]  rounded-[55%_45%_55%_45%]"}
-				src={"/images/profile.jpeg"} alt={"Chris in hoodie, relaxed"}/>
-			<div className={"basis-full lg:basis-[calc((100%-18rem)/2)]  xl:basis-[calc((100%-24rem)/2)]"}></div>
+			<motion.div id={'cards'}
+									className={"grow flex justify-center flex-wrap gap-12 max-sm:gap-10 *:basis-[calc(50%-1.5rem)] *:max-md:basis-full"}>
+				<Widget heading={'design'} className={'bg-[#62EAFF6B]'}>
+					<WidgetSectionContent sections={sections} sectionTitle={SECTION_KEYS.DESIGN}/>
+				</Widget>
+				<Widget heading={'engineering'} className={'bg-[#9494946B]'}>
+					<WidgetSectionContent sections={sections} sectionTitle={SECTION_KEYS.ENGINEERING}/>
+				</Widget>
+			</motion.div>
 		</div>
-		<div
-			className={"grow flex justify-center flex-wrap gap-12 max-sm:gap-10 *:basis-[calc(50%-1.5rem)] *:max-md:basis-full"}>
-			<Widget heading={'design'} className={'bg-[#62EAFF6B]'}>
-				<WidgetSectionContent sections={sections} sectionTitle={SECTION_KEYS.DESIGN}/>
-			</Widget>
-			<Widget heading={'engineering'} className={'bg-[#9494946B]'}>
-				<WidgetSectionContent sections={sections} sectionTitle={SECTION_KEYS.ENGINEERING}/>
-			</Widget>
-		</div>
-	</div>
-);
+	);
+};
 
 
 const AboutMe = ({sections}: { sections: SectionMap }) => (
@@ -625,9 +672,8 @@ const AboutSection = (props: { sections: SectionMap }) => (
 			You can't connect the dots looking forward; you can only connect them looking backwards.
 		</InspirationalQuote>
 		<DataIsBeautiful sections={props.sections}/>
-		<img src={"/images/pattern_background.png"} alt={"systems illustration"}
+		<img src={"/images/subway_very_dense.png"} alt={"systems illustration"}
 				 className={"w-full h-[100lvh] object-cover snap-start"}/>
-		<ImageComingSoon/>
 		<SystemDesign sections={props.sections}/>
 		<InspirationalQuote author={"Steve Jobs"}>
 			Design is not just what it looks like and feels like. Design is how it works.
