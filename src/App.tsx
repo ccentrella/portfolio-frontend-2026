@@ -5,6 +5,7 @@ import './App.css'
 import Home from "./pages/home/Home.tsx";
 import Footer from "./components/Footer.tsx";
 import BackToTop from "./components/BackToTop.tsx";
+import Single from "./pages/single/Single.tsx";
 
 // When page first loads, scroll to hash and disable instant scroll
 const useHashOnPageLoad = () => {
@@ -53,6 +54,11 @@ const App = () => {
 		<>
 			<Routes>
 				<Route index element={<Home/>}/>
+				<Route path={'/privacy-policy'} element={<Single path={'/policies/privacy.md'}/>}/>
+				<Route path={'/terms-conditions'} element={<Single path={'/policies/terms.md'}/>}/>
+				<Route path={'/accessibility'} element={<Single path={'/policies/accessibility.md'}/>}/>
+				<Route path={'/modern-slavery'} element={<Single path={'/policies/modern-slavery.md'}/>}/>
+				<Route path={'/palestine'} element={<Single path={'/policies/palestine.md'}/>}/>
 			</Routes>
 			{!isTop && <BackToTop/>}
 			<Footer/>

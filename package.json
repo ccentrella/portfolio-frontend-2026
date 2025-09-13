@@ -12,6 +12,7 @@
   "dependencies": {
     "@icons-pack/react-simple-icons": "^13.7.0",
     "@supabase/supabase-js": "^2.56.1",
+    "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.1.12",
     "lucide-react": "^0.542.0",
     "motion": "^12.23.12",
