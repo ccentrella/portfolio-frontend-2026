@@ -31,7 +31,6 @@ import {
 import Markdown from "react-markdown";
 import AttributeWidget from "../../components/AttributeWidget.tsx";
 import SectionHeading from "../../components/SectionHeading.tsx";
-import {useMediaQuery} from "react-responsive";
 
 // TODO: Add header
 
@@ -179,8 +178,7 @@ const AIWidget = () => {
 			once: true
 		})
 
-	const isMobile = useMediaQuery({maxWidth: 640});
-	const beat = isMobile ? 0.24 : 0.3;
+	const beat = 0.3;
 
 	useEffect(() => {
 
@@ -306,7 +304,7 @@ const DataIsBeautiful = ({sections}: { sections: SectionMap }) => (
 	</div>
 );
 const SystemDesign = ({sections}: { sections: SectionMap }) => (
-	<div className={'py-32 max-sm:py-24 max-sm:pt-12 snap-start'}>
+	<div className={'py-32 max-sm:py-24 snap-start'}>
 		<SectionHeading className={'text-4xl max-sm:text-3xl mb-14 max-sm:mb-10 text-center'}>millions of users. one
 			system.</SectionHeading>
 		<div
@@ -377,7 +375,7 @@ const ImproveContinuously = ({sections}: { sections: SectionMap }) => (
 		<div className={'flex justify-center'}>
 			<SectionHeading className={'text-4xl max-sm:text-3xl text-black self-center leading-snug'}>improve.<br/>continuously.</SectionHeading>
 		</div>
-		<IntegratedWidget heading={<>改善<span className={'ml-4 text-base'}>continuous improvement</span></>}
+		<IntegratedWidget heading={<>改善<span className={'text-base sm:ml-4 max-sm:block'}>continuous improvement</span></>}
 											className={'bg-[#16748C]'}>
 			<WidgetSectionContent sections={sections} sectionTitle={SECTION_KEYS.CONTINUOUS_IMPROVEMENT}/>
 			<WidgetSectionAttributes collection={sections[SECTION_KEYS.CONTINUOUS_IMPROVEMENT]?.attributes}/>
@@ -392,7 +390,7 @@ const LeanProcesses = ({sections}: { sections: SectionMap }) => (
 				simple. lean.<br/>forever.
 			</SectionHeading>
 		</div>
-		<IntegratedWidget heading={<>トヨタ生産方式<span className={'ml-4 text-base'}>lean methodology</span></>}>
+		<IntegratedWidget heading={<>トヨタ生産方式<span className={'text-base sm:ml-4 max-sm:block'}>lean methodology</span></>}>
 			<WidgetSectionContent sections={sections} sectionTitle={SECTION_KEYS.LEAN_PROCESSES}/>
 			<WidgetSectionAttributes collection={sections[SECTION_KEYS.LEAN_PROCESSES]?.attributes}/>
 		</IntegratedWidget>
@@ -411,7 +409,7 @@ const GuidingPrinciplesSection = (props: { sections: SectionMap }) => (
 			src={"/images/factory_2.png"} alt={"processes illustration"}
 			className={"transform-gpu w-full h-[100lvh] object-cover snap-start"}/>
 		<SectionHeading className={"text-5xl max-sm:text-4xl text-center py-32 max-sm:py-24 snap-start"}>人生の教訓<span
-			className={'text-2xl ml-8'}>guidelines for
+			className={'text-2xl ml-8 max-sm:block'}>guidelines for
 			life.</span></SectionHeading>
 		<ImproveContinuously sections={props.sections}/>
 		<LeanProcesses sections={props.sections}/>

@@ -20,7 +20,7 @@ const AttributeWidget = ({heading, children, className}: {
 				className={twMerge(`transform-gpu grow p-12 pt-14 rounded-xl text-[#FFFFFFA3] transition-colors bg-[#9494941A] opacity-95 hover:opacity-100 cursor-default`, className)}>
 				{children}
 			</div>
-			<p className={'uppercase text-gray-400 text-xl max-sm:text-lg'}>{heading}</p>
+			<div className={'uppercase text-gray-400 text-xl max-sm:text-lg'}>{heading}</div>
 		</motion.div>
 	);
 };
