@@ -3,7 +3,7 @@ import type {ReactNode} from "react";
 import {twMerge} from "tailwind-merge";
 
 const Widget = ({heading, children, className, disableAnimation}: {
-	heading: string,
+	heading: string | ReactNode,
 	children: ReactNode,
 	className?: string,
 	disableAnimation?: boolean

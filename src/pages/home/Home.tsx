@@ -4,7 +4,7 @@ import Widget from "../../components/Widget.tsx";
 import {supabase} from "../../utils/supabaseClient.ts";
 import AttributeLabel from "../../components/AttributeLabel.tsx";
 import {twMerge} from "tailwind-merge";
-import {Download, Send} from 'lucide-react';
+import {Download, ExternalLink, Send} from 'lucide-react';
 import {SiCalendly} from "@icons-pack/react-simple-icons";
 import {motion, useAnimate} from "motion/react"
 import {
@@ -17,6 +17,7 @@ import {
 	type SectionMap,
 	type translation
 } from "./HomeTypes.tsx";
+import Markdown from "react-markdown";
 
 // TODO: Add header
 
@@ -34,13 +35,10 @@ const WidgetSectionAttributes = ({collection}: { collection: Attribute[] }) => {
 	)
 }
 const WidgetSectionContent = (props: { sections: SectionMap, sectionTitle: string }) => (
-	<p className={"md:text-lg"}>{props.sections[props.sectionTitle]?.content ?? LOADING_MESSAGE}</p>
-);
-
-const ComingSoon = ({className}: { className?: string }) => (
-	<div
-		className={twMerge("max-sm:text-sm bg-cyan-500 text-gray-100 py-5 px-10 max-sm:py-4 max-sm:px-6 md:pr-20 rounded-md inline-block", className)}>
-		<p>Coming soon! Check back in the near future :)</p>
+	<div className={"md:text-lg space-y-5"}>
+		<Markdown>
+			{props.sections[props.sectionTitle]?.content ?? LOADING_MESSAGE}
+		</Markdown>
 	</div>
 );
 
@@ -124,7 +122,6 @@ const AboutMe = ({sections}: { sections: SectionMap }) => (
 			<Widget heading={'about me'} className={'grow'}>
 				<WidgetSectionContent sections={sections} sectionTitle={SECTION_KEYS.ABOUT_ME}/>
 				<WidgetSectionAttributes collection={sections[SECTION_KEYS.ABOUT_ME]?.attributes}/>
-				<ComingSoon/>
 			</Widget>
 			<img
 				className={`xl:basis-[calc(100%-100%/1.61803398875-1.5rem)] transition-colors opacity-95 hover:opacity-100 object-cover rounded-xl min-w-0 max-md:grow max-sm:flex-[100%]`}
@@ -260,7 +257,6 @@ const BuiltToScale = ({sections}: { sections: SectionMap }) => (
 			<Widget heading={'architecture'} className={'md:w-1/2 bg-[#FCFCFC1A]'}>
 				<WidgetSectionContent sections={sections} sectionTitle={SECTION_KEYS.ARCHITECTURE}/>
 				<WidgetSectionAttributes collection={sections[SECTION_KEYS.ARCHITECTURE]?.attributes}/>
-				<ComingSoon/>
 			</Widget>
 			<Widget heading={'quality assurance'} className={'md:w-1/2 bg-[#FCFCFC1A]'}>
 				<WidgetSectionContent sections={sections} sectionTitle={SECTION_KEYS.QUALITY_ASSURANCE}/>
@@ -305,10 +301,10 @@ const ImproveContinuously = ({sections}: { sections: SectionMap }) => (
 		<div className={'flex justify-center'}>
 			<p className={'text-4xl max-sm:text-3xl text-black self-center leading-snug'}>improve.<br/>continuously.</p>
 		</div>
-		<Widget heading={'continuous improvement'} className={'bg-[#16748C]'}>
+		<Widget heading={<>改善<span className={'ml-4 text-base'}>continuous improvement</span></>}
+						className={'bg-[#16748C]'}>
 			<WidgetSectionContent sections={sections} sectionTitle={SECTION_KEYS.CONTINUOUS_IMPROVEMENT}/>
 			<WidgetSectionAttributes collection={sections[SECTION_KEYS.CONTINUOUS_IMPROVEMENT]?.attributes}/>
-			<ComingSoon/>
 		</Widget>
 	</div>
 )
@@ -318,10 +314,9 @@ const LeanProcesses = ({sections}: { sections: SectionMap }) => (
 		<div className={'flex justify-center '}>
 			<p className={'text-4xl max-sm:text-3xl self-center leading-snug'}>simple. lean.<br/>forever.</p>
 		</div>
-		<Widget heading={'lean processes'}>
+		<Widget heading={<>トヨタ生産方式<span className={'ml-4 text-base'}>lean methodology</span></>}>
 			<WidgetSectionContent sections={sections} sectionTitle={SECTION_KEYS.LEAN_PROCESSES}/>
 			<WidgetSectionAttributes collection={sections[SECTION_KEYS.LEAN_PROCESSES]?.attributes}/>
-			<ComingSoon/>
 		</Widget>
 	</div>
 )
@@ -337,7 +332,9 @@ const GuidingPrinciplesSection = (props: { sections: SectionMap }) => (
 			viewport={{once: true, amount: 0.35}}
 			src={"/images/factory_2.png"} alt={"processes illustration"}
 			className={"transform-gpu w-full h-[100lvh] object-cover snap-start"}/>
-		<p className={"text-5xl max-sm:text-4xl text-center py-32 max-sm:py-24 snap-start"}>principles for life.</p>
+		<p className={"text-5xl max-sm:text-4xl text-center py-32 max-sm:py-24 snap-start"}>人生の教訓<span
+			className={'text-2xl ml-8'}>guidelines for
+			life.</span></p>
 		<ImproveContinuously sections={props.sections}/>
 		<LeanProcesses sections={props.sections}/>
 		<InspirationalQuote author={"Steve Jobs"} className={"text-white bg-black"}>
@@ -396,18 +393,16 @@ const WorkExperienceSection = (props: { projects: ProjectMap, roles: Role[] }) =
 
 const Environment = ({sections}: { sections: SectionMap }) => (
 	<div
-		className={'min-h-[100lvh] bg-[#91A38B] px-14 max-sm:px-10 py-32 max-sm:py-24 gap-12 max-sm:gap-10 flex flex-wrap snap-start'}>
-		<Widget heading={'environment'} className={'grow bg-[#133F06]'}>
+		className={'min-h-[100lvh] bg-[#021A24] px-14 max-sm:px-10 py-32 max-sm:py-24 gap-12 max-sm:gap-10 flex flex-wrap snap-start'}>
+		<Widget heading={'environment'}
+						className={'bg-[#133F06] basis-[calc(50%-1.5rem)] max-md:basis-full'}>
 			<WidgetSectionContent sections={sections} sectionTitle={SECTION_KEYS.ENVIRONMENT}/>
 			<WidgetSectionAttributes collection={sections[SECTION_KEYS.ENVIRONMENT]?.attributes}/>
-			<ComingSoon className={'bg-green-200 text-gray-600'}/>
 		</Widget>
 		<Widget heading={'planned obsolescence'}
-						className={'basis-[calc(100%-100%/1.61803398875-5rem)] max-lg:basis-[calc(50%-1.5rem)] ' +
-							'max-md:basis-full bg-[#133F0659]'}>
+						className={'basis-[calc(50%-1.5rem)] max-md:basis-full bg-[#3C4C24] '}>
 			<WidgetSectionContent sections={sections} sectionTitle={SECTION_KEYS.PLANNED_OBSOLESCENCE}/>
 			<WidgetSectionAttributes collection={sections[SECTION_KEYS.PLANNED_OBSOLESCENCE]?.attributes}/>
-			<ComingSoon className={'bg-green-200 text-gray-600'}/>
 		</Widget>
 	</div>
 )
@@ -417,26 +412,27 @@ const Housing = ({sections}: { sections: SectionMap }) => (
 		<div
 			className={'flex justify-center basis-[calc(100%-100%/1.61803398875-5rem)] max-lg:basis-[calc(50%-1.5rem)] ' +
 				'max-md:basis-full'}>
-			<p className={'text-4xl max-sm:text-3xl text-black self-center leading-snug'}>housing is a<br/>human right</p>
+			<p className={'text-4xl max-sm:text-3xl text-black self-center leading-snug'}>end homelessness.</p>
 		</div>
-		<Widget heading={'affordable housing'} className={'grow bg-[#746D40]'}>
+		<Widget heading={'affordable housing'}
+						className={'grow bg-[#746D40] basis-[calc(100%-100%/1.61803398875-5rem)] max-lg:basis-[calc(50%-1.5rem)] max-md:basis-full'}>
 			<WidgetSectionContent sections={sections} sectionTitle={SECTION_KEYS.AFFORDABLE_HOUSING}/>
 			<WidgetSectionAttributes collection={sections[SECTION_KEYS.AFFORDABLE_HOUSING]?.attributes}/>
-			<ComingSoon className={'bg-yellow-100 text-gray-600'}/>
 		</Widget>
 	</div>
 )
 const Palestine = () => (
-	<div className={'min-h-[100lvh] bg-[#4A4A4A] gap-12 max-sm:gap-10 flex flex-wrap snap-start'}>
+	<div className={'min-h-[100lvh] bg-gray-900 gap-12 max-sm:gap-10 flex flex-wrap snap-start'}>
 		<img
 			className={'w-[calc(100%/1.61803398875-3rem)] max-md:basis-full object-cover grow'}
-			src={'/images/pattern_background.png'}
+			src={'/images/palestine.jpg'}
 			alt={'picture of people in Palestine'}/>
 		<div className={'grow flex justify-center m-12'}>
-			<div className={'self-center space-y-5'}>
+			<div className={'self-center space-y-8'}>
 				<p className={'text-4xl max-sm:text-3xl leading-snug'}>every person<br/>deserves dignity</p>
-				<p className={'text-xl'}>statement on Palestine</p>
-				<ComingSoon className={'bg-black mt-3 md:pr-10'}/>
+				<a className={'px-10 py-5 bg-cyan-500 hover:bg-cyan-600 rounded block max-sm:w-full'}>
+					<ExternalLink className={'inline mr-4 mt-[-.15rem]'}/> Statement on Palestine
+				</a>
 			</div>
 		</div>
 	</div>
@@ -514,7 +510,7 @@ const InviteChrisSection = () => {
 
 	return (
 		<div id={'invite-chris'}
-				 className={'min-h-[100lvh] bg-black text-[#FFFFFFCC] px-14 max-sm:px-10 py-32 max-sm:py-24 space-y-12 text-lg snap-start'}>
+				 className={'min-h-[100lvh] bg-black px-14 max-sm:px-10 py-32 max-sm:py-24 space-y-12 text-lg snap-start'}>
 			<p className={'text-4xl max-sm:text-3xl'}>invite Chris</p>
 			<p className={'uppercase text-base text-[#FFFFFF99] mb-6'}>Schedule Call</p>
 			<div className={'flex flex-wrap gap-6'}>
