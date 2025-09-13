@@ -430,7 +430,7 @@ const Palestine = () => (
 		<div className={'grow flex justify-center m-12'}>
 			<div className={'self-center space-y-8'}>
 				<p className={'text-4xl max-sm:text-3xl leading-snug'}>every person<br/>deserves dignity</p>
-				<a className={'px-10 py-5 bg-cyan-500 hover:bg-cyan-600 rounded block max-sm:w-full'}>
+				<a href={'/palestine'} target={'_blank'} className={'px-10 py-5 bg-cyan-500 hover:bg-cyan-600 rounded block max-sm:w-full'}>
 					<ExternalLink className={'inline mr-4 mt-[-.15rem]'}/> Statement on Palestine
 				</a>
 			</div>
