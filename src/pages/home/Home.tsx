@@ -352,7 +352,7 @@ const AboutSection = (props: { sections: SectionMap }) => (
 								initial={{opacity: 0, scale: 1.02}}
 								whileInView={{opacity: 1, scale: 1}}
 								transition={{duration: 0.8, ease: "easeOut"}}
-								viewport={{once: true, amount: 0.35}}
+								viewport={{once: true, amount: 0.4}}
 								src={"/images/subway_very_dense.png"} alt={"systems illustration"}
 								className={"transform-gpu w-full h-[100lvh] object-cover snap-start"}/>
 		<SystemDesign sections={props.sections}/>
@@ -400,7 +400,7 @@ const GuidingPrinciplesSection = (props: { sections: SectionMap }) => (
 			initial={{opacity: 0, scale: 1.02}}
 			whileInView={{opacity: 1, scale: 1}}
 			transition={{duration: 0.8, ease: "easeOut"}}
-			viewport={{once: true, amount: 0.35}}
+			viewport={{once: true, amount: 0.4}}
 			src={"/images/factory_2.png"} alt={"processes illustration"}
 			className={"transform-gpu w-full h-[100lvh] object-cover snap-start"}/>
 		<SectionHeading className={"text-5xl max-sm:text-4xl text-center py-32 max-sm:py-24 snap-start"}>人生の教訓<span
@@ -599,7 +599,7 @@ const InviteChrisSection = () => {
 			initial={{opacity: 0, y: 12}}
 			whileInView={{opacity: 1, y: 0}}
 			transition={{duration: 0.55, ease: "easeOut"}}
-			viewport={{once: true, amount: 0.6}}
+			viewport={{once: true, amount: 0.4}}
 			id={'invite-chris'}
 			className={'transform-gpu min-h-[100lvh] bg-black px-14 max-sm:px-10 py-32 max-sm:py-24 space-y-12 text-lg snap-start'}>
 			<p className={'text-4xl max-sm:text-3xl'}>invite Chris</p>

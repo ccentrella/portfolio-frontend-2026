@@ -12,7 +12,7 @@ const InspirationalQuote = ({author, children, className}: {
 	const [scope, animate] = useAnimate();
 	const isInView = useInView(scope,
 		{
-			amount: 0.6,
+			amount: 0.4,
 			once: true
 		})
 
