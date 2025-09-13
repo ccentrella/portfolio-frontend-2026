@@ -17,7 +17,7 @@ import {
 	Send
 } from 'lucide-react';
 import {SiCalendly} from "@icons-pack/react-simple-icons";
-import {motion, useAnimate} from "motion/react"
+import {motion, useAnimate, useInView} from "motion/react"
 import {
 	type Attribute,
 	type InviteForm,
@@ -30,6 +30,7 @@ import {
 } from "./HomeTypes.tsx";
 import Markdown from "react-markdown";
 import AttributeWidget from "../../components/AttributeWidget.tsx";
+import SectionHeading from "../../components/SectionHeading.tsx";
 
 // TODO: Add header
 
@@ -105,6 +106,7 @@ const Hero = ({sections}: { sections: SectionMap }) => {
 						className={"ml-2 bg-cyan-200 size-2.5 rounded-[50%] inline-block"}></span></p>
 					<p><a href={'https://blog.chriscentrella.com'} target={'_blank'}>blog</a></p>
 					<p><a href={'#resume'}>resume</a></p>
+					<p><a href={'#chat'}>chat</a></p>
 					<p><a href={'#human-rights'}>human rights</a></p>
 					<p><a href={'#invite-chris'}>invite Chris</a></p>
 				</motion.div>
@@ -135,8 +137,12 @@ const AboutMe = ({sections}: { sections: SectionMap }) => (
 				<WidgetSectionContent sections={sections} sectionTitle={SECTION_KEYS.ABOUT_ME}/>
 				<WidgetSectionAttributes collection={sections[SECTION_KEYS.ABOUT_ME]?.attributes}/>
 			</IntegratedWidget>
-			<img
-				className={`xl:basis-[calc(100%-100%/1.61803398875-1.5rem)] transition-colors opacity-95 hover:opacity-100 object-cover rounded-xl min-w-0 max-md:grow max-sm:flex-[100%]`}
+			<motion.img
+				initial={{opacity: 0, y: 12}}
+				whileInView={{opacity: 1, y: 0}}
+				transition={{duration: 0.55, ease: "easeOut"}}
+				viewport={{once: true, amount: 0.6}}
+				className={`transform-gpu xl:basis-[calc(100%-100%/1.61803398875-1.5rem)] transition-colors opacity-95 hover:opacity-100 object-cover rounded-xl min-w-0 max-md:grow max-sm:flex-[100%]`}
 				src={"/images/stroll.jpeg"} alt={"Chris walking while carrying iPad"}/>
 		</div>
 		<IntegratedWidget heading={'looking for a design-minded software engineer?'}
@@ -168,6 +174,47 @@ const AIWidget = () => {
 	const [comingSoon, setComingSoon] = useState('Coming soon! Check back in the near future :)');
 	const [translations, setTranslations] = useState<translation[]>([]);
 
+	const [scope, animate] = useAnimate();
+	const isInView = useInView(scope,
+		{
+			amount: 0.6,
+			once: true
+		})
+	const beat = 0.3;
+
+	useEffect(() => {
+
+		const runAnimation = async () => animate(
+			[
+				[
+					'#ai-widget-heading',
+					{y: ["-40px", '50%'], opacity: [0, 1]},
+					{duration: 2 * beat, ease: "easeOut", at: beat}
+				],
+				[
+					'#ai-widget-input',
+					{opacity: [0, 1]},
+					{duration: 2 * beat, ease: "easeOut", at: 4 * beat}
+				],
+				[
+					'#ai-widget-heading',
+					{y: 0},
+					{duration: 2 * beat, ease: "easeOut", at: 4 * beat}
+				],
+				[
+					'#ai-widget-coming-soon',
+					{opacity: [0, 1]},
+					{duration: 2 * beat, ease: "easeOut", at: 6 * beat}
+				],
+			]
+		);
+
+		if (isInView) {
+			runAnimation().then();
+		}
+
+	}, [animate, isInView]);
+
 	useEffect(() => {
 		const observer = new IntersectionObserver(
 			entries => {
@@ -194,6 +241,8 @@ const AIWidget = () => {
 	}, [])
 
 	useEffect(() => {
+		let timer: NodeJS.Timeout | undefined;
+
 		if (translations.length === 0 || !isAnimating) {
 			return;
 		}
@@ -205,20 +254,28 @@ const AIWidget = () => {
 			setComingSoon(translations[current.current].comingSoon)
 		}
 
-		const timer = setInterval(updateText, 2500);
+		const initialDelay = setTimeout(() => {
+			updateText();
+			timer = setInterval(updateText, 2400);
+		}, 10000 * beat)
 
-		return () => clearInterval(timer);
+		return () => {
+			clearTimeout(initialDelay);
+			clearInterval(timer);
+		}
 	}, [isAnimating, translations]);
 
 	return (
-		<div ref={sectionRef} id={'chatbot'}
+		<div ref={sectionRef} id={'chat'}
 				 className={'min-h-[100lvh] bg-[#3C9FBA] flex justify-center items-center snap-start'}>
-			<div className={'text-center space-y-10 grow'}>
-				<p className={'font-bumbbled text-8xl max-sm:text-6xl text-[#85D7E0]'}>{heading}</p>
-				<input placeholder={placeholder}
-							 className={'py-5 px-12 bg-[#FFFFFF7F] placeholder-gray-500 text-xl max-sm:text-lg rounded-lg w-4/5'}
+			<div ref={scope} className={'text-center space-y-10 grow'}>
+				<p id={'ai-widget-heading'}
+					 className={'will-change-transform transform-gpu opacity-0 font-bumbbled text-8xl max-sm:text-6xl text-[#85D7E0]'}>{heading}</p>
+				<input id={'ai-widget-input'} placeholder={placeholder}
+							 className={'will-change-transform transform-gpu opacity-0 py-5 px-12 bg-[#FFFFFF7F] placeholder-gray-500 text-xl max-sm:text-lg rounded-lg w-4/5'}
 							 type={'text'}/>
-				<div className={'inline-block w-4/5'}>
+				<div id={'ai-widget-coming-soon'}
+						 className={'will-change-transform transform-gpu opacity-0 inline-block w-4/5'}>
 					<div className={twMerge("max-sm:text-sm bg-cyan-500 text-gray-100 py-5 px-10 max-sm:py-4" +
 						" max-sm:px-6 md:pr-20 rounded-md inline-block", "block md:w-max text-left")}>
 						<p>{comingSoon}</p>
@@ -230,8 +287,9 @@ const AIWidget = () => {
 };
 const CreativelyIntelligent = ({sections}: { sections: SectionMap }) => (
 	<div className={'py-32 max-sm:py-24 px-14 max-sm:px-10 space-y-10 snap-start'}>
-		<p className={'text-4xl max-sm:text-3xl'}>creatively intelligent.</p>
-		<AttributeWidget heading={<><Bot className={'mr-3 mt-[-.25rem] inline'} /> Artificial Intelligence</>} className={'md:w-1/2 bg-[#FCFCFC1A]'}>
+		<SectionHeading className={'text-4xl max-sm:text-3xl'}>creatively intelligent.</SectionHeading>
+		<AttributeWidget heading={<><Bot className={'mr-3 mt-[-.25rem] inline'}/> Artificial Intelligence</>}
+										 className={'md:w-1/2 bg-[#FCFCFC1A]'}>
 			<WidgetSectionContent sections={sections} sectionTitle={SECTION_KEYS.ARTIFICIAL_INTELLIGENCE}/>
 			<WidgetSectionAttributes collection={sections[SECTION_KEYS.ARTIFICIAL_INTELLIGENCE]?.attributes}/>
 		</AttributeWidget>
@@ -239,8 +297,8 @@ const CreativelyIntelligent = ({sections}: { sections: SectionMap }) => (
 );
 const DataIsBeautiful = ({sections}: { sections: SectionMap }) => (
 	<div className={'py-32 max-sm:py-24 px-14 max-sm:px-10 space-y-10 snap-start'}>
-		<p className={'text-4xl max-sm:text-3xl'}>data is beautiful.</p>
-		<AttributeWidget heading={<><Database className={'mr-3 mt-[-.15rem] inline'} /> Databases</>}
+		<SectionHeading className={'text-4xl max-sm:text-3xl'}>data is beautiful.</SectionHeading>
+		<AttributeWidget heading={<><Database className={'mr-3 mt-[-.15rem] inline'}/> Databases</>}
 										 className={'md:w-1/2 bg-[#FCFCFC1A]'}>
 			<WidgetSectionContent sections={sections} sectionTitle={SECTION_KEYS.DATABASES}/>
 			<WidgetSectionAttributes collection={sections[SECTION_KEYS.DATABASES]?.attributes}/>
@@ -249,14 +307,17 @@ const DataIsBeautiful = ({sections}: { sections: SectionMap }) => (
 );
 const SystemDesign = ({sections}: { sections: SectionMap }) => (
 	<div className={'py-32 max-sm:py-24 max-sm:pt-12 snap-start'}>
-		<p className={'text-4xl max-sm:text-3xl mb-14 max-sm:mb-10 text-center'}>millions of users. one system.</p>
+		<SectionHeading className={'text-4xl max-sm:text-3xl mb-14 max-sm:mb-10 text-center'}>millions of users. one
+			system.</SectionHeading>
 		<div
 			className={'flex flex-wrap px-14 max-sm:px-10 gap-12 max-sm:gap-10 *:basis-[calc(50%-1.5rem)] *:max-md:basis-full'}>
-			<AttributeWidget heading={<><Network className={'mr-3 mt-[-.15rem] inline'} /> Distributed Systems</>} className={'bg-[#FCFCFC1A]'}>
+			<AttributeWidget heading={<><Network className={'mr-3 mt-[-.15rem] inline'}/> Distributed Systems</>}
+											 className={'bg-[#FCFCFC1A]'}>
 				<WidgetSectionContent sections={sections} sectionTitle={SECTION_KEYS.DISTRIBUTED_SYSTEMS}/>
 				<WidgetSectionAttributes collection={sections[SECTION_KEYS.DISTRIBUTED_SYSTEMS]?.attributes}/>
 			</AttributeWidget>
-			<AttributeWidget heading={<><Cloud className={'mr-3 mt-[-.15rem] inline'} /> Cloud</>} className={'bg-[#FCFCFC1A]'}>
+			<AttributeWidget heading={<><Cloud className={'mr-3 mt-[-.15rem] inline'}/> Cloud</>}
+											 className={'bg-[#FCFCFC1A]'}>
 				<WidgetSectionContent sections={sections} sectionTitle={SECTION_KEYS.CLOUD}/>
 				<WidgetSectionAttributes collection={sections[SECTION_KEYS.CLOUD]?.attributes}/>
 			</AttributeWidget>
@@ -265,13 +326,15 @@ const SystemDesign = ({sections}: { sections: SectionMap }) => (
 )
 const BuiltToScale = ({sections}: { sections: SectionMap }) => (
 	<div className={'py-32 max-sm:py-24 px-14 max-sm:px-10 space-y-10 snap-start'}>
-		<p className={'text-4xl max-sm:text-3xl'}>built to scale.</p>
+		<SectionHeading className={'text-4xl max-sm:text-3xl'}>built to scale.</SectionHeading>
 		<div className={'flex flex-wrap gap-12 max-sm:gap-10 *:basis-[calc(50%-1.5rem)] *:max-md:basis-full'}>
-			<AttributeWidget heading={<><DraftingCompass className={'mr-3 mt-[-.15rem] inline'} /> Architecture</>} className={'bg-[#FCFCFC1A]'}>
+			<AttributeWidget heading={<><DraftingCompass className={'mr-3 mt-[-.15rem] inline'}/> Architecture</>}
+											 className={'bg-[#FCFCFC1A]'}>
 				<WidgetSectionContent sections={sections} sectionTitle={SECTION_KEYS.ARCHITECTURE}/>
 				<WidgetSectionAttributes collection={sections[SECTION_KEYS.ARCHITECTURE]?.attributes}/>
 			</AttributeWidget>
-			<AttributeWidget heading={<><SearchCheck className={'mr-3 mt-[-.15rem] inline'} /> Quality Assurance</>} className={'bg-[#FCFCFC1A]'}>
+			<AttributeWidget heading={<><SearchCheck className={'mr-3 mt-[-.15rem] inline'}/> Quality Assurance</>}
+											 className={'bg-[#FCFCFC1A]'}>
 				<WidgetSectionContent sections={sections} sectionTitle={SECTION_KEYS.QUALITY_ASSURANCE}/>
 				<WidgetSectionAttributes collection={sections[SECTION_KEYS.QUALITY_ASSURANCE]?.attributes}/>
 			</AttributeWidget>
@@ -312,7 +375,7 @@ const ImproveContinuously = ({sections}: { sections: SectionMap }) => (
 		className={'min-h-[100lvh] bg-white flex flex-wrap px-14 max-sm:px-10 py-32 max-sm:py-24 gap-12 max-sm:gap-10 *:basis-[calc(50%-1.5rem)]' +
 			' *:max-md:basis-full snap-start'}>
 		<div className={'flex justify-center'}>
-			<p className={'text-4xl max-sm:text-3xl text-black self-center leading-snug'}>improve.<br/>continuously.</p>
+			<SectionHeading className={'text-4xl max-sm:text-3xl text-black self-center leading-snug'}>improve.<br/>continuously.</SectionHeading>
 		</div>
 		<IntegratedWidget heading={<>改善<span className={'ml-4 text-base'}>continuous improvement</span></>}
 											className={'bg-[#16748C]'}>
@@ -325,7 +388,9 @@ const LeanProcesses = ({sections}: { sections: SectionMap }) => (
 	<div
 		className={'snap-start min-h-[100lvh] flex flex-wrap px-14 max-sm:px-10 py-32 max-sm:py-24 gap-12 max-sm:gap-10 *:basis-[calc(50%-1.5rem)] *:max-md:basis-full'}>
 		<div className={'flex justify-center '}>
-			<p className={'text-4xl max-sm:text-3xl self-center leading-snug'}>simple. lean.<br/>forever.</p>
+			<SectionHeading className={'text-4xl max-sm:text-3xl self-center leading-snug'}>
+				simple. lean.<br/>forever.
+			</SectionHeading>
 		</div>
 		<IntegratedWidget heading={<>トヨタ生産方式<span className={'ml-4 text-base'}>lean methodology</span></>}>
 			<WidgetSectionContent sections={sections} sectionTitle={SECTION_KEYS.LEAN_PROCESSES}/>
@@ -345,9 +410,9 @@ const GuidingPrinciplesSection = (props: { sections: SectionMap }) => (
 			viewport={{once: true, amount: 0.35}}
 			src={"/images/factory_2.png"} alt={"processes illustration"}
 			className={"transform-gpu w-full h-[100lvh] object-cover snap-start"}/>
-		<p className={"text-5xl max-sm:text-4xl text-center py-32 max-sm:py-24 snap-start"}>人生の教訓<span
+		<SectionHeading className={"text-5xl max-sm:text-4xl text-center py-32 max-sm:py-24 snap-start"}>人生の教訓<span
 			className={'text-2xl ml-8'}>guidelines for
-			life.</span></p>
+			life.</span></SectionHeading>
 		<ImproveContinuously sections={props.sections}/>
 		<LeanProcesses sections={props.sections}/>
 		<InspirationalQuote author={"Steve Jobs"} className={"text-white bg-black"}>
@@ -379,7 +444,7 @@ const Projects = ({projects}: { projects: ProjectMap }) => (
 				<a key={project.id} href={project.link} target={'_blank'} rel={'noopener'} className={'*:h-full'}>
 					<AttributeWidget
 						className={'bg-[#FCFCFC1A] hover:bg-[#FCFCFC1F] cursor-pointer opacity-100'}
-						heading={<><FolderHeart className={'mr-3 mt-[-.15rem] inline'} /> {project.title}</>}>
+						heading={<><FolderHeart className={'mr-3 mt-[-.15rem] inline'}/> {project.title}</>}>
 						{project.description}
 					</AttributeWidget>
 				</a>
@@ -391,15 +456,22 @@ const WorkExperienceSection = (props: { projects: ProjectMap, roles: Role[] }) =
 	<div id={'resume'} className={'pt-32 max-sm:pt-24 px-14 max-sm:px-10 snap-start'}>
 		<div className={'min-h-[100lvh]'}>
 			<div className={'flex flex-wrap max-sm:justify-center gap-6 items-center mb-10 justify-between max-w-[60rem]'}>
-				<p className={'text-4xl max-sm:text-3xl'}>
-					what's in a timeline?</p>
-				<p className={'max-sm:w-full'}><a className={'px-10 py-5 bg-cyan-500 hover:bg-cyan-600 rounded block'}
-																					href={'/resume_christopher_centrella.pdf'} target={'_blank'}><Download
-					className={'inline mr-4 mt-[-.15rem]'}/> Download Resume</a></p>
+				<SectionHeading className={'text-4xl max-sm:text-3xl'}>
+					what's in a timeline?</SectionHeading>
+				<motion.p
+					initial={{opacity: 0, y: 12}}
+					whileInView={{opacity: 1, y: 0}}
+					transition={{duration: 0.55, ease: "easeOut"}}
+					viewport={{once: true, amount: 0.6}}
+					className={'transform-gpu max-sm:w-full'}><a
+					className={'px-10 py-5 bg-cyan-500 hover:bg-cyan-600 rounded block'}
+					href={'/resume_christopher_centrella.pdf'} target={'_blank'}><Download
+					className={'inline mr-4 mt-[-.15rem]'}/> Download Resume</a></motion.p>
 			</div>
 			<Roles roles={props.roles}/>
 		</div>
-		<p className={'text-4xl max-sm:text-3xl text-center mt-24 mb-14 snap-start'}>...and so much more</p>
+		<SectionHeading className={'text-4xl max-sm:text-3xl text-center mt-24 mb-14 snap-start'}>...and so much
+			more</SectionHeading>
 		<Projects projects={props.projects}/>
 	</div>
 )
@@ -425,7 +497,8 @@ const Housing = ({sections}: { sections: SectionMap }) => (
 		<div
 			className={'flex justify-center basis-[calc(100%-100%/1.61803398875-5rem)] max-lg:basis-[calc(50%-1.5rem)] ' +
 				'max-md:basis-full'}>
-			<p className={'text-4xl max-sm:text-3xl text-black self-center leading-snug'}>fight homelessness.</p>
+			<SectionHeading className={'text-4xl max-sm:text-3xl text-black self-center leading-snug'}>fight
+				homelessness.</SectionHeading>
 		</div>
 		<IntegratedWidget heading={'affordable housing'}
 											className={'grow bg-[#746D40] basis-[calc(100%-100%/1.61803398875-5rem)] max-lg:basis-[calc(50%-1.5rem)] max-md:basis-full'}>
@@ -442,25 +515,32 @@ const Palestine = () => (
 			alt={'picture of people in Palestine'}/>
 		<div className={'grow flex justify-center m-12'}>
 			<div className={'self-center space-y-8'}>
-				<p className={'text-4xl max-sm:text-3xl leading-snug'}>every person<br/>deserves dignity</p>
-				<a href={'/palestine'} target={'_blank'} className={'px-10 py-5 bg-cyan-500 hover:bg-cyan-600 rounded block max-sm:w-full'}>
+				<SectionHeading className={'text-4xl max-sm:text-3xl leading-snug'}>every person<br/>deserves
+					dignity</SectionHeading>
+				<motion.a
+					initial={{opacity: 0, y: 12}}
+					whileInView={{opacity: 1, y: 0}}
+					transition={{duration: 0.55, ease: "easeOut"}}
+					viewport={{once: true, amount: 0.6}}
+					href={'/palestine'} target={'_blank'}
+					className={'transform-gpu px-10 py-5 bg-cyan-500 hover:bg-cyan-600 rounded block max-sm:w-full'}>
 					<ExternalLink className={'inline mr-4 mt-[-.15rem]'}/> Statement on Palestine
-				</a>
+				</motion.a>
 			</div>
 		</div>
 	</div>
 )
 const HumanRightsSection = (props: { sections: SectionMap }) => (
-	<>
-		<p id={"human-rights"} className={"text-5xl max-sm:text-4xl text-center py-32 max-sm:py-24 snap-start"}>human
-			rights</p>
+	<div id={"human-rights"}>
+		<SectionHeading className={"text-5xl max-sm:text-4xl text-center py-32 max-sm:py-24 snap-start"}>human
+			rights</SectionHeading>
 		<InspirationalQuote author={"Steve Jobs"}>
 			The people who are crazy enough to think they can change the world, are the ones who do.
 		</InspirationalQuote>
 		<Environment sections={props.sections}/>
 		<Housing sections={props.sections}/>
 		<Palestine/>
-	</>
+	</div>
 );
 
 const InviteChrisSection = () => {
@@ -522,8 +602,13 @@ const InviteChrisSection = () => {
 	}
 
 	return (
-		<div id={'invite-chris'}
-				 className={'min-h-[100lvh] bg-black px-14 max-sm:px-10 py-32 max-sm:py-24 space-y-12 text-lg snap-start'}>
+		<motion.div
+			initial={{opacity: 0, y: 12}}
+			whileInView={{opacity: 1, y: 0}}
+			transition={{duration: 0.55, ease: "easeOut"}}
+			viewport={{once: true, amount: 0.6}}
+			id={'invite-chris'}
+			className={'transform-gpu min-h-[100lvh] bg-black px-14 max-sm:px-10 py-32 max-sm:py-24 space-y-12 text-lg snap-start'}>
 			<p className={'text-4xl max-sm:text-3xl'}>invite Chris</p>
 			<p className={'uppercase text-base text-[#FFFFFF99] mb-6'}>Schedule Call</p>
 			<div className={'flex flex-wrap gap-6'}>
@@ -627,7 +712,7 @@ const InviteChrisSection = () => {
 					<div id="turnstile-container" className={'mt-5'}></div>
 				</div>
 			</form>
-		</div>
+		</motion.div>
 	);
 }
 

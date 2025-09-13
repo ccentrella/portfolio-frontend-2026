@@ -19,7 +19,7 @@ const IntegratedWidget = ({heading, children, className, disableAnimation}: {
 		whileInView={{opacity: 1, y: 0}}
 		transition={{duration: 0.55, ease: "easeOut"}}
 		viewport={{once: true, amount: 0.6}}
-		className={twMerge(`p-12 max-sm:p-10 pb-24 max-sm:pb-20 rounded-xl text-[#FFFFFFA3] transition-colors bg-[#9494941A] opacity-95 hover:opacity-100 space-y-6 cursor-default`, className)}>
+		className={twMerge(`transform-gpu p-12 max-sm:p-10 pb-24 max-sm:pb-20 rounded-xl text-[#FFFFFFA3] transition-colors bg-[#9494941A] opacity-95 hover:opacity-100 space-y-6 cursor-default`, className)}>
 		<p className={'text-2xl max-sm:text-lg mb-6'}>{heading}</p>
 		{children}
 	</motion.div>

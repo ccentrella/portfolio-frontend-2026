@@ -8,6 +8,7 @@ const Footer = () => (
 					className={'font-poppins font-medium text-4xl max-sm:text-3xl text-gray-400 [&_a]:hover:text-gray-300 [&_a]:transition-colors space-y-5 max-sm:space-y-4 basis-2/5 max-md:basis-3/5 max-sm:basis-full'}>
 					<p><a href={'https://blog.chriscentrella.com'} target={'_blank'}>blog</a></p>
 					<p><a href={'#resume'}>resume</a></p>
+					<p><a href={'#chat'}>chat</a></p>
 					<p><a href={'#human-rights'}>human rights</a></p>
 					<p><a href={'#invite-chris'}>invite Chris</a></p>
 				</div>
