@@ -31,6 +31,7 @@ import {
 import Markdown from "react-markdown";
 import AttributeWidget from "../../components/AttributeWidget.tsx";
 import SectionHeading from "../../components/SectionHeading.tsx";
+import {useMediaQuery} from "react-responsive";
 
 // TODO: Add header
 
@@ -57,10 +58,11 @@ const WidgetSectionContent = (props: { sections: SectionMap, sectionTitle: strin
 
 const Hero = ({sections}: { sections: SectionMap }) => {
 	const [scope, animate] = useAnimate();
+	const isMobile = useMediaQuery({maxWidth: "sm"});
 
 	useEffect(() => {
 
-		const beat = 0.30;
+		const beat = isMobile ? 0.15 : 0.30;
 		const dropBeats = 2;
 		const holdBeats = 4;
 		const controlsAt = (dropBeats + holdBeats) * beat;
