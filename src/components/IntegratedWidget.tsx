@@ -2,7 +2,7 @@ import {motion} from "motion/react";
 import type {ReactNode} from "react";
 import {twMerge} from "tailwind-merge";
 
-const Widget = ({heading, children, className, disableAnimation}: {
+const IntegratedWidget = ({heading, children, className, disableAnimation}: {
 	heading: string | ReactNode,
 	children: ReactNode,
 	className?: string,
@@ -25,4 +25,4 @@ const Widget = ({heading, children, className, disableAnimation}: {
 	</motion.div>
 );
 
-export default Widget;
+export default IntegratedWidget;

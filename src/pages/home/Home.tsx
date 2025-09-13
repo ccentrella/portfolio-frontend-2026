@@ -1,10 +1,21 @@
 import InspirationalQuote from "../../components/InspirationalQuote.tsx";
 import {type ChangeEvent, useEffect, useMemo, useRef, useState} from "react";
-import Widget from "../../components/Widget.tsx";
+import IntegratedWidget from "../../components/IntegratedWidget.tsx";
 import {supabase} from "../../utils/supabaseClient.ts";
 import AttributeLabel from "../../components/AttributeLabel.tsx";
 import {twMerge} from "tailwind-merge";
-import {Download, ExternalLink, Send} from 'lucide-react';
+import {
+	Bot,
+	Cloud,
+	Database,
+	Download,
+	DraftingCompass,
+	ExternalLink,
+	FolderHeart,
+	Network,
+	SearchCheck,
+	Send
+} from 'lucide-react';
 import {SiCalendly} from "@icons-pack/react-simple-icons";
 import {motion, useAnimate} from "motion/react"
 import {
@@ -18,6 +29,7 @@ import {
 	type translation
 } from "./HomeTypes.tsx";
 import Markdown from "react-markdown";
+import AttributeWidget from "../../components/AttributeWidget.tsx";
 
 // TODO: Add header
 
@@ -105,12 +117,12 @@ const Hero = ({sections}: { sections: SectionMap }) => {
 			</div>
 			<motion.div id={'cards'}
 									className={"transform-gpu will-change-transform grow flex justify-center flex-wrap gap-12 max-sm:gap-10 *:basis-[calc(50%-1.5rem)] *:max-md:basis-full"}>
-				<Widget heading={'design'} className={'bg-[#62EAFF6B]'} disableAnimation={true}>
+				<IntegratedWidget heading={'design'} className={'bg-[#62EAFF6B]'} disableAnimation={true}>
 					<WidgetSectionContent sections={sections} sectionTitle={SECTION_KEYS.DESIGN}/>
-				</Widget>
-				<Widget heading={'engineering'} className={'bg-[#9494946B]'} disableAnimation={true}>
+				</IntegratedWidget>
+				<IntegratedWidget heading={'engineering'} className={'bg-[#9494946B]'} disableAnimation={true}>
 					<WidgetSectionContent sections={sections} sectionTitle={SECTION_KEYS.ENGINEERING}/>
-				</Widget>
+				</IntegratedWidget>
 			</motion.div>
 		</div>
 	);
@@ -119,16 +131,16 @@ const Hero = ({sections}: { sections: SectionMap }) => {
 const AboutMe = ({sections}: { sections: SectionMap }) => (
 	<div className={"min-h-[100lvh] py-[8rem] max-sm:py-[6rem] snap-start"}>
 		<div className={"flex max-md:flex-wrap px-14 max-sm:px-10 gap-12 max-sm:gap-10 max-xl:*:basis-1/2"}>
-			<Widget heading={'about me'} className={'grow'}>
+			<IntegratedWidget heading={'about me'} className={'grow'}>
 				<WidgetSectionContent sections={sections} sectionTitle={SECTION_KEYS.ABOUT_ME}/>
 				<WidgetSectionAttributes collection={sections[SECTION_KEYS.ABOUT_ME]?.attributes}/>
-			</Widget>
+			</IntegratedWidget>
 			<img
 				className={`xl:basis-[calc(100%-100%/1.61803398875-1.5rem)] transition-colors opacity-95 hover:opacity-100 object-cover rounded-xl min-w-0 max-md:grow max-sm:flex-[100%]`}
 				src={"/images/stroll.jpeg"} alt={"Chris walking while carrying iPad"}/>
 		</div>
-		<Widget heading={'looking for a design-minded software engineer?'}
-						className={'m-14 max-sm:m-10 bg-[#62EAFF6B]'}>
+		<IntegratedWidget heading={'looking for a design-minded software engineer?'}
+											className={'m-14 max-sm:m-10 bg-[#62EAFF6B]'}>
 			<div className={'max-w-[48rem] space-y-6 *:space-y-2'}>
 				<WidgetSectionContent sections={sections} sectionTitle={SECTION_KEYS.DESIGN_MINDED_SOFTWARE_ENGINEER}/>
 				<div>
@@ -144,7 +156,7 @@ const AboutMe = ({sections}: { sections: SectionMap }) => (
 					<WidgetSectionAttributes collection={sections[SECTION_KEYS.BACKEND]?.attributes}/>
 				</div>
 			</div>
-		</Widget>
+		</IntegratedWidget>
 	</div>
 );
 const AIWidget = () => {
@@ -219,19 +231,20 @@ const AIWidget = () => {
 const CreativelyIntelligent = ({sections}: { sections: SectionMap }) => (
 	<div className={'py-32 max-sm:py-24 px-14 max-sm:px-10 space-y-10 snap-start'}>
 		<p className={'text-4xl max-sm:text-3xl'}>creatively intelligent.</p>
-		<Widget heading={'artificial intelligence'} className={'md:w-1/2 bg-[#FCFCFC1A]'}>
+		<AttributeWidget heading={<><Bot className={'mr-3 mt-[-.25rem] inline'} /> Artificial Intelligence</>} className={'md:w-1/2 bg-[#FCFCFC1A]'}>
 			<WidgetSectionContent sections={sections} sectionTitle={SECTION_KEYS.ARTIFICIAL_INTELLIGENCE}/>
 			<WidgetSectionAttributes collection={sections[SECTION_KEYS.ARTIFICIAL_INTELLIGENCE]?.attributes}/>
-		</Widget>
+		</AttributeWidget>
 	</div>
 );
 const DataIsBeautiful = ({sections}: { sections: SectionMap }) => (
 	<div className={'py-32 max-sm:py-24 px-14 max-sm:px-10 space-y-10 snap-start'}>
 		<p className={'text-4xl max-sm:text-3xl'}>data is beautiful.</p>
-		<Widget heading={'databases'} className={'md:w-1/2 bg-[#FCFCFC1A]'}>
+		<AttributeWidget heading={<><Database className={'mr-3 mt-[-.15rem] inline'} /> Databases</>}
+										 className={'md:w-1/2 bg-[#FCFCFC1A]'}>
 			<WidgetSectionContent sections={sections} sectionTitle={SECTION_KEYS.DATABASES}/>
 			<WidgetSectionAttributes collection={sections[SECTION_KEYS.DATABASES]?.attributes}/>
-		</Widget>
+		</AttributeWidget>
 	</div>
 );
 const SystemDesign = ({sections}: { sections: SectionMap }) => (
@@ -239,14 +252,14 @@ const SystemDesign = ({sections}: { sections: SectionMap }) => (
 		<p className={'text-4xl max-sm:text-3xl mb-14 max-sm:mb-10 text-center'}>millions of users. one system.</p>
 		<div
 			className={'flex flex-wrap px-14 max-sm:px-10 gap-12 max-sm:gap-10 *:basis-[calc(50%-1.5rem)] *:max-md:basis-full'}>
-			<Widget heading={'distributed systems'} className={'bg-[#FCFCFC1A]'}>
+			<AttributeWidget heading={<><Network className={'mr-3 mt-[-.15rem] inline'} /> Distributed Systems</>} className={'bg-[#FCFCFC1A]'}>
 				<WidgetSectionContent sections={sections} sectionTitle={SECTION_KEYS.DISTRIBUTED_SYSTEMS}/>
 				<WidgetSectionAttributes collection={sections[SECTION_KEYS.DISTRIBUTED_SYSTEMS]?.attributes}/>
-			</Widget>
-			<Widget heading={'cloud'} className={'bg-[#FCFCFC1A]'}>
+			</AttributeWidget>
+			<AttributeWidget heading={<><Cloud className={'mr-3 mt-[-.15rem] inline'} /> Cloud</>} className={'bg-[#FCFCFC1A]'}>
 				<WidgetSectionContent sections={sections} sectionTitle={SECTION_KEYS.CLOUD}/>
 				<WidgetSectionAttributes collection={sections[SECTION_KEYS.CLOUD]?.attributes}/>
-			</Widget>
+			</AttributeWidget>
 		</div>
 	</div>
 )
@@ -254,14 +267,14 @@ const BuiltToScale = ({sections}: { sections: SectionMap }) => (
 	<div className={'py-32 max-sm:py-24 px-14 max-sm:px-10 space-y-10 snap-start'}>
 		<p className={'text-4xl max-sm:text-3xl'}>built to scale.</p>
 		<div className={'flex flex-wrap gap-12 max-sm:gap-10 *:basis-[calc(50%-1.5rem)] *:max-md:basis-full'}>
-			<Widget heading={'architecture'} className={'md:w-1/2 bg-[#FCFCFC1A]'}>
+			<AttributeWidget heading={<><DraftingCompass className={'mr-3 mt-[-.15rem] inline'} /> Architecture</>} className={'bg-[#FCFCFC1A]'}>
 				<WidgetSectionContent sections={sections} sectionTitle={SECTION_KEYS.ARCHITECTURE}/>
 				<WidgetSectionAttributes collection={sections[SECTION_KEYS.ARCHITECTURE]?.attributes}/>
-			</Widget>
-			<Widget heading={'quality assurance'} className={'md:w-1/2 bg-[#FCFCFC1A]'}>
+			</AttributeWidget>
+			<AttributeWidget heading={<><SearchCheck className={'mr-3 mt-[-.15rem] inline'} /> Quality Assurance</>} className={'bg-[#FCFCFC1A]'}>
 				<WidgetSectionContent sections={sections} sectionTitle={SECTION_KEYS.QUALITY_ASSURANCE}/>
 				<WidgetSectionAttributes collection={sections[SECTION_KEYS.QUALITY_ASSURANCE]?.attributes}/>
-			</Widget>
+			</AttributeWidget>
 		</div>
 	</div>
 );
@@ -301,11 +314,11 @@ const ImproveContinuously = ({sections}: { sections: SectionMap }) => (
 		<div className={'flex justify-center'}>
 			<p className={'text-4xl max-sm:text-3xl text-black self-center leading-snug'}>improve.<br/>continuously.</p>
 		</div>
-		<Widget heading={<>改善<span className={'ml-4 text-base'}>continuous improvement</span></>}
-						className={'bg-[#16748C]'}>
+		<IntegratedWidget heading={<>改善<span className={'ml-4 text-base'}>continuous improvement</span></>}
+											className={'bg-[#16748C]'}>
 			<WidgetSectionContent sections={sections} sectionTitle={SECTION_KEYS.CONTINUOUS_IMPROVEMENT}/>
 			<WidgetSectionAttributes collection={sections[SECTION_KEYS.CONTINUOUS_IMPROVEMENT]?.attributes}/>
-		</Widget>
+		</IntegratedWidget>
 	</div>
 )
 const LeanProcesses = ({sections}: { sections: SectionMap }) => (
@@ -314,10 +327,10 @@ const LeanProcesses = ({sections}: { sections: SectionMap }) => (
 		<div className={'flex justify-center '}>
 			<p className={'text-4xl max-sm:text-3xl self-center leading-snug'}>simple. lean.<br/>forever.</p>
 		</div>
-		<Widget heading={<>トヨタ生産方式<span className={'ml-4 text-base'}>lean methodology</span></>}>
+		<IntegratedWidget heading={<>トヨタ生産方式<span className={'ml-4 text-base'}>lean methodology</span></>}>
 			<WidgetSectionContent sections={sections} sectionTitle={SECTION_KEYS.LEAN_PROCESSES}/>
 			<WidgetSectionAttributes collection={sections[SECTION_KEYS.LEAN_PROCESSES]?.attributes}/>
-		</Widget>
+		</IntegratedWidget>
 	</div>
 )
 const GuidingPrinciplesSection = (props: { sections: SectionMap }) => (
@@ -346,15 +359,15 @@ const GuidingPrinciplesSection = (props: { sections: SectionMap }) => (
 const Roles = ({roles}: { roles: Role[] }) => (
 	<div className={'space-y-10 max-sm:space-y-8'}>
 		{roles.map(role => (
-			<Widget key={role.id} heading={`${role.title} at ${role.company}`}
-							className={'max-w-[60rem] space-y-5 max-sm:space-y-4'}>
+			<IntegratedWidget key={role.id} heading={`${role.title} at ${role.company}`}
+												className={'max-w-[60rem] space-y-5 max-sm:space-y-4'}>
 				<p className={'max-sm:text-sm text-gray-400'}>{role.year_start} - {role.year_end}</p>
 				<p className={'max-sm:text-sm uppercase text-gray-400'}>Accomplishments:</p>
 				<div className={'space-y-2'}>
 					{role.accomplishments?.map(accomplishment => (<p key={accomplishment}>{accomplishment}</p>))}
 				</div>
 
-			</Widget>
+			</IntegratedWidget>
 		))}
 	</div>
 )
@@ -363,12 +376,12 @@ const Projects = ({projects}: { projects: ProjectMap }) => (
 		className={'flex flex-wrap m-auto justify-center gap-12 xl:gap-x-24 max-sm:gap-8 *:basis-[calc(50%-3rem)] *:max-md:basis-full max-w-[75rem]'}>
 		{
 			Object.values(projects).map(project => (
-				<a key={project.id} href={project.link} target={'_blank'} rel={'noopener'}>
-					<Widget
-						className={'bg-[#FCFCFC1A] h-full cursor-pointer opacity-100 hover:bg-[#FCFCFC1F]'}
-						heading={project.title}>
+				<a key={project.id} href={project.link} target={'_blank'} rel={'noopener'} className={'*:h-full'}>
+					<AttributeWidget
+						className={'bg-[#FCFCFC1A] hover:bg-[#FCFCFC1F] cursor-pointer opacity-100'}
+						heading={<><FolderHeart className={'mr-3 mt-[-.15rem] inline'} /> {project.title}</>}>
 						{project.description}
-					</Widget>
+					</AttributeWidget>
 				</a>
 			))
 		}
@@ -394,16 +407,16 @@ const WorkExperienceSection = (props: { projects: ProjectMap, roles: Role[] }) =
 const Environment = ({sections}: { sections: SectionMap }) => (
 	<div
 		className={'min-h-[100lvh] bg-[#021A24] px-14 max-sm:px-10 py-32 max-sm:py-24 gap-12 max-sm:gap-10 flex flex-wrap snap-start'}>
-		<Widget heading={'environment'}
-						className={'bg-[#133F06] basis-[calc(50%-1.5rem)] max-md:basis-full'}>
+		<IntegratedWidget heading={'environment'}
+											className={'bg-[#133F06] basis-[calc(50%-1.5rem)] max-md:basis-full'}>
 			<WidgetSectionContent sections={sections} sectionTitle={SECTION_KEYS.ENVIRONMENT}/>
 			<WidgetSectionAttributes collection={sections[SECTION_KEYS.ENVIRONMENT]?.attributes}/>
-		</Widget>
-		<Widget heading={'planned obsolescence'}
-						className={'basis-[calc(50%-1.5rem)] max-md:basis-full bg-[#3C4C24] '}>
+		</IntegratedWidget>
+		<IntegratedWidget heading={'planned obsolescence'}
+											className={'basis-[calc(50%-1.5rem)] max-md:basis-full bg-[#3C4C24] '}>
 			<WidgetSectionContent sections={sections} sectionTitle={SECTION_KEYS.PLANNED_OBSOLESCENCE}/>
 			<WidgetSectionAttributes collection={sections[SECTION_KEYS.PLANNED_OBSOLESCENCE]?.attributes}/>
-		</Widget>
+		</IntegratedWidget>
 	</div>
 )
 const Housing = ({sections}: { sections: SectionMap }) => (
@@ -414,11 +427,11 @@ const Housing = ({sections}: { sections: SectionMap }) => (
 				'max-md:basis-full'}>
 			<p className={'text-4xl max-sm:text-3xl text-black self-center leading-snug'}>fight homelessness.</p>
 		</div>
-		<Widget heading={'affordable housing'}
-						className={'grow bg-[#746D40] basis-[calc(100%-100%/1.61803398875-5rem)] max-lg:basis-[calc(50%-1.5rem)] max-md:basis-full'}>
+		<IntegratedWidget heading={'affordable housing'}
+											className={'grow bg-[#746D40] basis-[calc(100%-100%/1.61803398875-5rem)] max-lg:basis-[calc(50%-1.5rem)] max-md:basis-full'}>
 			<WidgetSectionContent sections={sections} sectionTitle={SECTION_KEYS.AFFORDABLE_HOUSING}/>
 			<WidgetSectionAttributes collection={sections[SECTION_KEYS.AFFORDABLE_HOUSING]?.attributes}/>
-		</Widget>
+		</IntegratedWidget>
 	</div>
 )
 const Palestine = () => (
