@@ -4,6 +4,7 @@
 
 @theme {
 	--font-poppins: poppins, "ui-sans-serif", "system-ui", sans-serif;
+	--font-agrandir: "pp agrandir", "ui-sans-serif", "system-ui", sans-serif;
 	--font-bumbbled: bumbbled, "Brush Script MT", "Comic Sans MS", cursive;
 	--font-sans: var(--font-poppins);
 }
@@ -11,10 +12,19 @@
 @utility animate-imgFloat {
 	animation: imgFloat 5s ease-in-out infinite;
 }
-
 @keyframes imgFloat {
 	50%{
 		transform: translateY(10px);
 		border-radius: 45% 55% 45% 55%;
 	}
+}
+
+@utility reveal {
+	opacity: 0;
+	transform: translateY(24px);
+	transition: opacity .5s ease-out, transform .5s ease-out;
+}
+@utility reveal-in {
+	opacity: 1;
+	transform: translateY(0);
 }
