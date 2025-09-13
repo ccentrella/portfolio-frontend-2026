@@ -1,7 +1,6 @@
 import {type ReactNode, useEffect, useRef} from "react";
 import {twMerge} from "tailwind-merge";
 import {useAnimate, useInView} from "motion/react";
-import {useMediaQuery} from "react-responsive";
 
 const InspirationalQuote = ({author, children, className}: {
 	author: string,
@@ -17,8 +16,7 @@ const InspirationalQuote = ({author, children, className}: {
 			once: true
 		})
 
-	const isMobile = useMediaQuery({maxWidth: 640});
-	const beat = isMobile ? 0.15 : 0.3;
+	const beat = 0.24;
 
 	useEffect(() => {
 

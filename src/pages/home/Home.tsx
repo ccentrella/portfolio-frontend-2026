@@ -61,29 +61,33 @@ const Hero = ({sections}: { sections: SectionMap }) => {
 
 	useEffect(() => {
 		const isMobile = window.matchMedia("(max-width: 40rem)").matches
-		const beat = isMobile ? 0.15 : 0.30;
+		const beat = 0.15;
 		const dropBeats = 2;
 		const holdBeats = 4;
-		const controlsAt = (dropBeats + holdBeats) * beat;
-		const dockAt = controlsAt + beat;
+		const firstItem = 0;
+		const secondItem = (dropBeats + holdBeats) * beat;
+		const thirdItem = secondItem + beat;
+		const firstDuration = dropBeats * beat;
+		const secondDuration = beat;
+		const thirdDuration = 2 * beat;
 
 		const runAnimation = async () =>
 			await animate([
 				// Image drops in
 				[
 					"#profile-image",
-					{y: ["-40px", 0], opacity: [0, 1]},
-					{duration: dropBeats * beat, ease: "easeOut", at: 0}
+					{y: isMobile ? 0 : ["-40px", 0], opacity: [0, 1]},
+					{duration: isMobile ? secondDuration : firstDuration, ease: "easeOut", at: isMobile ? secondItem : firstItem}
 				],
 				[
 					"#controls",
-					{opacity: [0, 1]},
-					{duration: beat, ease: "easeOut", at: controlsAt}
+					{y: isMobile ? ["-40px", 0] : 0, opacity: [0, 1]},
+					{duration: isMobile ? firstDuration : secondDuration, ease: "easeOut", at: isMobile ? firstItem: secondItem}
 				],
 				[
 					"#cards",
 					{y: ["40px", 0], opacity: [0, 1]},
-					{duration: 2 * beat, ease: "easeOut", at: dockAt}
+					{duration: thirdDuration, ease: "easeOut", at: thirdItem}
 				],
 			]);
 
