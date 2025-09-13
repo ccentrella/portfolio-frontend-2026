@@ -180,7 +180,7 @@ const AIWidget = () => {
 		})
 
 	const isMobile = useMediaQuery({maxWidth: 640});
-	const beat = isMobile ? 0.15 : 0.3;
+	const beat = isMobile ? 0.24 : 0.3;
 
 	useEffect(() => {
 
@@ -263,7 +263,7 @@ const AIWidget = () => {
 			clearTimeout(initialDelay);
 			clearInterval(timer);
 		}
-	}, [isAnimating, translations]);
+	}, [beat, isAnimating, translations]);
 
 	return (
 		<div ref={sectionRef} id={'chat'}
