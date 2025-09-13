@@ -412,7 +412,7 @@ const Housing = ({sections}: { sections: SectionMap }) => (
 		<div
 			className={'flex justify-center basis-[calc(100%-100%/1.61803398875-5rem)] max-lg:basis-[calc(50%-1.5rem)] ' +
 				'max-md:basis-full'}>
-			<p className={'text-4xl max-sm:text-3xl text-black self-center leading-snug'}>end homelessness.</p>
+			<p className={'text-4xl max-sm:text-3xl text-black self-center leading-snug'}>fight homelessness.</p>
 		</div>
 		<Widget heading={'affordable housing'}
 						className={'grow bg-[#746D40] basis-[calc(100%-100%/1.61803398875-5rem)] max-lg:basis-[calc(50%-1.5rem)] max-md:basis-full'}>
