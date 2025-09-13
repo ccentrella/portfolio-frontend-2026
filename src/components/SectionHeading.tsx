@@ -1,5 +1,5 @@
 import {motion} from "motion/react";
-import type {ReactElement, ReactNode} from "react";
+import type {ReactNode} from "react";
 import {twMerge} from "tailwind-merge";
 
 const SectionHeading = ({children, className}:{children:ReactNode, className?:string}) => {
