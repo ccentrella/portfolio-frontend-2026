@@ -1,4 +1,4 @@
-# Terms of Service
+# Terms of Use
 
 **Effective Date:** September 13, 2025
 

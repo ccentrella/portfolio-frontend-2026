@@ -13,16 +13,16 @@ const Footer = () => (
 				</div>
 				<div className={'uppercase text-lg space-y-5'}>
 					<p className={'font-semibold'}>Legal</p>
-					<p>Privacy Policy</p>
-					<p>Terms of Use</p>
+					<p><a href={'/privacy-policy'} target={'_blank'}>Privacy Policy</a></p>
+					<p><a href={'/terms-conditions'} target={'_blank'}>Terms of Use</a></p>
 				</div>
 			</div>
 		</div>
 		<div className={'space-y-8 lg:mx-6'}>
 			<div className={'flex flex-wrap text-lg justify-between uppercase gap-x-10 gap-y-6'}>
-				<p>Accessibility Disclaimer</p>
-				<p>Modern Slavery Notice</p>
-				<p>Statement on Palestine</p>
+				<p><a href={'/accessibility'} target={'_blank'}>Accessibility Statement</a></p>
+				<p><a href={'/modern-slavery'} target={'_blank'}>Modern Slavery Notice</a></p>
+				<p><a href={'/palestine'} target={'_blank'}>Statement on Palestine</a></p>
 			</div>
 			<div className={'space-y-0 max-md:space-y-3'}>
 				<p>Designed with love by Chris Centrella, without the use of generative AI.</p>
