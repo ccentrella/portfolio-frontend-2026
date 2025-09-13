@@ -409,7 +409,7 @@ const GuidingPrinciplesSection = (props: { sections: SectionMap }) => (
 			src={"/images/factory_2.png"} alt={"processes illustration"}
 			className={"transform-gpu w-full h-[100lvh] object-cover snap-start"}/>
 		<SectionHeading className={"text-5xl max-sm:text-4xl text-center py-32 max-sm:py-24 snap-start"}>人生の教訓<span
-			className={'text-2xl ml-8 max-sm:block'}>guidelines for
+			className={'text-2xl sm:ml-8 max-sm:block'}>guidelines for
 			life.</span></SectionHeading>
 		<ImproveContinuously sections={props.sections}/>
 		<LeanProcesses sections={props.sections}/>
