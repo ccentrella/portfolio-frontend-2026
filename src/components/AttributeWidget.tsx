@@ -8,7 +8,7 @@ const AttributeWidget = ({heading, children, className}: {
 	children: ReactNode,
 	className?: string,
 }) => {
-	const isMobile = useMediaQuery({maxWidth: "sm"});
+	const isMobile = useMediaQuery({maxWidth: 640});
 
 	return (
 		<motion.div initial={{opacity: 0, y: 12}}

@@ -58,10 +58,9 @@ const WidgetSectionContent = (props: { sections: SectionMap, sectionTitle: strin
 
 const Hero = ({sections}: { sections: SectionMap }) => {
 	const [scope, animate] = useAnimate();
-	const isMobile = useMediaQuery({maxWidth: "sm"});
 
 	useEffect(() => {
-
+		const isMobile = window.matchMedia("(max-width: 40rem)").matches
 		const beat = isMobile ? 0.15 : 0.30;
 		const dropBeats = 2;
 		const holdBeats = 4;
@@ -175,7 +174,9 @@ const AIWidget = () => {
 			amount: 0.6,
 			once: true
 		})
-	const beat = 0.3;
+
+	const isMobile = useMediaQuery({maxWidth: 640});
+	const beat = isMobile ? 0.15 : 0.3;
 
 	useEffect(() => {
 
@@ -208,7 +209,7 @@ const AIWidget = () => {
 			runAnimation().then();
 		}
 
-	}, [animate, isInView]);
+	}, [beat, animate, isInView]);
 
 	useEffect(() => {
 		const observer = new IntersectionObserver(

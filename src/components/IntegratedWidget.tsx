@@ -9,7 +9,7 @@ const IntegratedWidget = ({heading, children, className, disableAnimation}: {
 	className?: string,
 	disableAnimation?: boolean
 }) => {
-	const isMobile = useMediaQuery({maxWidth: "sm"});
+	const isMobile = useMediaQuery({maxWidth: 640});
 
 	return disableAnimation ? (
 		<div
