@@ -463,7 +463,7 @@ const WorkExperienceSection = (props: { projects: ProjectMap, roles: Role[] }) =
 					viewport={{once: true, amount: 0.6}}
 					className={'transform-gpu max-sm:w-full'}><a
 					className={'px-10 py-5 bg-cyan-500 hover:bg-cyan-600 rounded block'}
-					href={'/resume_christopher_centrella.pdf'} target={'_blank'}><Download
+					href={'/resume_christopher_centrella_public.pdf'} target={'_blank'}><Download
 					className={'inline mr-4 mt-[-.15rem]'}/> Download Resume</a></motion.p>
 			</div>
 			<Roles roles={props.roles}/>
