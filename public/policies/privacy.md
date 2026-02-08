@@ -1,6 +1,7 @@
 # Privacy Policy
 
 **Effective Date:** September 13, 2025
+**Last Revised:** February 08, 2026
 
 ## 1. Introduction
 
@@ -33,7 +34,7 @@ Examples may include:
 
 - Google Analytics (to understand site traffic)
 - Substack or Buy Me a Coffee (for subscriptions and support)
-- Calendly (for scheduling meetings)
+- Cal.com (for scheduling meetings)
 
 ## 5. Data Security
 

@@ -16,7 +16,7 @@ import {
 	SearchCheck,
 	Send
 } from 'lucide-react';
-import {SiCalendly} from "@icons-pack/react-simple-icons";
+import {SiCaldotcom} from "@icons-pack/react-simple-icons";
 import {motion, useAnimate, useInView} from "motion/react"
 import {
 	type Attribute,
@@ -611,10 +611,10 @@ const InviteChrisSection = () => {
 			<p className={'uppercase text-base text-[#FFFFFF99] mb-6'}>Schedule Call</p>
 			<div className={'flex flex-wrap gap-6'}>
 				<p className={'max-sm:w-full'}>
-					<a className={'px-10 py-5 bg-cyan-500 hover:bg-cyan-600 rounded block'}
-						 href={'https://calendly.com/ccentrella/chat'}
+					<a className={'px-10 py-2 bg-cyan-500 hover:bg-cyan-600 rounded block'}
+						 href={'https://cal.com/ccentrella/chat'}
 						 target={'_blank'}>
-						<SiCalendly className={'inline mr-4 mt-[-.15rem]'}/> Calendly</a>
+						<SiCaldotcom className={'inline mr-4 mt-[-.15rem] w-16 h-16'}/> Schedule</a>
 				</p>
 			</div>
 			{isSuccess && <div
@@ -623,7 +623,7 @@ const InviteChrisSection = () => {
 			</div>}
 			{isSuccess == false && <div
 				className={'max-sm:text-sm bg-red-400 text-gray-100 py-5 px-10  max-sm:py-4 max-sm:px-6 md:pr-20 rounded-md inline-block'}>
-				<p>Message unsuccessful. Feel free to schedule a meeting on my Calendly.</p>
+				<p>Message unsuccessful. Feel free to schedule a meeting on my calendar.</p>
 			</div>}
 			<form onSubmit={e => {
 				e.preventDefault();
