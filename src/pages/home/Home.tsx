@@ -101,7 +101,7 @@ const Hero = ({sections}: { sections: SectionMap }) => {
 										className={"opacity-0 transform-gpu will-change-transform font-poppins font-medium text-4xl max-sm:text-3xl text-gray-400 [&_a]:hover:text-gray-300 [&_a]:transition-colors space-y-5 max-sm:space-y-4 lg:basis-[calc((100%-18rem)/2)]  xl:basis-[calc((100%-24rem)/2)] max-md:basis-full"}>
 					<p className={"text-cyan-500 text-4xl max-sm:text-3xl mb-10 max-sm:mb-8"}>Chris <span
 						className={"ml-2 bg-cyan-200 size-2.5 rounded-[50%] inline-block"}></span></p>
-					<p><a href={'https://blog.chriscentrella.com'} target={'_blank'}>blog</a></p>
+					<p><a href={'https://blog.chriscentrella.com'}>blog</a></p>
 					<p><a href={'#resume'}>resume</a></p>
 					<p><a href={'#chat'}>chat</a></p>
 					<p><a href={'#human-rights'}>human rights</a></p>
