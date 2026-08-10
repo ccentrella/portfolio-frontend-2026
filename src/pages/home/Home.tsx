@@ -775,7 +775,7 @@ const Home = () => {
 
 	useScrollReveal();
 
-	return ( 
+	return (
 		<div>
 			<Hero sections={sections}/>
 			<AboutSection sections={sections}/>
