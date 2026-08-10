@@ -351,15 +351,17 @@ const AboutSection = (props: { sections: SectionMap }) => (
 			You can't connect the dots looking forward; you can only connect them looking backwards.
 		</InspirationalQuote>
 		<DataIsBeautiful sections={props.sections}/>
-		<motion.img loading="lazy"
-								decoding="async"
-								fetchPriority="low"
-								initial={{opacity: 0, scale: 1.02}}
-								whileInView={{opacity: 1, scale: 1}}
-								transition={{duration: 0.8, ease: "easeOut"}}
-								viewport={{once: true, amount: 0.4}}
-								src={"/images/subway_very_dense.png"} alt={"systems illustration"}
-								className={"transform-gpu w-full h-[100lvh] object-cover snap-start"}/>
+		<div style={{ overflowX: 'clip' }}>
+			<motion.img loading="lazy"
+				decoding="async"
+				fetchPriority="low"
+				initial={{opacity: 0, scale: 1.02}}
+				whileInView={{opacity: 1, scale: 1}}
+				transition={{duration: 0.8, ease: "easeOut"}}
+				viewport={{once: true, amount: 0.4}}
+				src={"/images/subway_very_dense.png"} alt={"systems illustration"}
+				className={"transform-gpu w-full h-[100lvh] object-cover snap-start"}/>
+		</div>
 		<SystemDesign sections={props.sections}/>
 		<InspirationalQuote author={"Steve Jobs"}>
 			Design is not just what it looks like and feels like. Design is how it works.
@@ -398,16 +400,18 @@ const LeanProcesses = ({sections}: { sections: SectionMap }) => (
 )
 const GuidingPrinciplesSection = (props: { sections: SectionMap }) => (
 	<>
-		<motion.img
-			loading="lazy"
-			decoding="async"
-			fetchPriority="low"
-			initial={{opacity: 0, scale: 1.02}}
-			whileInView={{opacity: 1, scale: 1}}
-			transition={{duration: 0.8, ease: "easeOut"}}
-			viewport={{once: true, amount: 0.4}}
-			src={"/images/factory_2.png"} alt={"processes illustration"}
-			className={"transform-gpu w-full h-[100lvh] object-cover snap-start"}/>
+		<div style={{ overflowX: 'clip' }}>
+			<motion.img
+				loading="lazy"
+				decoding="async"
+				fetchPriority="low"
+				initial={{opacity: 0, scale: 1.02}}
+				whileInView={{opacity: 1, scale: 1}}
+				transition={{duration: 0.8, ease: "easeOut"}}
+				viewport={{once: true, amount: 0.4}}
+				src={"/images/factory_2.png"} alt={"processes illustration"}
+				className={"transform-gpu w-full h-[100lvh] object-cover snap-start"}/>
+		</div>
 		<SectionHeading className={"text-5xl max-sm:text-4xl text-center py-32 max-sm:py-24 snap-start"}>人生の教訓<span
 			className={'text-2xl sm:ml-8 max-sm:block'}>guidelines for
 			life.</span></SectionHeading>
